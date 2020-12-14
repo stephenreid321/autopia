@@ -26,8 +26,4 @@ Autopia::App.helpers do
   def sign_in_required!
     halt(403) unless current_account
   end
-
-  def tag_badge(tag)
-    %(<span href="/coins/tag/#{tag.name}" class="badge badge-secondary" style="background-color: #{tag.background_color}; color: white">#{tag.name}</span>) if tag
-  end
 end
