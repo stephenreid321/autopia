@@ -46,7 +46,7 @@
 
           <tr>
             <th>
-              Number of clicks
+              Number of clicks of those registered
               <th>
                 <td>
                   <%= s = valid.values.sum %>
@@ -80,10 +80,10 @@
                         Clicks
                       </th>
                       <th>
-                        %
+                        AUT
                       </th>
                       <th>
-                        Initial $
+                        %
                       </th>
                     </tr>
                   </thead>
@@ -103,10 +103,10 @@
                       <%= v %>
                     </td>
                     <td>
-                      <%="#{(f * 100).round(2)}%"%>
+                      <%="#{(f * 5000).round(2)}"%>
                     </td>
                     <td>
-                      <%="$#{(5000 * f).round(2)}"%>
+                      <%="#{(f * 100).round(2)}%"%>
                     </td>
                   </tr>
                 <% end %>
