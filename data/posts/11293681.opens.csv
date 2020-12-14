@@ -1,0 +1,4 @@
+post_id,timestamp,email,post_type,post_audience,active_subscription,country,city,region,device_type,client_os,client_type,user_agent
+11293681,2020-10-14T18:32:41.290Z,stephen@stephenreid.net,newsletter,only_paid,false,US,Seattle,WA,desktop,Windows,browser,Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)
+11293681,2020-10-15T10:26:37.190Z,obranagan@pm.me,newsletter,only_paid,false,US,Seattle,WA,mobile,iOS,mobile browser,"Mozilla/5.0 (iPhone; CPU iPhone OS 14_0_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"
+11293681,2020-10-17T14:37:41.510Z,raphael.thelen@posteo.de,newsletter,only_paid,false,US,New York,NY,mobile,iOS,mobile browser,"Mozilla/5.0 (iPhone; CPU iPhone OS 13_6_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148"

@@ -1,0 +1,206 @@
+$primary: #8747E6;
+$font-family-sans-serif: 'Overpass', sans-serif;
+
+@import "bootstrap/bootstrap";
+
+.zt {
+  font-family: 'zilap_triburegular';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body, small { font-weight: 300 }
+.form-control { font-weight: 300 }
+b, strong { font-weight: 600 }
+
+h2:not(.regular) { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
+.badge-warning { color: white }
+
+.bgo:hover { opacity: 0 !important }
+
+pre code { color: #e83e8c }
+
+p.attribution { text-align: right; font-size: 0.95rem !important }
+
+.text-sm, .text-sm p {
+  font-size: 90% !important;
+  line-height: 1.2rem !important
+}
+
+.rainbow  {
+  margin: 0 auto;
+  background: linear-gradient(to right, #F03AA0, #8747e6, #4782E5, );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.blog_post p, .blog_post ul, .blog_post ol { font-size: 1.15rem; line-height: 1.8rem }
+.blog_post img:not(.post-header-image), .blog_post video { max-width: 100%; margin: 1em 0 }
+.blog_post h2 { display: block; border: none; }
+.blog_post h2, .blog_post h3, .blog_post h4 { margin-top: 0.75em; margin-bottom: 0.33em }
+
+blockquote { border-left: 0.3em solid #ccc; padding-left: 1em; font-style: italic }
+blockquote footer { font-size: 1rem !important }
+
+.dropdown-item { font-weight: 300 }
+.dropdown-item.active { font-weight: bold }
+
+
+// Range Slider
+$range-width: 100% !default;
+
+$range-handle-color: $primary !default;
+$range-handle-color-hover: $primary !default;
+$range-handle-size: 20px !default;
+
+$range-track-color: #E9ECEF !default;
+$range-track-height: 10px !default;
+
+$range-label-color: $primary !default;
+$range-label-width: 60px !default;
+
+.range-slider {
+  width: $range-width;
+}
+
+.range-slider__range {
+  -webkit-appearance: none;
+  width: calc(100% - (#{$range-label-width + 13px}));
+  height: $range-track-height;
+  border-radius: 5px;
+  background: $range-track-color;
+  outline: none;
+  padding: 0;
+  margin: 0;
+
+  // Range Handle
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-webkit-slider-thumb {
+    background: $range-handle-color-hover;
+  }
+
+  &::-moz-range-thumb {
+    width: $range-handle-size;
+    height: $range-handle-size;
+    border: 0;
+    border-radius: 50%;
+    background: $range-handle-color;
+    cursor: pointer;
+    transition: background .15s ease-in-out;
+
+    &:hover {
+      background: $range-handle-color-hover;
+    }
+  }
+
+  &:active::-moz-range-thumb {
+    background: $range-handle-color-hover;
+  }
+
+  // Focus state
+  &:focus {
+
+    &::-webkit-slider-thumb {
+      box-shadow: 0 0 0 3px #fff,
+                  0 0 0 6px $primary;
+    }
+  }
+}
+
+
+// Range Label
+.range-slider__value {
+  display: inline-block;
+  position: relative;
+  width: $range-label-width;
+  color: #fff;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 3px;
+  background: $range-label-color;
+  padding: 5px 10px;
+  margin-left: 8px;
+
+  &:after {
+    position: absolute;
+    top: 8px;
+    left: -7px;
+    width: 0;
+    height: 0;
+    border-top: 7px solid transparent;
+    border-right: 7px solid $range-label-color;
+    border-bottom: 7px solid transparent;
+    content: '';
+  }
+}
+
+
+// Firefox Overrides
+::-moz-range-track {
+    background: $range-track-color;
+    border: 0;
+}
+
+input::-moz-focus-inner,
+input::-moz-focus-outer {
+  border: 0;
+}
+
+mark, .mark {
+  padding: 0.2em 0;
+  background-color: #FDFFAA
+}
+
+
+
+#toc {
+  position: sticky;
+  top: 0;
+  font-size: 0.8rem;
+}
+
+#toc ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#toc li {
+    padding: 0.25em 0.1em;
+}
+
+#toc a {
+    text-decoration: none;
+    display: block;
+    color: rgba(33,37,41,0.6);
+}
+
+#toc .toc-h2 {
+    padding-left: 1em;
+}
+
+#toc .toc-h3 {
+    padding-left: 2em;
+}
+
+#toc .toc-h4 {
+    padding-left: 3em;
+}
+
+#toc .toc-active a {
+  color: rgba(33,37,41,1);
+  font-weight: bold;
+}

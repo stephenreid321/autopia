@@ -1,0 +1,118 @@
+<div class="row" >
+  <div class="col-sm-5">
+    <%= md 'intro' %>
+  </div>
+  <div class="col-sm-7">
+
+    <%
+
+      responses = CSV.parse(open(Padrino.root('data', 'Autopia Token Airdrop (Responses) - Form responses 1.csv')))
+      registered = {}
+      responses.each_with_index do |row, i|
+        next if i == 0
+        email = row[1].downcase
+        eth = row[2]
+        registered[email] = eth if eth.include?('0x') || eth.include?('.eth')
+      end
+
+      clickers = {}
+      Dir["#{Padrino.root('data','posts')}/*.clicks.csv"].each do |f|
+        CSV.parse(open(f)).each_with_index do |row, i|
+          next if i == 0
+          email = row[2]
+          clickers[email] = 0 unless clickers[email]
+          clickers[email] += 1
+        end
+      end
+
+      registered.each do |email, _eth|
+        clickers[email] = 1 unless clickers[email]
+      end
+
+      valid = clickers.select { |k, _v| registered.keys.include?(k) }
+
+      %>
+
+    <table class="table">
+
+      <tr>
+        <th>
+          Registrations
+          <th>
+            <td>
+              <%= valid.keys.count %>
+            </td>
+          </tr>
+
+          <tr>
+            <th>
+              Number of clicks
+              <th>
+                <td>
+                  <%= s = valid.values.sum %>
+                  (median: <%= median = valid.values.median.round %>)
+                  (mean: <%= mean = valid.values.mean %>)
+                </td>
+              </tr>
+
+              <tr>
+                <th>
+                  $ value of a click
+                  <th>
+                    <td>
+                      $<%= value = (5000.to_f / s).round(2) %>
+                    </td>
+                  </tr>
+
+                </table>
+
+
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>
+                        #
+                      </th>
+                      <th>
+                        Ethereum/xDai address
+                      </th>
+                      <th>
+                        Clicks
+                      </th>
+                      <th>
+                        %
+                      </th>
+                      <th>
+                        $
+                      </th>
+                    </tr>
+                  </thead>
+                  <%
+        valid.sort_by { |_k, v| -v }.each_with_index do |x, i|
+        k, v = x
+        f = v.to_f / s %>
+                  <tr>
+                    <td>
+                      #<%=i+1%>
+                    </td>
+                    <td>
+                      <% eth = registered[k].split('/').last.downcase %>
+                      <a target="_blank" href="https://etherscan.io/address/<%=eth%>"><%=eth[0..6]%>&hellip;</a>
+                    </td>
+                    <td>
+                      <%= v %>
+                    </td>
+                    <td>
+                      <%="#{(f * 100).round(2)}%"%>
+                    </td>
+                    <td>
+                      <%="$#{(5000 * f).round(2)}"%>
+                    </td>
+                  </tr>
+                <% end %>
+              </table>
+
+
+            </div>
+          </div>
+        </div>

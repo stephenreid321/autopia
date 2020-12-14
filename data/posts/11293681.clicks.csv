@@ -1,0 +1,3 @@
+post_id,timestamp,email,post_type,post_audience,active_subscription,country,city,region,device_type,client_os,client_type,user_agent
+11293681,2020-10-14T18:32:42.670Z,stephen@stephenreid.net,newsletter,only_paid,false,US,Seattle,WA,desktop,OS X,browser,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.75 Safari/537.36"
+11293681,2020-10-14T19:44:01.500Z,wilsoncanda@gmail.com,newsletter,only_paid,false,US,Seattle,WA,mobile,Android,mobile browser,"Mozilla/5.0 (Linux; Android 9; VOG-L09) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 Mobile Safari/537.36"
