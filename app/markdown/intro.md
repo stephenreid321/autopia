@@ -1,6 +1,6 @@
 10,000 AUT (Autopia Tokens) will be minted as an ERC-20 on the Ethereum mainnet. These tokens will then be transferred to the xDai chain (where transactions cost just cents rather than dollars) using the xDai OmniBridge.
 
-**51% of the tokens will be airdropped to subscribers of the [Stephen Reid In Correspondence](http://stephenreid.substack.com/) newsletter who [register via this form](https://docs.google.com/forms/d/e/1FAIpQLSfUnLxvkMhjsV8TsV_meH2gHdleT2HrRQL_SlVFkHxGfFKdoA/viewform) by 11.59pm on Winter Solstice, 22nd December 2020**, in proportion to the number of links clicked in my past newsletters (people registering who have never clicked a link will be included as if they had clicked one link).
+**51% of the tokens will be airdropped to subscribers of the [Stephen Reid In Correspondence](http://stephenreid.substack.com/) newsletter who [register via this form](https://docs.google.com/forms/d/e/1FAIpQLSfUnLxvkMhjsV8TsV_meH2gHdleT2HrRQL_SlVFkHxGfFKdoA/viewform) by 11.59pm on Winter Solstice, 22nd December 2020**, in proportion to the number of links clicked in past newsletters (people registering who have never clicked a link will be included as if they had clicked one link).
 
 I will hold the other 49%, and over 12 months place ~half of this amount (so ~25% of the total supply) into a liquidity pool on Honeyswap at an initial ratio of 1 AUT : 1 xDAI:
 
