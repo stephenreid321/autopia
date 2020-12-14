@@ -25,7 +25,7 @@ I will hold the other 49%, and over 12 months place ~half of this amount (so ~25
 <tr><td>12</td><td>0.6103515625</td></tr>
 </table>
 
-<strong>The top 150 AUT holders will be invited to a new, private Autopia Slack.</strong> Each new moon, anyone who has become a top 150 AUT holder will be invited to the Slack, and anyone who is no longer a top 150 AUT holder will be removed. On the Autopia Slack, discussions will begin around a real-life co-created gathering in Summer 2021. It will also become the main place I share timely and important news and tips from the crypto world and beyond.
+<strong>The top 150 AUT holders will be invited to a new, private Autopia Slack.</strong> Each new moon, anyone who has become a top 150 AUT holder will be added to the Slack, and anyone who is no longer a top 150 AUT holder will be removed. On the Autopia Slack, discussions will begin around a real-life co-created gathering in Summer 2021. It will also become the main place I share timely and important news and tips from the crypto world and beyond.
 
 So, after the airdrop:
 
