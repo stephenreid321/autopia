@@ -34,4 +34,4 @@ So, after the airdrop:
 * If you're not interested in being part of the Autopia community, you are welcome to sell your AUT on Honeyswap and make a few DAI.
 
 With curiosity,<br />
-Stephen
+[Stephen](https://stephenreid.net)
