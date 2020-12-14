@@ -58,8 +58,6 @@
   <script src="<%=f%>"></script>
   <% } %>
 
-
-  <%= favicon_tag @favicon %>
   <title><%=if @full_title; t = @full_title; elsif @title; t = "#{@title} · Autopia"; else; t = "Autopia"; end %></title>
     <meta property="og:title" content="<%=t%>" />
     <meta name="description" content="<%=@og_desc%>">
