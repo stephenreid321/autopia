@@ -6,18 +6,22 @@
   #nav .nav-link.active { font-weight: bold }
 </style>
 
-<h1 class="text-center mt-3 mb-0">
-  <a class="zt rainbow" style="font-size: 5rem; text-decoration: none" href="/">Autopia</a>
-</h1>
-<p class="lead text-center mb-4">
-  <em>a cryptoeconomic experiment in community and co-creation</em>
-</p>
+<div class="container">
 
-<div id="nav">
-  <%= ul_nav [
+  <h1 class="text-center mt-3 mb-0">
+    <a class="zt rainbow" style="font-size: 5rem; text-decoration: none" href="/">Autopia</a>
+  </h1>
+  <p class="lead text-center mb-4">
+    <em>a cryptoeconomic experiment in community and co-creation</em>
+  </p>
+
+  <div id="nav">
+    <%= ul_nav [
         ], ul_class: 'nav justify-content-center', li_class: 'nav-item', a_class: 'text-white nav-link' %>
+  </div>
+  <script>
+    $("#nav a[href^=http]").attr('target', '_blank')
+    $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').css({'font-weight': 'bold', 'color': 'rgba(0, 0, 0, 0.9)'})
+  </script>
+
 </div>
-<script>
-  $("#nav a[href^=http]").attr('target', '_blank')
-  $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').css({'font-weight': 'bold', 'color': 'rgba(0, 0, 0, 0.9)'})
-</script>
