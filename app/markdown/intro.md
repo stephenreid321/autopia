@@ -1,4 +1,4 @@
-10,000 AUT (Autopia Tokens, currency symbol <span class="zt">A</span>) were minted as an ERC-20 on the Ethereum mainnet. These tokens were then be transferred to the xDai chain (where transactions cost just cents rather than dollars) using the xDai OmniBridge.
+10,000 AUT (Autopia Tokens, currency symbol <span class="zt">A</span>) were minted as an ERC-20 on the Ethereum mainnet. These tokens were then transferred to the xDai chain (where transactions cost just cents rather than dollars) using the xDai OmniBridge.
 
 **51% of the tokens were airdropped to subscribers of the [Stephen Reid In Correspondence](http://stephenreid.substack.com/) newsletter who registered by 11.59pm on Winter Solstice, 21st December 2020**, in proportion to the number of links clicked in past newsletters (people registering who had never clicked a link were included as if they had clicked one link). [View token balances on the xDai block explorer &rarr;](https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders)
 
