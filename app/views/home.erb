@@ -25,8 +25,13 @@
         end
       end
 
+      newbies = []
+
       registered.each do |email, _eth|
-        clickers[email] = 1 unless clickers[email]
+        if !clickers[email]
+          clickers[email] = 1
+          newbies.push(email)
+        end
       end
 
       valid = clickers.select { |k, _v| registered.keys.include?(k) }
@@ -38,81 +43,89 @@
       <tr>
         <th>
           Registrations
-          <th>
-            <td>
-              <%= valid.keys.count %>
-            </td>
-          </tr>
+        </th>
+        <td>
+          <%= valid.keys.count %>
+        </td>
+      </tr>
 
-          <tr>
-            <th>
-              Number of clicks of those registered
-              <th>
-                <td>
-                  <%= s = valid.values.sum %>
-                  (median: <%= median = valid.values.median.round %>)
-                  (mean: <%= mean = valid.values.mean %>)
-                </td>
-              </tr>
+      <th>
+        People who hadn't previously clicked any links
+      </th>
+      <td>
+        <%= newbies.count %>
+      </td>
+    </tr>
 
-              <tr>
-                <th>
-                  AUT per click/registration
-                  <th>
-                    <td>
-                      <%= value = (5100.to_f / s).round(2) %>
-                    </td>
-                  </tr>
+    <tr>
+      <th>
+        Number of clicks of those registered
+      </th>
+      <td>
+        <%= s = valid.values.sum %>
+        (median: <%= median = valid.values.median.round %>)
+        (mean: <%= mean = valid.values.mean %>)
+      </td>
+    </tr>
 
-                </table>
+    <tr>
+      <th>
+        AUT per click/registration
+      </th>
+      <td>
+        <%= value = (5100.to_f / s).round(2) %>
+      </td>
+    </tr>
+
+  </table>
 
 
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th>
-                        #
-                      </th>
-                      <th>
-                        Ethereum/xDai address
-                      </th>
-                      <th>
-                        Clicks
-                      </th>
-                      <th>
-                        AUT
-                      </th>
-                      <th>
-                        % of drop
-                      </th>
-                    </tr>
-                  </thead>
-                  <%
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          Ethereum/xDai address
+        </th>
+        <th>
+          Clicks
+        </th>
+        <th>
+          AUT
+        </th>
+        <th>
+          % of drop
+        </th>
+      </tr>
+    </thead>
+    <%
         valid.sort_by { |_k, v| -v }.each_with_index do |x, i|
         k, v = x
         f = v.to_f / s %>
-                  <tr>
-                    <td>
-                      #<%=i+1%>
-                    </td>
-                    <td>
-                      <% eth = registered[k].split('/').last.downcase %>
-                      <a target="_blank" href="https://etherscan.io/address/<%=eth%>"><%=eth[0..6]%>&hellip;</a>
-                    </td>
-                    <td>
-                      <%= v %>
-                    </td>
-                    <td>
-                      <%="#{(f * 5100).round(2)}"%>
-                    </td>
-                    <td>
-                      <%="#{(f * 100).round(2)}%"%>
-                    </td>
-                  </tr>
-                <% end %>
-              </table>
+    <tr>
+      <td>
+        #<%=i+1%>
+      </td>
+      <td>
+        <% eth = registered[k].split('/').last.downcase %>
+        <a target="_blank" href="https://etherscan.io/address/<%=eth%>"><%=eth[0..6]%>&hellip;</a>
+      </td>
+      <td>
+        <%= v %>
+      </td>
+      <td>
+        <%="#{(f * 5100).round(2)}"%>
+      </td>
+      <td>
+        <%="#{(f * 100).round(2)}%"%>
+      </td>
+    </tr>
+  <% end %>
+</table>
 
 
-            </div>
-          </div>
-        </div>
+</div>
+</div>
+</div>
