@@ -1,5 +1,53 @@
 <div class="row" >
-  <div class="col-sm-12">
+  <div class="col-sm-5">
     <%= md 'intro' %>
+  </div>
+  <div class="col-sm-7">
+
+    <a href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders">Token balances from Blockscout</a>
+
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th>
+            #
+          </th>
+          <th>
+            Ethereum/xDai address
+          </th>
+          <th>
+            AUT
+          </th>
+        </tr>
+      </thead
+  </table>
+      <%
+a = Mechanize.new
+
+items = []
+
+j = JSON.parse(a.get('https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders?type=JSON').body)
+
+while j
+  items += j['items']
+  puts items.count
+  break if !j['next_page_path']
+  j = JSON.parse(a.get(j['next_page_path']+'&type=JSON').body)
+end
+
+
+items.each_with_index { |item,i|
+h = Nokogiri::HTML(item)
+eth = h.search('[data-address-hash]').attr('data-address-hash')
+tokens = h.search('.text-dark').text.split(' ').first.gsub(',','')
+%>
+      <tr>
+        <th>#<%=i+1%></th>
+        <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=eth%>/tokens"><%=eth%></a></td>
+        <td><%=tokens%></td>
+      </tr>
+      <% } %>
+    </table>
+
   </div>
 </div>
