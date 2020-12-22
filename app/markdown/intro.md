@@ -1,8 +1,8 @@
-10,000 AUT (Autopia Tokens, currency symbol <span class="zt">A</span>) will be minted as an ERC-20 on the Ethereum mainnet. These tokens will then be transferred to the xDai chain (where transactions cost just cents rather than dollars) using the xDai OmniBridge.
+10,000 AUT (Autopia Tokens, currency symbol <span class="zt">A</span>) were minted as an ERC-20 on the Ethereum mainnet. These tokens were then be transferred to the xDai chain (where transactions cost just cents rather than dollars) using the xDai OmniBridge.
 
-**51% of the tokens will be airdropped to subscribers of the [Stephen Reid In Correspondence](http://stephenreid.substack.com/) newsletter who [register via this form](https://docs.google.com/forms/d/e/1FAIpQLSfUnLxvkMhjsV8TsV_meH2gHdleT2HrRQL_SlVFkHxGfFKdoA/viewform) by 11.59pm on Winter Solstice, 21st December 2020**, in proportion to the number of links clicked in past newsletters (people registering who have never clicked a link will be included as if they had clicked one link).
+**51% of the tokens were airdropped to subscribers of the [Stephen Reid In Correspondence](http://stephenreid.substack.com/) newsletter who registered by 11.59pm on Winter Solstice, 21st December 2020**, in proportion to the number of links clicked in past newsletters (people registering who had never clicked a link were included as if they had clicked one link). [View token balances on the xDai block explorer &rarr;](https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders)
 
-I will hold the other 49%, and over 12 new moons place ~half of this amount (so ~25% of the total supply) into a liquidity pool on Honeyswap at an initial ratio of 1 AUT : 1 xDAI:
+Over 12 new moons ~25% of the total supply will be put into a liquidity pool on Honeyswap at an initial ratio of 1 AUT : 1 xDAI:
 
 <table class="table table-condensed">
 <thead>
@@ -26,8 +26,6 @@ I will hold the other 49%, and over 12 new moons place ~half of this amount (so 
 </table>
 
 <strong>The top 150 AUT holders will be invited to a new, private Autopia Slack.</strong> Each new moon, anyone who has become a top 150 AUT holder will be added to the Slack, and anyone who is no longer a top 150 AUT holder will be removed. On the Autopia Slack, discussions will begin around a real-life co-created gathering in Summer 2021. It will also become the main place I share timely and important news and tips from the crypto world and beyond.
-
-So, after the airdrop:
 
 * If you are a top 150 AUT holder, expect an invite to the Slack.
 * If you aren't a top 150 AUT holder, but would like to join the Slack, you can buy more AUT on Honeyswap — or ask someone to gift some to you.
