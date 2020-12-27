@@ -15,7 +15,7 @@
           <th>
             Ethereum/xDai address
           </th>
-          <% if params[:a] == ENV['ADMIN_PASSWORD'] %>
+          <% if Padrino.env == :development %>
             <th>
               Email
             </th>
@@ -37,7 +37,7 @@ balances.each_with_index { |b,i|
       <tr>
         <th>#<%=i+1%></th>
         <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=eth%>/tokens"><%=eth%></a></td>
-        <% if params[:a] == ENV['ADMIN_PASSWORD'] %>
+        <% if Padrino.env == :development %>
           <td><%=email%></td>
         <% end %>
         <td><%=balance%></td>
