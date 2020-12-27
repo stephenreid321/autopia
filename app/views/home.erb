@@ -15,6 +15,11 @@
           <th>
             Ethereum/xDai address
           </th>
+          <% if params[:a] == ENV['ADMIN_PASSWORD'] %>
+            <th>
+              Email
+            </th>
+          <% end %>
           <th>
             AUT
           </th>
@@ -22,43 +27,19 @@
       </thead
   </table>
       <%
-a = Mechanize.new
-
-items = []
-
-j = JSON.parse(a.get('https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-transfers?type=JSON').body)
-
-while j
-  items += j['items']
-  puts items.count
-  break if !j['next_page_path']
-  j = JSON.parse(a.get(j['next_page_path']+'&type=JSON').body)
-end
-
-balances = {}
-
-items.each { |item|
-
-h = Nokogiri::HTML(item)
-from = h.search('[data-address-hash]')[0].attr('data-address-hash')
-to = h.search('[data-address-hash]')[1].attr('data-address-hash')
-tokens = h.search('.tile-title').text.split(' ').first.gsub(',','').to_f
-
-balances[from] = 0 if !balances[from]
-balances[to] = 0 if !balances[to]
-balances[from] -= tokens
-balances[to] += tokens
-
-}
-
-balances = balances.select { |k,v| v > 0 }.sort_by { |k,v| -v }
+registered = build_registered
+balances = build_balances
 
 balances.each_with_index { |b,i|
   eth, balance = b
+  email = registered[eth.downcase]
 %>
       <tr>
         <th>#<%=i+1%></th>
         <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=eth%>/tokens"><%=eth%></a></td>
+        <% if params[:a] == ENV['ADMIN_PASSWORD'] %>
+          <td><%=email%></td>
+        <% end %>
         <td><%=balance%></td>
       </tr>
       <% } %>

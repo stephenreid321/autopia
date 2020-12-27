@@ -1,6 +1,0 @@
-post_id,timestamp,email,post_type,post_audience,active_subscription,country,city,region,device_type,client_os,client_type,user_agent
-18577699,2020-11-12T17:14:21.650Z,stephen@stephenreid.net,newsletter,only_paid,false,US,Seattle,WA,desktop,Windows,browser,Mozilla/5.0 (Windows NT 5.1; rv:11.0) Gecko Firefox/11.0 (via ggpht.com GoogleImageProxy)
-18577699,2020-11-12T17:30:43.230Z,raphael.thelen@posteo.de,newsletter,only_paid,false,US,Austin,TX,desktop,OS X,email client,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko)"
-18577699,2020-11-12T21:03:54.650Z,joann.mallett@yahoo.co.uk,newsletter,only_paid,false,US,Seattle,WA,other,unknown,unknown,YahooMailProxy; https://help.yahoo.com/kb/yahoo-mail-proxy-SLN28749.html
-18577699,2020-11-13T08:05:42.620Z,raphael.thelen@posteo.de,newsletter,only_paid,false,US,Seattle,WA,desktop,OS X,email client,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/605.1.15 (KHTML, like Gecko)"
-18577699,2020-11-17T20:14:24.660Z,obranagan@pm.me,newsletter,only_paid,false,US,Seattle,WA,desktop,OS X,browser,"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.0.1 Safari/605.1.15"

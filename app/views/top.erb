@@ -1,0 +1,10 @@
+<%
+registered = build_registered
+balances = build_balances
+
+balances[0..149].each_with_index { |b,i|
+  eth, balance = b
+  email = registered[eth.downcase]
+  %>
+<%= email || eth %><br />
+<% } %>

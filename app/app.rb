@@ -58,5 +58,10 @@ module Autopia
     get '/', cache: true do
       erb :home
     end
+
+    get '/150', cache: true do
+      halt unless Padrino.env == :development
+      erb :top, layout: false
+    end
   end
 end
