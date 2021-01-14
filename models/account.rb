@@ -16,7 +16,7 @@ class Account
 
   def self.sync_with_slack
     Slack.configure do |config|
-      config.token = slack_api_key
+      config.token = ENV['SLACK_API_KEY']
     end
     client = Slack::Web::Client.new
 
@@ -42,6 +42,10 @@ class Account
 
   def self.with_balance
     all.select { |account| account.balance > 0 }.sort_by { |account| -account.balance }
+  end
+
+  def self.with_balance_or_slack_member
+    all.select { |account| account.balance > 0 || account.slack_member }.sort_by { |account| -account.balance }
   end
 
   def balance

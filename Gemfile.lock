@@ -93,6 +93,7 @@ GEM
       ffi (>= 1.0.0)
       rake
     front_matter_parser (0.2.1)
+    gli (2.19.0)
     hashie (4.1.0)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -209,6 +210,13 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.2)
       tilt (~> 2.0)
+    slack-ruby-client (0.14.6)
+      activesupport
+      faraday (>= 0.9)
+      faraday_middleware
+      gli
+      hashie
+      websocket-driver
     telegram-bot-ruby (0.13.0)
       faraday
       inflecto
@@ -261,6 +269,7 @@ DEPENDENCIES
   rss
   sass
   sinatra (= 2.0.2)
+  slack-ruby-client
   telegram-bot-ruby
   will_paginate!
 

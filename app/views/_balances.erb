@@ -15,13 +15,16 @@
         ID
       </th>
       <th>
+        Slack member
+      </th>
+      <th>
         AUT
       </th>
     </tr>
   </thead>
   <%
 
-Account.with_balance.each_with_index { |account,i|
+Account.with_balance_or_slack_member.each_with_index { |account,i|
 %>
   <tr>
     <th>#<%=i+1%></th>
@@ -39,6 +42,11 @@ Account.with_balance.each_with_index { |account,i|
         <% elsif account.name %>
           <a href="<%=account.link%>"><%= account.name %></a>
         <% end %>
+      <% end %>
+    </td>
+    <td>
+      <% if account.slack_member %>
+        <i class="fa fa-check-circle"></i>
       <% end %>
     </td>
     <td>
