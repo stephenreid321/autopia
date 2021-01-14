@@ -1,0 +1,41 @@
+<div class="text-center my-3">
+  <a href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders">Token balances from Blockscout</a>
+</div>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th>
+        #
+      </th>
+      <th>
+        Ethereum/xDai address
+      </th>
+      <% if Padrino.env == :development %>
+        <th>
+          Email
+        </th>
+      <% end %>
+      <th>
+        AUT
+      </th>
+    </tr>
+  </thead>
+  <%
+registered = build_registered
+balances = build_balances
+
+balances.each_with_index { |b,i|
+  eth, balance = b
+  email = registered[eth.downcase]
+%>
+  <tr>
+    <th>#<%=i+1%></th>
+    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=eth%>/tokens"><%=eth%></a></td>
+    <% if Padrino.env == :development %>
+      <td><%=email%></td>
+    <% end %>
+    <td><%=balance%></td>
+  </tr>
+  <% } %>
+</table>

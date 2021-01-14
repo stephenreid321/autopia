@@ -59,6 +59,10 @@ module Autopia
       erb :home
     end
 
+    get '/pair' do
+      erb :pair
+    end
+
     get '/150', cache: true do
       halt unless Padrino.env == :development
       erb :top, layout: false
