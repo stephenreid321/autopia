@@ -35,7 +35,6 @@ class Transaction
 
     while j
       items += j['items']
-      puts items.count
       break unless j['next_page_path']
 
       j = JSON.parse(a.get(j['next_page_path'] + '&type=JSON').body)
@@ -46,13 +45,9 @@ class Transaction
       block = h.search("a[href^='/poa/xdai/blocks']")[0].text.gsub('Block #', '')
       identifier = h.search('[data-identifier-hash]')[0].attr('data-identifier-hash')
       tx = h.search('[data-test=transaction_hash_link]')[0].text
-      puts from = h.search('[data-address-hash]')[0].attr('data-address-hash').downcase
-      puts to = h.search('[data-address-hash]')[1].attr('data-address-hash').downcase
       sender = Account.find_or_create_by!(address_hash: from)
       receiver = Account.find_or_create_by!(address_hash: to)
       amount = h.search('.tile-title').text.split(' ').first.gsub(',', '')
-
-      puts tx
       create(identifier: identifier, tx: tx, sender: sender, receiver: receiver, amount: amount, block: block)
     end
   end
