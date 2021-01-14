@@ -37,7 +37,7 @@
 
 <% aut_in_xdai = @pair['data']['pair']['token0']['derivedETH'].to_f.round(2) %>
 <div class="text-center mb-2">
-  <a class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 AUT = <%= aut_in_xdai %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
+  <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 AUT = <%= aut_in_xdai %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
     <div class="card-body py-1 px-4" style="font-size: 3em">
       1 <%= aut %> = <%= aut_in_xdai %> <%= xdai %>
     </div>
@@ -48,7 +48,7 @@
 
   <% xdai_in_aut = (1/@pair['data']['pair']['token0']['derivedETH'].to_f).round(3) %>
   <div>
-    <a class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 XDAI = <%= xdai_in_aut %> AUT "  href="https://app.honeyswap.org/#/swap?outputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 XDAI = <%= xdai_in_aut %> AUT "  href="https://app.honeyswap.org/#/swap?outputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
       <div class="card-body py-1 px-2">
         1 <%= xdai %> = <%= xdai_in_aut %> <%= aut %>
       </div>
@@ -57,7 +57,7 @@
 
   <% vol_24h = number_with_delimiter @pair['data']['pair']['volumeUSD'].to_f.round %>
   <div>
-    <a class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="24hr volume = <%=vol_24h%> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="24hr volume = <%=vol_24h%> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">
         🌅
         <%= vol_24h %> <%= xdai %>
@@ -67,7 +67,7 @@
 
   <% aut_liquidity = @pair['data']['pair']['reserve0'].to_f.round(2) %>
   <div>
-    <a class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="AUT liquidity = <%= aut_liquidity %> AUT" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="AUT liquidity = <%= aut_liquidity %> AUT" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">
         💦 <%= aut %>
         <%= aut_liquidity %>
@@ -77,7 +77,7 @@
 
   <% xdai_liquidity = number_with_delimiter @pair['data']['pair']['reserve1'].to_f.round %>
   <div>
-    <a class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="XDAI liquidity = <%= xdai_liquidity %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="XDAI liquidity = <%= xdai_liquidity %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">
         💦 <%= xdai %>
         <%= xdai_liquidity %>
@@ -87,7 +87,7 @@
 
   <% market_cap = number_with_delimiter (10_000 * aut_in_xdai).round %>
   <div>
-    <a class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Market cap = <%= market_cap %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Market cap = <%= market_cap %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">
         💸 <%= market_cap %>
         <%= xdai %>
