@@ -11,31 +11,39 @@
       <th>
         Ethereum/xDai address
       </th>
-      <% if Padrino.env == :development %>
-        <th>
-          Email
-        </th>
-      <% end %>
+      <th>
+        ID
+      </th>
       <th>
         AUT
       </th>
     </tr>
   </thead>
   <%
-registered = build_registered
-balances = build_balances
 
-balances.each_with_index { |b,i|
-  eth, balance = b
-  email = registered[eth.downcase]
+Account.with_balance.each_with_index { |account,i|
 %>
   <tr>
     <th>#<%=i+1%></th>
-    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=eth%>/tokens"><%=eth%></a></td>
-    <% if Padrino.env == :development %>
-      <td><%=email%></td>
-    <% end %>
-    <td><%=balance%></td>
+    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=account.address_hash%>/tokens"><%=account.address_hash%></a></td>
+    <td>
+      <% if current_account %>
+        <% if account.email || account.name %>
+          <a <% if account.email %> class="text-dark" <% end %> target="_blank" href="/admin/edit/Account/<%=account.id%>"><%=account.email || account.name%></a>
+        <% else %>
+          <a target="_blank" href="/admin/edit/Account/<%=account.id%>"><i class="fa fa-question-circle"></i></a>
+        <% end %>
+      <% else %>
+        <% if account.email %>
+          <i class="fa fa-check-circle"></i>
+        <% elsif account.name %>
+          <a href="<%=account.link%>"><%= account.name %></a>
+        <% end %>
+      <% end %>
+    </td>
+    <td>
+      <%= (account.balance < 0.001) ? account.balance.to_f : number_with_precision(account.balance, precision: 3) %>
+    </td>
   </tr>
   <% } %>
 </table>
