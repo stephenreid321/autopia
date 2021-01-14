@@ -18,7 +18,10 @@
         Slack member
       </th>
       <th>
-        AUT
+        <%= aut %>
+      </th>
+      <th>
+        <%= xdai %>
       </th>
     </tr>
   </thead>
@@ -54,7 +57,10 @@ Account.with_balance_or_slack_member.each_with_index { |account,i|
       <% end %>
     </td>
     <td>
-      <%= (account.balance < 0.001) ? account.balance.to_f : number_with_precision(account.balance, precision: 3) %>
+      <%= ((b = account.balance) < 0.001) ? b.to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
+    </td>
+    <td>
+      <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? b.to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
   </tr>
   <% } %>

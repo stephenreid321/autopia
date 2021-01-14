@@ -52,6 +52,10 @@ class Account
     transactions_as_receiver.pluck(:amount).sum - transactions_as_sender.pluck(:amount).sum
   end
 
+  def balance_xdai(xdai_per_aut)
+    balance * xdai_per_aut
+  end
+
   def self.protected_attributes
     %w[admin]
   end
