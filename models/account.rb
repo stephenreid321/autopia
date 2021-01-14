@@ -9,9 +9,32 @@ class Account
   field :crypted_password, type: String
   field :address_hash, type: String
   field :link, type: String
+  field :slack_member, type: Boolean
 
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver
+
+  def self.sync_with_slack
+    Slack.configure do |config|
+      config.token = slack_api_key
+    end
+    client = Slack::Web::Client.new
+
+    all_members = []
+    client.users_list do |response|
+      all_members.concat(response.members)
+    end
+    all_members.each do |member|
+      name = member.name
+      email = member.profile.email
+      next unless email
+
+      puts "#{name} #{email}"
+      account = Account.find_by(email: email.downcase) || Account.create(name: name, email: email)
+      account.slack_member = true
+      account.save
+    end
+  end
 
   def self.balance
     Account.where(:address_hash.ne => '0x0000000000000000000000000000000000000000').map(&:balance).sum
@@ -50,6 +73,7 @@ class Account
       admin: :check_box,
       time_zone: :select,
       link: :url,
+      slack_member: :check_box,
       password: { type: :password, new_hint: 'Leave blank to keep existing password' }
     }
   end

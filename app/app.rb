@@ -55,7 +55,7 @@ module Autopia
       erb :not_found, layout: :application
     end
 
-    get '/', cache: true do
+    get '/' do
       erb :home
     end
 
@@ -63,7 +63,7 @@ module Autopia
       erb :pair
     end
 
-    get '/150', cache: true do
+    get '/150' do
       halt unless Padrino.env == :development
       erb :top, layout: false
     end
