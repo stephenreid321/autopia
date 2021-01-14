@@ -59,7 +59,7 @@
   <% } %>
 
   <title><%=if @full_title; t = @full_title; elsif @title; t = "#{@title} · Autopia"; else; t = "Autopia"; end %></title>
-    <%= favicon_tag @favicon || 'autopia-200-200.jpg' %>
+    <%= favicon_tag @favicon || 'autopia-200-200.png' %>
     <meta property="og:title" content="<%=t%>" />
     <meta name="description" content="<%=@og_desc%>">
     <meta property="og:image" content="<%= @og_image%>" />
