@@ -7,8 +7,8 @@ class Transaction
   field :amount, type: BigDecimal
   field :block, type: Integer
 
-  belongs_to :sender, class_name: 'Account', inverse_of: :transactions_as_sender, index: true
-  belongs_to :receiver, class_name: 'Account', inverse_of: :transactions_as_receiver, index: true
+  belongs_to :sender, class_name: 'Account', inverse_of: :transactions_as_sender, dependent: :destroy, index: true
+  belongs_to :receiver, class_name: 'Account', inverse_of: :transactions_as_receiver, dependent: :destroy, index: true
 
   def self.admin_fields
     {
