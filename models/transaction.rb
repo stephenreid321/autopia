@@ -7,8 +7,8 @@ class Transaction
   field :amount, type: BigDecimal
   field :block, type: Integer
 
-  belongs_to :sender, class_name: 'Account', inverse_of: :transactions_as_sender, dependent: :destroy, index: true
-  belongs_to :receiver, class_name: 'Account', inverse_of: :transactions_as_receiver, dependent: :destroy, index: true
+  belongs_to :sender, class_name: 'Account', inverse_of: :transactions_as_sender, index: true
+  belongs_to :receiver, class_name: 'Account', inverse_of: :transactions_as_receiver, index: true
 
   def self.admin_fields
     {
@@ -45,6 +45,8 @@ class Transaction
       block = h.search("a[href^='/poa/xdai/blocks']")[0].text.gsub('Block #', '')
       identifier = h.search('[data-identifier-hash]')[0].attr('data-identifier-hash')
       tx = h.search('[data-test=transaction_hash_link]')[0].text
+      from = h.search('[data-address-hash]')[0].attr('data-address-hash').downcase
+      to = h.search('[data-address-hash]')[1].attr('data-address-hash').downcase
       sender = Account.find_or_create_by!(address_hash: from)
       receiver = Account.find_or_create_by!(address_hash: to)
       amount = h.search('.tile-title').text.split(' ').first.gsub(',', '')

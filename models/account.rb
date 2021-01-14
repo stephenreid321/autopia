@@ -11,8 +11,8 @@ class Account
   field :link, type: String
   field :slack_member, type: Boolean
 
-  has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender
-  has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver
+  has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
+  has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
 
   def self.sync_with_slack
     Slack.configure do |config|

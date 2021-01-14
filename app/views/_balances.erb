@@ -40,7 +40,11 @@ Account.with_balance_or_slack_member.each_with_index { |account,i|
         <% if account.email %>
           <i class="fa fa-check-circle"></i>
         <% elsif account.name %>
-          <a href="<%=account.link%>"><%= account.name %></a>
+          <% if account.link %>
+            <a href="<%=account.link%>"><%= account.name %></a>
+          <% else %>
+            <%= account.name %>
+          <% end %>
         <% end %>
       <% end %>
     </td>
