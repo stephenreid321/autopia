@@ -34,7 +34,7 @@ Autopia::App.helpers do
   end
 
   def aut(h: '0.75em', va: 'baseline')
-    %(<img src="/images/aut.jpg" style="vertical-align: #{va}; height: #{h}">)
+    %(<img src="/images/aut.png" style="vertical-align: #{va}; height: #{h}">)
   end
 
   def xdai(h: '0.75em', va: 'baseline')
