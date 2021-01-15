@@ -90,8 +90,8 @@ class Account
   before_validation do
     self.password = Account.generate_password(8) unless password || crypted_password
     self.address_hash = address_hash.downcase if address_hash
-    self.dao_shares = nil if dao_shares.zero?
-    self.dao_loot = nil if dao_loot.zero?
+    self.dao_shares = nil if dao_shares && dao_shares.zero?
+    self.dao_loot = nil if dao_loot && dao_loot.zero?
   end
 
   validates_uniqueness_of   :address_hash, allow_nil: true
