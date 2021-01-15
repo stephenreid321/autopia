@@ -100,12 +100,20 @@
 
 <div class="stats text-center">
 
+  <% token_holders = Account.with_balance.count %>
+  <div>
+    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(token_holders, 'token holders')%>">
+      <div class="card-body py-1 px-2">
+        <i class="fa fa-user"></i> <%= token_holders %>
+      </div>
+    </span>
+  </div>
+
   <% slack_members = Account.where(slack_member: true).count %>
   <div>
     <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
       <div class="card-body py-1 px-2">
         <i class="fa fab fa-slack"></i> <%= slack_members %>
-        <%= xdai %>
       </div>
     </span>
   </div>
@@ -115,7 +123,6 @@
     <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(dao_members, 'DAO member')%>">
       <div class="card-body py-1 px-2">
         <i class="fa fa-user-cog"></i> <%= dao_members %>
-        <%= xdai %>
       </div>
     </span>
   </div>

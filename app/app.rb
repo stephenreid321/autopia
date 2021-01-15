@@ -55,17 +55,13 @@ module Autopia
       erb :not_found, layout: :application
     end
 
-    get '/' do
+    get '/', cache: true do
+      expires 1.hour.to_i
       erb :home
     end
 
     get '/pair' do
       erb :pair
-    end
-
-    get '/150' do
-      halt unless Padrino.env == :development
-      erb :top, layout: false
     end
   end
 end
