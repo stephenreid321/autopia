@@ -56,6 +56,7 @@ module Autopia
     end
 
     get '/', cache: true do
+      cache_key { request.path + "?signed_in=#{current_account ? 1 : 0}" }
       expires 1.hour.to_i
       erb :home
     end
