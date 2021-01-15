@@ -30,9 +30,9 @@
 <style>
   a.card { text-decoration: none }
   a.card:hover { background: rgba(135,71,230,0.15) }
-  #stats > div { font-size: 1.5em; margin-bottom: 0.25em }
+  .stats > div { font-size: 1.5em; margin-bottom: 0.25em }
   @media(min-width: 768px) {
-  #stats > div { display: inline-block;  }
+  .stats > div { display: inline-block;  }
   }
 </style>
 
@@ -45,7 +45,7 @@
   </a>
 </div>
 
-<div id="stats" class="text-center">
+<div class="stats text-center">
 
   <% xdai_in_aut = (1/@pair['data']['pair']['token0']['derivedETH'].to_f).round(3) %>
   <div>
@@ -94,6 +94,30 @@
         <%= xdai %>
       </div>
     </a>
+  </div>
+
+</div>
+
+<div class="stats text-center">
+
+  <% slack_members = Account.where(slack_member: true).count %>
+  <div>
+    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
+      <div class="card-body py-1 px-2">
+        <i class="fa fab fa-slack"></i> <%= slack_members %>
+        <%= xdai %>
+      </div>
+    </span>
+  </div>
+
+  <% dao_members = Account.where(:dao_shares.ne => nil).count %>
+  <div>
+    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(dao_members, 'DAO member')%>">
+      <div class="card-body py-1 px-2">
+        <i class="fa fa-user-cog"></i> <%= dao_members %>
+        <%= xdai %>
+      </div>
+    </span>
   </div>
 
 </div>
