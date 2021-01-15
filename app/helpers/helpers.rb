@@ -27,12 +27,6 @@ Autopia::App.helpers do
     halt(403) unless current_account
   end
 
-  def g(query)
-    agent = Mechanize.new
-    response = agent.post 'https://api.thegraph.com/subgraphs/name/1hive/uniswap-v2', %({"query":"#{query.gsub("\n", ' ').gsub('"', '\\"')}"}), { 'Content-Type' => 'application/json' }
-    JSON.parse(response.body)
-  end
-
   def aut(h: '0.75em', va: 'baseline')
     %(<img src="/images/aut.png" style="vertical-align: #{va}; height: #{h}">)
   end

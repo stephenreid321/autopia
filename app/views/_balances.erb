@@ -18,16 +18,22 @@
         Slack member
       </th>
       <th>
-        <%= aut %>
+        DAO shares
       </th>
       <th>
-        <%= xdai %>
+        DAO loot
+      </th>
+      <th>
+        <%= aut(h: '1em') %>
+      </th>
+      <th>
+        <%= xdai(h: '1em') %>
       </th>
     </tr>
   </thead>
   <%
 
-Account.with_balance_or_slack_member.each_with_index { |account,i|
+Account.interesting.each_with_index { |account,i|
 %>
   <tr>
     <th>#<%=i+1%></th>
@@ -54,6 +60,16 @@ Account.with_balance_or_slack_member.each_with_index { |account,i|
     <td>
       <% if account.slack_member %>
         <i class="fa fa-check-circle"></i>
+      <% end %>
+    </td>
+    <td>
+      <% if account.dao_shares %>
+        <%= account.dao_shares %>
+      <% end %>
+    </td>
+    <td>
+      <% if account.dao_loot %>
+        <%= account.dao_loot %>
       <% end %>
     </td>
     <td>

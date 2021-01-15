@@ -10,11 +10,36 @@ class Account
   field :address_hash, type: String
   field :link, type: String
   field :slack_member, type: Boolean
+  field :dao_shares, type: Integer
+  field :dao_loot, type: Integer
 
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
 
+  def self.sync_with_dao
+    Account.all.set(dao_shares: nil, dao_loot: nil)
+
+    @members = TheGraph.query('odyssy-automaton/daohaus-xdai', %{
+          {
+            members(where: {molochAddress: "0x80de9a508443c68e825f683f9ebd2659600a678e"}) {
+              id
+              memberAddress
+              shares
+              loot
+            }
+          }
+        })
+    @members['data']['members'].each do |member|
+      account = Account.find_by(address_hash: member['memberAddress']) || Account.create(address_hash: member['memberAddress'])
+      account.dao_shares = member['shares']
+      account.dao_loot = member['loot']
+      account.save
+    end
+  end
+
   def self.sync_with_slack
+    Account.all.set(slack_member: nil)
+
     Slack.configure do |config|
       config.token = ENV['SLACK_API_KEY']
     end
@@ -44,8 +69,8 @@ class Account
     all.select { |account| account.balance > 0 }.sort_by { |account| -account.balance }
   end
 
-  def self.with_balance_or_slack_member
-    all.select { |account| account.balance > 0 || account.slack_member }.sort_by { |account| -account.balance }
+  def self.interesting
+    all.select { |account| account.balance > 0 || account.slack_member || account.dao_shares && account.dao_shares > 0 || account.dao_loot && account.dao_loot > 0 }.sort_by { |account| -account.balance }
   end
 
   def balance
@@ -65,6 +90,8 @@ class Account
   before_validation do
     self.password = Account.generate_password(8) unless password || crypted_password
     self.address_hash = address_hash.downcase if address_hash
+    self.dao_shares = nil if dao_shares.zero?
+    self.dao_loot = nil if dao_loot.zero?
   end
 
   validates_uniqueness_of   :address_hash, allow_nil: true
@@ -82,6 +109,8 @@ class Account
       time_zone: :select,
       link: :url,
       slack_member: :check_box,
+      dao_shares: :number,
+      dao_loot: :number,
       password: { type: :password, new_hint: 'Leave blank to keep existing password' }
     }
   end
