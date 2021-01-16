@@ -63,8 +63,8 @@ module Autopia
       erb :home
     end
 
-    get '/address_hash_to_email/:address_hash' do
-      Account.find_by(address_hash: params[:address_hash]).try(:email) || params[:address_hash]
+    get '/address_hash_to_slack_id/:address_hash' do
+      Account.find_by(address_hash: params[:address_hash]).try(:slack_id)
     end
 
     get '/pair' do

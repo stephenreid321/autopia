@@ -9,7 +9,7 @@ class Account
   field :crypted_password, type: String
   field :address_hash, type: String
   field :link, type: String
-  field :slack_member, type: Boolean
+  field :slack_id, type: String
   field :dao_shares, type: Integer
   field :dao_loot, type: Integer
 
@@ -38,7 +38,7 @@ class Account
   end
 
   def self.sync_with_slack
-    Account.all.set(slack_member: nil)
+    Account.all.set(slack_id: nil)
 
     Slack.configure do |config|
       config.token = ENV['SLACK_API_KEY']
@@ -56,7 +56,7 @@ class Account
 
       puts "#{name} #{email}"
       account = Account.find_by(email: email.downcase) || Account.create(name: name, email: email)
-      account.slack_member = true
+      account.slack_id = member.id
       account.save
     end
   end
@@ -70,7 +70,7 @@ class Account
   end
 
   def self.interesting
-    all.select { |account| account.balance > 0 || account.slack_member || account.dao_shares && account.dao_shares > 0 || account.dao_loot && account.dao_loot > 0 }.sort_by { |account| -account.balance }
+    all.select { |account| account.balance > 0 || account.slack_id || account.dao_shares && account.dao_shares > 0 || account.dao_loot && account.dao_loot > 0 }.sort_by { |account| -account.balance }
   end
 
   def balance
@@ -108,7 +108,7 @@ class Account
       admin: :check_box,
       time_zone: :select,
       link: :url,
-      slack_member: :check_box,
+      slack_id: :text,
       dao_shares: :number,
       dao_loot: :number
     }

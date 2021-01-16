@@ -109,7 +109,7 @@
     </span>
   </div>
 
-  <% slack_members = Account.where(slack_member: true).count %>
+  <% slack_members = Account.where(:slack_id.ne => nil).count %>
   <div>
     <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
       <div class="card-body py-1 px-2">
