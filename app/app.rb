@@ -63,6 +63,10 @@ module Autopia
       erb :home
     end
 
+    get '/address_hash_to_email/:address_hash' do
+      Account.find_by(address_hash: params[:address_hash]).try(:email) || params[:address_hash]
+    end
+
     get '/pair' do
       erb :pair
     end
