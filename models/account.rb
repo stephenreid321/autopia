@@ -110,8 +110,7 @@ class Account
       link: :url,
       slack_member: :check_box,
       dao_shares: :number,
-      dao_loot: :number,
-      password: { type: :password, new_hint: 'Leave blank to keep existing password' }
+      dao_loot: :number
     }
   end
 
