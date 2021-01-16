@@ -36,18 +36,19 @@
   }
 </style>
 
-<% @aut_in_xdai = @pair['data']['pair']['token0']['derivedETH'].to_f.round(2) %>
+<% @aut_in_xdai = @pair['data']['pair']['token0']['derivedETH'].to_f %>
+<% @aut_in_xdai_2 = number_with_precision @aut_in_xdai, precision: 2 %>
 <div class="text-center mb-2">
-  <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 AUT = <%= @aut_in_xdai %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
+  <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 AUT = <%= @aut_in_xdai_2 %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
     <div class="card-body py-1 px-4" style="font-size: 3em">
-      1 <%= aut %> = <%= @aut_in_xdai %> <%= xdai %>
+      1 <%= aut %> = <%= @aut_in_xdai_2 %> <%= xdai %>
     </div>
   </a>
 </div>
 
 <div class="stats text-center">
 
-  <% xdai_in_aut = (1/@pair['data']['pair']['token0']['derivedETH'].to_f).round(3) %>
+  <% xdai_in_aut = (1/@aut_in_xdai).round(3) %>
   <div>
     <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 XDAI = <%= xdai_in_aut %> AUT "  href="https://app.honeyswap.org/#/swap?outputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
       <div class="card-body py-1 px-2">
@@ -76,7 +77,7 @@
     </a>
   </div>
 
-  <% aut_liquidity = @pair['data']['pair']['reserve0'].to_f.round(2) %>
+  <% aut_liquidity = number_with_precision @pair['data']['pair']['reserve0'].to_f.round(2), precision: 2 %>
   <div>
     <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="AUT liquidity = <%= aut_liquidity %> AUT" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">

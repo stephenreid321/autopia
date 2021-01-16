@@ -52,7 +52,7 @@ class Account
     all_members.each do |member|
       name = member.name
       email = member.profile.email
-      next unless email
+      next if !email || member.is_invited_user
 
       puts "#{name} #{email}"
       account = Account.find_by(email: email.downcase) || Account.create(name: name, email: email)
