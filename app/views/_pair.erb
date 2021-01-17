@@ -97,22 +97,22 @@
     </a>
   </div>
 
-  <% market_cap = number_with_delimiter (10_000 * @aut_in_xdai).round %>
-  <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Market cap = <%= market_cap %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
-      <div class="card-body py-1 px-2">
-        💸 <%= market_cap %>
-        <%= xdai %>
-      </div>
-    </a>
-  </div>
-
   <% total_supply = number_with_delimiter Account.balance.round %>
   <div>
     <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Total supply = <%= total_supply %> AUT" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938">
       <div class="card-body py-1 px-2">
         💰 <%= total_supply %>
         <%= aut %>
+      </div>
+    </a>
+  </div>
+
+  <% market_cap = number_with_delimiter (10_000 * @aut_in_xdai).round %>
+  <div>
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Market cap = <%= market_cap %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+      <div class="card-body py-1 px-2">
+        💸 <%= market_cap %>
+        <%= xdai %>
       </div>
     </a>
   </div>
