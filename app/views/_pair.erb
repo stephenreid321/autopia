@@ -123,20 +123,20 @@
 
   <% token_holders = Account.with_balance.count %>
   <div>
-    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(token_holders, 'token holders')%>">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(token_holders, 'token holders')%>" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders">
       <div class="card-body py-1 px-2">
         <i class="fa fa-user"></i> <%= token_holders %>
       </div>
-    </span>
+    </a>
   </div>
 
   <% slack_members = Account.where(:slack_id.ne => nil).count %>
   <div>
-    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>" href="mailto:team@autopia.co">
       <div class="card-body py-1 px-2">
         <i class="fa fab fa-slack"></i> <%= slack_members %>
       </div>
-    </span>
+    </a>
   </div>
 
   <% dao_members = Account.where(:dao_shares.ne => nil).count %>
