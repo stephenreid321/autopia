@@ -107,6 +107,17 @@
     </a>
   </div>
 
+  <% if current_account %>
+    <div>
+      <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Supply">
+        <div class="card-body py-1 px-2">
+          <%= Account.balance.round %>
+          <%= aut %>
+        </div>
+      </span>
+    </div>
+  <% end %>
+
 </div>
 
 <div class="stats text-center">
@@ -131,11 +142,11 @@
 
   <% dao_members = Account.where(:dao_shares.ne => nil).count %>
   <div>
-    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(dao_members, 'DAO member')%>">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(dao_members, 'DAO member')%>" href="https://app.daohaus.club/dao/0x80de9a508443c68e825f683f9ebd2659600a678e">
       <div class="card-body py-1 px-2">
         <i class="fa fa-user-cog"></i> <%= dao_members %>
       </div>
-    </span>
+    </a>
   </div>
 
 </div>
