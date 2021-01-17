@@ -132,11 +132,11 @@
 
   <% slack_members = Account.where(:slack_id.ne => nil).count %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>" href="mailto:team@autopia.co">
+    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
       <div class="card-body py-1 px-2">
         <i class="fa fab fa-slack"></i> <%= slack_members %>
       </div>
-    </a>
+    </span>
   </div>
 
   <% dao_members = Account.where(:dao_shares.ne => nil).count %>
