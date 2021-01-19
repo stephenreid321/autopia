@@ -54,7 +54,7 @@ Account.interesting.each_with_index { |account,i|
         <% end %>
       <% else %>
         <% if account.email %>
-          <i class="fa fa-check-circle"></i>
+          <i style="opacity: 0.2" class="fa fa-check-circle"></i>
         <% elsif account.name %>
           <% if account.link %>
             <a href="<%=account.link%>"><%= account.name %></a>
@@ -66,7 +66,9 @@ Account.interesting.each_with_index { |account,i|
     </td>
     <td>
       <% if account.slack_id %>
-        <i class="fa fa-check-circle"></i>
+        <i style="opacity: 0.2" class="fa fa-check-circle"></i>
+      <% else %>
+        <i data-toggle="tooltip" title="Not a Slack member" class="fa fa-exclamation-triangle"></i>
       <% end %>
     </td>
     <td>
