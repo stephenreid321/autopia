@@ -9,7 +9,7 @@
         $('#balances').dataTable({info: false, paging: false, searching: false})
   })
 </script>
-<table id="balances" class="table mt-3">
+<table id="balances" class="table mt-3" style="font-size: 0.95rem">
   <thead>
     <tr>
       <th>
@@ -44,7 +44,11 @@ Account.interesting.each_with_index { |account,i|
 %>
   <tr>
     <th data-sort="<%=i%>">#<%=i+1%></th>
-    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=account.address_hash%>/tokens"><%=account.address_hash%></a></td>
+    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=account.address_hash%>/tokens">
+        <% if account.address_hash%>
+          <span data-toggle="tooltip" title="<%=account.address_hash%>"><%=account.short_hash%></span>
+        <% end %>
+      </a></td>
     <td>
       <% if current_account %>
         <% if account.email || account.name %>
