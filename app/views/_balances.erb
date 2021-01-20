@@ -52,7 +52,7 @@ Account.interesting.each_with_index { |account,i|
     <td>
       <% if current_account %>
         <% if account.email || account.name %>
-          <a <% if account.email %> class="text-dark" <% end %> target="_blank" href="/admin/edit/Account/<%=account.id%>"><%=account.email || account.name%></a>
+          <a <% if account.email %> class="text-white" <% end %> target="_blank" href="/admin/edit/Account/<%=account.id%>"><%=account.email || account.name%></a>
         <% else %>
           <a target="_blank" href="/admin/edit/Account/<%=account.id%>"><i class="fa fa-question-circle"></i></a>
         <% end %>
