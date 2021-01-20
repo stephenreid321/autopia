@@ -77,7 +77,7 @@ Account.interesting.each_with_index { |account,i|
     <td>
       <% if account.slack_id %>
         <i style="opacity: 0.2" class="fa fa-check-circle"></i>
-      <% else %>
+      <% elsif !account.name %>
         <i data-toggle="tooltip" title="Not a Slack member" class="fa fa-exclamation-triangle"></i>
       <% end %>
     </td>
