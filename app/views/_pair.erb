@@ -28,9 +28,19 @@
 %>
 
 <style>
-  a.card { text-decoration: none; border: 0  }
-  a.card:hover { background: #EEE7FC /*rgba(135,71,230,0.15)*/ }
-  .stats > div { font-size: 1.5em; margin-bottom: 0.25em }
+  .card.aut-price { font-size: 3em }
+  .stats .card { font-size: 1.5em; }
+  a.card {
+    text-decoration: none;
+    border: 0;
+    box-shadow: 0 0 0.5em rgba(135,71,230);
+    transition: box-shadow 1s;
+  }
+  a.card:hover {
+  transition: box-shadow 1s;
+  box-shadow: 0 0 1.5em rgba(135,71,230)
+  }
+  .stats > div { margin-bottom: 0.25em }
   @media(min-width: 768px) {
   .stats > div { display: inline-block;  }
   }
@@ -39,8 +49,8 @@
 <% @aut_in_xdai = @pair['data']['pair']['token0']['derivedETH'].to_f %>
 <% @aut_in_xdai_2 = number_with_precision @aut_in_xdai, precision: 2 %>
 <div class="text-center mb-2">
-  <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 AUT = <%= @aut_in_xdai_2 %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
-    <div class="card-body py-1 px-4" style="font-size: 3em">
+  <a target="_blank" class="text-dark card d-sm-inline-block aut-price" data-toggle="tooltip" title="1 AUT = <%= @aut_in_xdai_2 %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
+    <div class="card-body py-1 px-4">
       1 <%= aut %> = <%= @aut_in_xdai_2 %> <%= xdai %>
     </div>
   </a>
