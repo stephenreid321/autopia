@@ -94,10 +94,10 @@ Account.interesting.each_with_index { |account,i|
       <% end %>
     </td>
     <td>
-      <%= ((b = account.balance) < 0.001) ? b.to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
+      <%= ((b = account.balance) < 0.001) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
     <td>
-      <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? b.to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
+      <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
   </tr>
   <% } %>
