@@ -30,13 +30,13 @@
 <style>
   .card.aut-price { font-size: 3em }
   .stats .card { font-size: 1.5em; }
-  a.card {
+  .card {
     text-decoration: none;
     border: 0;
     box-shadow: 0 0 0.5em rgba(135,71,230);
     transition: box-shadow 1s;
   }
-  a.card:hover {
+  .card:hover {
   transition: box-shadow 1s;
   box-shadow: 0 0 1.5em rgba(135,71,230)
   }
@@ -69,7 +69,7 @@
 
 
   <%
-  @vol_24h = TheGraph.query '1hive/uniswap-v2', %{
+  @vol_daily = TheGraph.query '1hive/uniswap-v2', %{
     {
       pairDayDatas(first: 1, orderBy: date, orderDirection: desc, where: {pairAddress: "0xccace6772a98d8a3da115b63e816e500a12aad9a"}) {
         dailyVolumeUSD
@@ -77,12 +77,12 @@
     }
   }
 %>
-  <% vol_24h = number_with_delimiter @vol_24h['data']['pairDayDatas'].first['dailyVolumeUSD'].to_f.round %>
+  <% vol_daily = number_with_delimiter @vol_daily['data']['pairDayDatas'].first['dailyVolumeUSD'].to_f.round %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="24hr volume = <%=vol_24h%> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Daily volume = <%=vol_daily%> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">
         🌅
-        <%= vol_24h %> <%= xdai %>
+        <%= vol_daily %> <%= xdai %>
       </div>
     </a>
   </div>
