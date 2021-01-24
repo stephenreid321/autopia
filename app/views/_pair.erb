@@ -107,11 +107,11 @@
     </a>
   </div>
 
-  <% circulating_supply = number_with_delimiter Account.balance.round %>
+  <% total_supply = 10_000 %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Circulating supply = <%= circulating_supply %> AUT" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Total supply = <%= total_supply %> AUT" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938">
       <div class="card-body py-1 px-2">
-        💰 <%= circulating_supply %>
+        💰 <%= total_supply %>
         <%= aut %>
       </div>
     </a>
