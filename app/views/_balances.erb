@@ -65,12 +65,8 @@ Account.interesting.each_with_index { |account,i|
       <% else %>
         <% if account.email %>
           <i style="opacity: 0.2" class="fa fa-check-circle"></i>
-        <% elsif account.name %>
-          <% if account.link %>
-            <a href="<%=account.link%>"><%= account.name %></a>
-          <% else %>
-            <%= account.name %>
-          <% end %>
+        <% elsif account.name && account.link %>
+          <a href="<%=account.link%>"><%= account.name %></a>
         <% end %>
       <% end %>
     </td>
