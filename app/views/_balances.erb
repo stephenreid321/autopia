@@ -72,7 +72,11 @@ Account.interesting.each_with_index { |account,i|
     </td>
     <td>
       <% if account.slack_id %>
-        <i style="opacity: 0.2" class="fa fa-check-circle"></i>
+        <% if current_account %>
+          <i style="opacity: 0.2" class="fa fa-check-circle"></i>
+        <% else %>
+          <i class="fa fa-check-circle"></i>
+        <% end %>
       <% elsif !account.name %>
         <% if current_account %>
           <% unless i+1 > 150 %>
