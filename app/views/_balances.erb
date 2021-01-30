@@ -63,7 +63,7 @@ Account.interesting.each_with_index { |account,i|
           <a target="_blank" href="/admin/edit/Account/<%=account.id%>"><i class="fa fa-question-circle"></i></a>
         <% end %>
       <% else %>
-        <% if account.email %>
+        <% if account.email || (account.name && !account.link) %>
           <i class="fa fa-check-circle"></i>
         <% elsif account.name && account.link %>
           <a href="<%=account.link%>"><%= account.name %></a>
