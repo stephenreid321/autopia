@@ -52,7 +52,7 @@ Account.interesting.each_with_index { |account,i|
     <td>
       <% if current_account %>
         <% if account.email || account.name %>
-          <a <% if account.email %> class="text-white" <% end %> target="_blank" data-toggle="tooltip" title="<%=account.email || account.name%>" href="/admin/edit/Account/<%=account.id%>">
+          <a <% if account.email %> class="text-dark" <% end %> target="_blank" data-toggle="tooltip" title="<%=account.email || account.name%>" href="/admin/edit/Account/<%=account.id%>">
             <% if account.email %>
               <%= account.email.length > 25 ? account.email.split('@').first+'@&hellip;' : account.email %>
             <% else %>

@@ -1,7 +1,5 @@
 $primary: #8747E6;
 $font-family-sans-serif: 'Space Mono', sans-serif;
-$body-bg: #222;
-$body-color: white;
 
 @import "bootstrap/bootstrap";
 
@@ -211,7 +209,7 @@ mark, .mark {
 
 
 
-.datatabled .dataTables_empty { display: none } 
+.datatabled .dataTables_empty { display: none }
 
 .datatabled .p {
   display: block;

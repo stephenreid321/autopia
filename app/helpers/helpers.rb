@@ -45,7 +45,7 @@ Autopia::App.helpers do
       else
         name = tag
         bg = 'background: none'
-        c = 'text-white'
+        c = 'text-dark'
         s = 'font-weight: 500'
       end
       %(<#{html_tag} href="/u/#{account.id}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
