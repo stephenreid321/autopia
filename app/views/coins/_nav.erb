@@ -1,3 +1,10 @@
+<nav>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#">Portfolios</a></li>
+    <li class="breadcrumb-item active"><%=@account.name%></li>
+  </ol>
+</nav>
+
 <%= ul_nav (
       (@virtual_tags.map { |slug| [tag_badge(slug, account: @account, html_tag: 'span'), "/u/#{@account.id}/tags/#{slug}"] }) +
       (tags = @account.tags.sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/u/#{@account.id}/tags/#{tag.name}"] } +
