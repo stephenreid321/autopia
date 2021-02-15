@@ -6,7 +6,7 @@
   <a target="_blank" href="/u/<%=@account.id%>/tags/<%=tag.name%>">
     <div class="p">
       <% if tag.holding < 1e-6 %>
-        <i data-toggle="tooltip" <% if current_account %> style="cursor: pointer" <% end %> class="far fa-question-circle"></i>
+        <i data-toggle="tooltip" class="far fa-question-circle"></i>
       <% else %>
         <i class="fas fa-spin fa-circle-notch"></i>
       <% end %>

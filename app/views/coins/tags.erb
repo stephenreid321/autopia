@@ -1,6 +1,6 @@
 <%= partial :'coins/nav' %>
 
-<% if current_account %>
+<% if current_account && current_account.id == @account.id %>
   <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
 <% end %>
 
@@ -24,7 +24,7 @@
 
           var t = parseFloat($('#tags td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
 
-          <% if current_account %>
+          <% if current_account && current_account.id == @account.id %>
             var priceFactor = <%=ENV['PRICE_FACTOR']%>
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
             var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})

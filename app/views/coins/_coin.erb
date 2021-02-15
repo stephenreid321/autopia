@@ -9,7 +9,7 @@
   <% end %>
 </td>
 <td>
-  <% if current_account %>
+  <% if current_account && current_account.id == @account.id %>
     <% if !coinship || !coinship.starred %>
       <a class="pagelet-trigger" href="/coins/<%=coin.id%>/star"><i class="far fa-star" style="color: #FAC84F; opacity: 0.3"></i></a>
     <% else %>
@@ -38,7 +38,7 @@
   <% end %>
 </td>
 <td data-sort="<%=coinship.try(:market_cap_rank_prediction)%>">
-  <% if current_account %>
+  <% if current_account && current_account.id == @account.id %>
     <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">#<%=coinship.try(:market_cap_rank_prediction)%></a>
     <% form_tag "/coins/#{coin.id}/market_cap_rank_prediction", :style => 'display: none' do %>
 
@@ -58,7 +58,7 @@
   <% end %>
 </td>
 <td data-sort="<%=coinship.try(:market_cap_rank_prediction_conviction)%>">
-  <% if current_account %>
+  <% if current_account && current_account.id == @account.id %>
     <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()"><%=coinship.try(:market_cap_rank_prediction_conviction) || '&hellip;'%></a>
     <% form_tag "/coins/#{coin.id}/market_cap_rank_prediction_conviction", :style => 'display: none' do %>
       <%= number_field_tag :p, :value => coinship.try(:market_cap_rank_prediction_conviction), :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
@@ -77,19 +77,19 @@
   <% end %>
 </td>
 <td class="holding" data-sort="<%= (!coinship || coinship.holding < 1e-6 ? 0 : coinship.holding) * ENV['PRICE_FACTOR'].to_i  %>">
-  <% if coinship && current_account %>
+  <% if coinship && current_account && current_account.id == @account.id %>
     <a target="_blank" href="/admin/edit/Coinship/<%=coinship.id%>">
     <% end %>
     <div class="p">
       <% if coinship && coinship.starred && coinship.all_units %>
         <% if coinship.holding < 1e-6 %>
-          <i data-toggle="tooltip" <% if current_account %> style="cursor: pointer" <% end %> class="far fa-question-circle"></i>
+          <i data-toggle="tooltip" class="far fa-question-circle"></i>
         <% else %>
           <i class="fas fa-spin fa-circle-notch"></i>
         <% end %>
       <% end %>
     </div>
-    <% if coinship && current_account %>
+    <% if coinship && current_account && current_account.id == @account.id %>
     </a>
   <% end %>
 </td>
@@ -150,7 +150,7 @@
 <% else %>
   <td></td>
 <% end %>
-<% if current_account %>
+<% if current_account && current_account.id == @account.id %>
   <td>
     <a class="btn btn-sm btn-danger" href="javascript:;" onclick="$.get('/coins/<%=coin.id%>/hide');$(this).closest('tr').remove()"><i class="fas fa-times"></i></a>
   </td>
