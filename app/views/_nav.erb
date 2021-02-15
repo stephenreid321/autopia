@@ -1,27 +1,28 @@
 <style>
   @media(min-width: 992px) {
-    #nav .nav-item {  }
+    #nav .nav-item { font-size: 0.8rem }
   }
   #nav .nav-item { padding-right: 1rem; }
   #nav .nav-link.active { font-weight: bold }
 </style>
-
-<div class="container">
-
-  <h1 class="text-center mt-3 mb-0">
-    <a class="zt rainbow" style="font-size: 5rem; text-decoration: none" href="/">Autopia</a>
-  </h1>
-  <p class="lead text-center">
-    <em>a cryptoeconomic experiment in community and co-creation</em>
-  </p>
-
-  <div id="nav">
-    <%= ul_nav [
-        ], ul_class: 'nav justify-content-center', li_class: 'nav-item', a_class: 'text-white nav-link' %>
-  </div>
-  <script>
-    $("#nav a[href^=http]").attr('target', '_blank')
-    $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').css({'font-weight': 'bold', 'color': 'rgba(0, 0, 0, 0.9)'})
-  </script>
-
+<div id="nav">
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand zt rainbow" style="text-decoration: none" href="/">A</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <%= ul_nav [
+        ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link text-white" href="#">Sign in</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </div>
+<script>
+  $("#nav a[href^=http]").attr('target', '_blank')
+  $('.dropdown-item.active').closest('.dropdown').find('.dropdown-toggle').css({'font-weight': 'bold', 'color': 'rgba(0, 0, 0, 0.9)'})
+</script>
