@@ -1,0 +1,15 @@
+<div class="text-center my-3">
+  Without tokens:<br />
+  <%
+agent = Mechanize.new
+JSON.parse(agent.get('https://defipulse.com/').search('#__NEXT_DATA__').inner_html)['props']['initialState']['coin']['projects'].each_with_index do |p,i|
+  if (coin = Coin.find_by(name: p['name'])) || (coin = Coin.find_by(defi_pulse_name: p['name']))
+    coin.set(defi_pulse_name: p['name'])
+  else
+    %>
+  <span class="badge badge-secondary">#<%=i+1%> <%= p['name'] %></span>
+  <%
+  end
+end
+%>
+</div>

@@ -208,3 +208,36 @@ mark, .mark {
   color: rgba(33,37,41,1);
   font-weight: bold;
 }
+
+
+
+
+.datatabled .p {
+  display: block;
+  padding-top: 0.1em;
+  height: 1.5em;
+}
+
+.datatabled .back {
+  border-radius: 2.5px;
+  position: relative;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+.datatabled .boundbox {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+}
+
+.datatabled .front {
+  border-radius: 2.5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #8747E6;
+  color: white;
+}

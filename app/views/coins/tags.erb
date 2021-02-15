@@ -1,0 +1,80 @@
+<%= partial :'coins/nav' %>
+
+<% if current_account %>
+  <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+<% end %>
+
+<script>
+  $(function () {
+    function tagTable() {
+      if (!$('#tags').hasClass('datatabled'))
+        var dt = $('#tags').dataTable({
+          bInfo: false,
+          paging: false,
+          searching: false,
+          order: [[3, "desc"]]})
+          .addClass('datatabled')
+          .on('draw.dt', function () {
+            var i = 0;
+            $("#tags td:first-child").each(function () {
+              console.log(this)
+                    $(this).html(++i);
+                })
+          } ).trigger('draw.dt');
+
+          var t = parseFloat($('#tags td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
+
+          <% if current_account %>
+            var priceFactor = <%=ENV['PRICE_FACTOR']%>
+            var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
+            var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+            $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
+          <% end %>
+
+          var max;
+          $('#tags td.holding').each(function() {
+            if (!max)
+              max = parseFloat($(this).attr('data-sort'))
+            else if (parseFloat($(this).attr('data-sort')) > max)
+              max = parseFloat($(this).attr('data-sort'))
+          })
+          $('#tags td.holding').each(function() {
+              var v = parseFloat($(this).attr('data-sort'))
+              if (v) {
+                var text = parseFloat(100*v/t).toFixed(1)+'%'
+                $(this).find('.p').html('\
+                <div class="p back"> \
+                  <span>'+text+'</span> \
+                  <div class="p boundbox"> \
+                    <div class="p front">'+text+'</div> \
+                  </div>')
+                  $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
+                  $(this).find('.front').width($(this).find('.back').width())
+                }
+          })
+        }
+        tagTable()
+        $(document).ajaxStop(function() { tagTable() })
+  })
+</script>
+<style>
+  #tags th { border-top: 0; }
+</style>
+<table class="table" style="font-size: 0.9rem; border-collapse: collapse !important" id="tags">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th style="white-space: nowrap">Relative holding</th>
+      <th>24h</th>
+      <th>7d</th>
+      <th>1h</th>
+      <th>Market cap 24h</th>
+    </tr>
+  </thead>
+  <% @account.tags.each { |tag| %>
+  <tr data-pagelet-url="/tags/<%=tag.name%>">
+    <%= partial :'coins/tag', locals: { tag: tag } %>
+  </tr>
+  <% } %>
+</table>

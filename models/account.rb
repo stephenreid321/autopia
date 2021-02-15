@@ -16,6 +16,9 @@ class Account
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
 
+  has_many :coinships, dependent: :destroy
+  has_many :tags, dependent: :destroy
+
   def self.sync_with_dao
     Account.all.set(dao_shares: nil, dao_loot: nil)
 
@@ -106,9 +109,9 @@ class Account
 
   def self.admin_fields
     {
-      address_hash: :text,
-      name: :text,
       email: :email,
+      name: :text,
+      address_hash: :text,
       admin: :check_box,
       time_zone: :select,
       link: :url,

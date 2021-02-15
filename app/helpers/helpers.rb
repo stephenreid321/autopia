@@ -34,4 +34,21 @@ Autopia::App.helpers do
   def xdai(h: '0.75em', va: 'baseline')
     %(<img src="/images/xdai.png" style="vertical-align: #{va}; height: #{h}">)
   end
+
+  def tag_badge(tag, account: tag.account, html_tag: 'a')
+    if tag
+      if tag.is_a?(Tag)
+        name = tag.name
+        bg = "background-color: #{tag.background_color}"
+        c = ''
+        s = ''
+      else
+        name = tag
+        bg = 'background: none'
+        c = 'text-white'
+        s = 'font-weight: 500'
+      end
+      %(<#{html_tag} href="/u/#{account.id}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
+    end
+  end
 end

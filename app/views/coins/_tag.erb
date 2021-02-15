@@ -1,0 +1,27 @@
+<td style="opacity: 0.5"></td>
+<td>
+  <a href="/u/<%=@account.id%>/tags/<%=tag.name%>"><%= tag.name %></a>
+</td>
+<td class="holding" data-sort="<%= (tag.holding < 1e-6 ? 0 : tag.holding) * ENV['PRICE_FACTOR'].to_i  %>">
+  <a target="_blank" href="/u/<%=@account.id%>/tags/<%=tag.name%>">
+    <div class="p">
+      <% if tag.holding < 1e-6 %>
+        <i data-toggle="tooltip" <% if current_account %> style="cursor: pointer" <% end %> class="far fa-question-circle"></i>
+      <% else %>
+        <i class="fas fa-spin fa-circle-notch"></i>
+      <% end %>
+    </div>
+  </a>
+</td>
+<% %w{24h 7d 1h}.each { |p| %>
+<td class="rg" <% unless p == '24h' %> style="opacity: 0.5" <% end %>>
+  <% if tag.send(:"price_change_percentage_#{p}_in_currency") %>
+    <%=number_to_percentage tag.send(:"price_change_percentage_#{p}_in_currency"), precision: 2%>
+  <% end %>
+</td>
+<% } %>
+<td class="rg">
+  <% if tag.send(:market_cap_change_percentage_24h) %>
+    <%=number_to_percentage tag.send(:market_cap_change_percentage_24h), precision: 2%>
+  <% end %>
+</td>
