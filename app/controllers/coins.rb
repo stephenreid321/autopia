@@ -80,6 +80,7 @@ Autopia::App.controller do
       coinship.tag = current_account.tags.find_or_create_by(name: params[:tag])
       coinship.save
     end
+    current_account.tags.update_holdings
     200
   end
 
@@ -87,6 +88,7 @@ Autopia::App.controller do
     sign_in_required!
     coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
     coinship.update_attribute(:tag_id, nil)
+    current_account.tags.update_holdings
     200
   end
 

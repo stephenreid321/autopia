@@ -3,7 +3,7 @@
   <a href="/u/<%=@account.id%>/tags/<%=tag.name%>"><%= tag.name %></a>
 </td>
 <td class="holding" data-sort="<%= (tag.holding < 1e-6 ? 0 : tag.holding) * ENV['PRICE_FACTOR'].to_i  %>">
-  <a target="_blank" href="/u/<%=@account.id%>/tags/<%=tag.name%>">
+  <a href="/u/<%=@account.id%>/tags/<%=tag.name%>">
     <div class="p">
       <% if tag.holding < 1e-6 %>
         <i data-toggle="tooltip" class="far fa-question-circle"></i>

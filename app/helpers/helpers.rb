@@ -35,7 +35,7 @@ Autopia::App.helpers do
     %(<img src="/images/xdai.png" style="vertical-align: #{va}; height: #{h}">)
   end
 
-  def tag_badge(tag, account: tag.account, html_tag: 'a')
+  def tag_badge(tag, account: tag.try(:account), html_tag: 'a')
     if tag
       if tag.is_a?(Tag)
         name = tag.name
