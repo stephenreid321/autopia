@@ -144,9 +144,9 @@
     <% coins.each { |coin| %>
     <tr data-pagelet-url="/u/<%=@account.id%>/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"
      <% if coin.symbol == 'ETH' %>
-     style="background-color: rgba(135, 71, 230, 0.35)"
+     style="background-color: rgba(135, 71, 230, 0.3)"
      <% elsif coin.erc20? %>
-     style="background-color: rgba(135, 71, 230, 0.2)"
+     style="background-color: rgba(135, 71, 230, 0.125)"
      <% end %>
      >
       <%= partial :'coins/coin', locals: { coin: coin } %>
