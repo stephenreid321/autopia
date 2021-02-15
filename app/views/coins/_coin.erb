@@ -24,7 +24,7 @@
   <% end %>
 </td>
 <td style="white-space: nowrap" data-symbol="<%=coin.symbol.starts_with?('$') ? coin.symbol[1..-1] : coin.symbol%>">
-  <a target="_blank" href="<%=coin.website || %Q{https://coingecko.com/en/coins/#{coin.slug}}%>"><%=coin.name%> (<%=coin.symbol%>)</a>
+  <a class="text-dark" target="_blank" href="<%=coin.website || %Q{https://coingecko.com/en/coins/#{coin.slug}}%>"><%=coin.name%> (<%=coin.symbol%>)</a>
   <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
     <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
   </a>
@@ -73,7 +73,7 @@
 </td>
 <td data-sort="<%=coinship.try(:market_cap_change_prediction)%>">
   <% if coinship.try(:market_cap_change_prediction); p = coinship.market_cap_change_prediction.round %>
-    <a href="javascript:;" style="text-decoration: none" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-square"></i> <% end %></a>
+    <a href="javascript:;" style="text-decoration: none; font-family: sans-serif" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-square"></i> <% end %></a>
   <% end %>
 </td>
 <td class="holding" data-sort="<%= (!coinship || coinship.holding < 1e-6 ? 0 : coinship.holding) * ENV['PRICE_FACTOR'].to_i  %>">

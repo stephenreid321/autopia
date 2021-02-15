@@ -143,10 +143,10 @@
     </thead>
     <% coins.each { |coin| %>
     <tr data-pagelet-url="/u/<%=@account.id%>/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"
-     <% if false && coin.symbol == 'ETH' %>
-     style="background-color: rgba(228, 217, 250, 0.25)"
-     <% elsif false && coin.erc20? %>
-     style="background-color: rgba(245, 242, 250, 0.25)"
+     <% if coin.symbol == 'ETH' %>
+     style="background-color: rgba(135, 71, 230, 0.35)"
+     <% elsif coin.erc20? %>
+     style="background-color: rgba(135, 71, 230, 0.2)"
      <% end %>
      >
       <%= partial :'coins/coin', locals: { coin: coin } %>

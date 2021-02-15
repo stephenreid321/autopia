@@ -55,7 +55,7 @@ class Tag
     tags = account.tags.order('holding desc').where(:holding.gt => 0)
     i = tags.pluck(:id).index(id)
     i = (tags.count - 1) - i if i.odd?
-    i && !tags.empty? ? '#8747E6'.paint.spin(0 - (i.to_f / (tags.count - 1)) * (360 - (360 / tags.count))).lighten(8) : '#666666'
+    i && !tags.empty? ? '#8747E6'.paint.spin(0 - (i.to_f / (tags.count - 1)) * (360 - (360 / tags.count))).lighten(12) : '#666666'
   rescue StandardError
     '#666666'
   end
