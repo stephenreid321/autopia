@@ -1,18 +1,31 @@
-<div id="alert-wrap">
-  <% {:error => 'alert-danger', :warning => 'alert-warning', :notice => 'alert-info'}.each { |k,v| %>
-  <% if flash[k] %>
-    <div class="fade in alert <%=v%> alert-dismissable">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%= flash[k] %>
+<% unless @hide_alert %>
+  <style>
+    #alert-wrap { position: absolute; z-index: 9999; top: 0; left: 50%; width: 90%; margin-left: -45% }
+    @media(min-width: 768px) {
+      #alert-wrap { width: 50%; margin-left: -25% }
+    }
+  </style>
+  <div id="alert-wrap" class="mt-3">
+    <div class="container">
+      <% {:error => 'alert-danger', :warning => 'alert-warning', :notice => 'alert-success'}.each { |k,v| %>
+      <% if flash[k] %>
+        <div class="alert fade show <%=v%> alert-dismissable">
+          <%= flash[k] %>
+          <% unless @hide_alert %>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          <% end %>
+        </div>
+      <% end %>
+      <% } %>
     </div>
-  <% end %>
-  <% } %>
-</div>
-<script>
-  $(function() {
-    $(".alert").alert()
-    window.setTimeout(function() {
-      $("#alert-wrap .alert").alert('close');
-    }, 3000);
-  });
-</script>
+  </div>
+  <script>
+    $(function () {
+      window.setTimeout(function () {
+        $("#alert-wrap .alert").alert('close');
+      }, 3000);
+    });
+  </script>
+<% end %>

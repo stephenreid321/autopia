@@ -16,6 +16,10 @@ module Autopia
     Sass::Plugin.options[:css_location] = Padrino.root('app', 'assets', 'stylesheets')
     use Sass::Plugin::Rack
 
+    use OmniAuth::Builder do
+      provider :account
+    end
+
     set :sessions, expire_after: 1.year
     set :public_folder, Padrino.root('app', 'assets')
     set :default_builder, 'ActivateFormBuilder'
@@ -61,6 +65,10 @@ module Autopia
         expires 1.hour.to_i
       end
       erb :home
+    end
+
+    get '/sign_in' do
+      erb :sign_in
     end
 
     get '/address_hash_to_slack_id/:address_hash' do

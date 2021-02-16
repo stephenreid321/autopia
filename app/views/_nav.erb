@@ -1,6 +1,6 @@
 <style>
   @media(min-width: 992px) {
-    #nav .nav-item { font-size: 0.8rem }
+    #nav .nav-item, #nav .dropdown-item { font-size: 0.8rem }
   }
   #nav .nav-item { padding-right: 1rem; }
   #nav .nav-link.active { font-weight: bold }
@@ -14,12 +14,24 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <%= ul_nav [        
+      <%= ul_nav [
         ], ul_class: 'navbar-nav mr-auto', li_class: 'nav-item', a_class: 'nav-link' %>
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Sign in</a>
-        </li>
+        <% if current_account %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+              <%=current_account.name%> <b class="caret"></b>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="<%="/u/#{current_account.id}/coins"%>">Portfolio</a>
+              <a class="dropdown-item" href="/sign_out">Sign out</a>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <a class="nav-link" href="/sign_in">Sign in</a>
+          </li>
+        <% end %>
       </ul>
     </div>
   </nav>

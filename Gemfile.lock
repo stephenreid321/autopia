@@ -145,6 +145,10 @@ GEM
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     ntlm-http (0.1.1)
+    omniauth (2.0.2)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
+      rack-protection
     padrino (0.15.0)
       padrino-admin (= 0.15.0)
       padrino-cache (= 0.15.0)
@@ -261,6 +265,7 @@ DEPENDENCIES
   mail
   mechanize
   mongoid
+  omniauth
   padrino
   pocket-ruby
   puma

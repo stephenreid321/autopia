@@ -72,11 +72,9 @@
     <% end %>
   </head>
   <body>
-    <div>
-      <%= partial :nav %>
-    </div>
+    <%= partial :alert %>
+    <%= partial :nav %>
     <div class="container-fluid">
-      <%= partial :alert %>
       <%= yield %>
     </div>
     <!-- /.modal -->
