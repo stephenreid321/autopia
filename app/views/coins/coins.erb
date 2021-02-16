@@ -1,6 +1,6 @@
 <%= partial :'coins/nav' %>
 
-<% case params[:tag]; when nil, 'holding' %>
+<% case params[:tag]; when nil, 'starred' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
       :id.in => @account.coinships.where(:starred => true).pluck(:coin_id)

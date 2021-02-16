@@ -1,6 +1,6 @@
 Autopia::App.controller do
   before do
-    @virtual_tags = %w[holding watching watching-less-core uniswap sushiswap defi-pulse 24h 7d market-cap-24h top-100 top-100-less-tagged starred-less-tagged]
+    @virtual_tags = %w[starred watching watching-less-core uniswap sushiswap defi-pulse 24h 7d market-cap-24h top-100 top-100-less-tagged starred-less-tagged]
   end
 
   get '/u/:account_id/coins' do
