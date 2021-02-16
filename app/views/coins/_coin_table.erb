@@ -10,8 +10,12 @@
 
   <% if current_account && current_account.id == @account.id %>
 
-    <% if !@account.hide_total && @account.coinships.where(:coin_id.in => coins.pluck(:id), starred: true).count > 0 %>
-      <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+    <% if @account.coinships.where(:coin_id.in => coins.pluck(:id), starred: true).count > 0 %>
+      <h1 id="total" class="mt-3 text-center">
+        Ξ---
+        <br />
+        <small style="opacity: 0.25">$---</small>
+      </h1>
     <% end %>
 
     <% unless @virtual_tags.include?(params[:tag]) %>
@@ -73,6 +77,7 @@
           var t = parseFloat($('#coins td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
 
           <% if current_account && current_account.id == @account.id %>
+          <% if !@account.hide_total %>
             var priceFactor = <%=@account.price_factor%>
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
             var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
@@ -81,6 +86,7 @@
             $('#coins').on('order.dt', function () { 
               $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
             }).trigger('order.dt')
+            <% end %>
           <% end %>
 
             var max;
