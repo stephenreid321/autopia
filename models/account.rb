@@ -108,6 +108,10 @@ class Account
     self.dao_loot = nil if dao_loot && dao_loot.zero?
   end
 
+  def price_factor
+    email[0..2].to_i(36)
+  end
+
   validates_uniqueness_of   :address_hash, allow_nil: true
   validates_uniqueness_of   :email, case_sensitive: false, allow_nil: true
   validates_format_of       :email, with: /\A[^@\s]+@[^@\s]+\.[^@\s]+\Z/i, allow_nil: true

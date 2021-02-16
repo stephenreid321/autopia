@@ -25,7 +25,7 @@
           var t = parseFloat($('#tags td.holding').map(function() { return $(this).attr('data-sort') }).toArray().reduce(function(a, b) { return parseFloat(a) + parseFloat(b); }))
 
           <% if current_account && current_account.id == @account.id %>
-            var priceFactor = <%=ENV['PRICE_FACTOR']%>
+            var priceFactor = <%=@account.price_factor%>
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
             var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
             $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')

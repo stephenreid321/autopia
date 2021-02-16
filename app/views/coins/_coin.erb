@@ -76,7 +76,7 @@
     <a href="javascript:;" style="text-decoration: none; font-family: sans-serif" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-square"></i> <% end %></a>
   <% end %>
 </td>
-<td class="holding" data-sort="<%= (!coinship || coinship.holding < 1e-6 ? 0 : coinship.holding) * ENV['PRICE_FACTOR'].to_i  %>">
+<td class="holding" data-sort="<%= (!coinship || coinship.holding < 1e-6 ? 0 : coinship.holding) * @account.price_factor  %>">
   <% if coinship %>
     <% if current_account && current_account.id == @account.id %>
       <a class="text-dark" href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">
