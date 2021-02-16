@@ -50,7 +50,7 @@ Account.interesting.each_with_index { |account,i|
         <% end %>
       </a></td>
     <td>
-      <% if current_account %>
+      <% if current_account && current_account.admin? %>
         <% if account.email || account.name %>
           <a <% if account.email %> class="text-dark" <% end %> target="_blank" data-toggle="tooltip" title="<%=account.email || account.name%>" href="/admin/edit/Account/<%=account.id%>">
             <% if account.email %>
@@ -72,12 +72,12 @@ Account.interesting.each_with_index { |account,i|
     </td>
     <td>
       <% if account.slack_id %>
-        <% if current_account %>
+        <% if current_account && current_account.admin? %>
           <i style="opacity: 0.2" class="fa fa-check-circle"></i>
         <% else %>
           <i class="fa fa-check-circle"></i>
         <% end %>
-      <% elsif current_account && !account.name && i < 150 %>
+      <% elsif current_account && current_account.admin? && !account.name && i < 150 %>
         <i data-toggle="tooltip" title="Not a Slack member" class="fa fa-exclamation-triangle"></i>
       <% end %>
     </td>
