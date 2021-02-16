@@ -14,6 +14,7 @@ class Account
   field :dao_loot, type: Integer
   field :binance_api_key, type: String
   field :binance_api_secret, type: String
+  field :price_factor, type: Integer
 
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
@@ -104,12 +105,9 @@ class Account
   before_validation do
     self.password = Account.generate_password(8) unless password || crypted_password
     self.address_hash = address_hash.downcase if address_hash
+    self.price_factor = rand(100) unless price_factor
     self.dao_shares = nil if dao_shares && dao_shares.zero?
     self.dao_loot = nil if dao_loot && dao_loot.zero?
-  end
-
-  def price_factor
-    email[0..2].to_i(36)
   end
 
   validates_uniqueness_of   :address_hash, allow_nil: true
@@ -129,6 +127,7 @@ class Account
       slack_id: :text,
       dao_shares: :number,
       dao_loot: :number,
+      price_factor: :number,
       binance_api_key: :text,
       binance_api_secret: :text,
       eth_addresses: :collection,
