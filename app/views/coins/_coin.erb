@@ -77,25 +77,33 @@
   <% end %>
 </td>
 <td class="holding" data-sort="<%= (!coinship || coinship.holding < 1e-6 ? 0 : coinship.holding) * ENV['PRICE_FACTOR'].to_i  %>">
-  <% if coinship && current_account && current_account.id == @account.id %>
-    <a class="text-dark" target="_blank" href="/admin/edit/Coinship/<%=coinship.id%>">
-    <% end %>
-    <div class="p">
-      <% if coinship && coinship.starred && coinship.all_units %>
-        <% if coinship.holding < 1e-6 %>
-          <i data-toggle="tooltip" class="far fa-question-circle"></i>
-        <% else %>
-          <i class="fas fa-spin fa-circle-notch"></i>
-        <% end %>
+  <% if coinship %>
+    <% if current_account && current_account.id == @account.id %>
+      <a class="text-dark" href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">
+        <div class="p">
+          <% if coinship.starred && coinship.all_units %>
+            <% if coinship.holding < 1e-6 %>
+              <i data-toggle="tooltip" class="far fa-question-circle"></i>
+            <% else %>
+              <i class="fas fa-spin fa-circle-notch"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </a>
+      <% form_tag "/coins/#{coin.id}/units_elsewhere", :style => 'display: none' do %>
+        <%= text_field_tag :units_elsewhere, :value => coinship.try(:units_elsewhere), :class => 'form-control', :style => 'width: 100%;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
       <% end %>
-    </div>
-    <% if coinship && current_account && current_account.id == @account.id %>
-    </a>
-  <% end %>
-</td>
-<td>
-  <% if coinship.try(:staked_units) %>
-    <i data-toggle="tooltip" title="Staked" class="fas fa-check-circle"></i>
+    <% else %>
+      <div class="p">
+        <% if coinship.starred && coinship.all_units %>
+          <% if coinship.holding < 1e-6 %>
+            <i data-toggle="tooltip" class="far fa-question-circle"></i>
+          <% else %>
+            <i class="fas fa-spin fa-circle-notch"></i>
+          <% end %>
+        <% end %>
+      </div>
+    <% end %>
   <% end %>
 </td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >

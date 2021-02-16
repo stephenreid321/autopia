@@ -103,6 +103,13 @@ Autopia::App.controller do
     200
   end
 
+  post '/coins/:coin_id/units_elsewhere' do
+    sign_in_required!
+    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
+    coinship.update_attribute(:units_elsewhere, params[:units_elsewhere])
+    200
+  end
+
   post '/coins/:coin_id/market_cap_rank_prediction' do
     sign_in_required!
     coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])

@@ -6,8 +6,7 @@ class Coinship
   field :market_cap_rank_prediction_conviction, type: Float
   field :starred, type: Boolean
   field :units, type: Float
-  field :staked_units, type: Float
-  field :notes, type: String
+  field :units_elsewhere, type: String
 
   belongs_to :account
   belongs_to :coin
@@ -21,8 +20,7 @@ class Coinship
       coin_id: :lookup,
       tag_id: :lookup,
       units: :number,
-      staked_units: :number,
-      notes: :text_area,
+      units_elsewhere: :text,
       market_cap_rank_prediction: :number,
       market_cap_rank_prediction_conviction: :number,
       starred: :check_box
@@ -45,8 +43,22 @@ class Coinship
     (market_cap_at_predicted_rank / coin.market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && coin.market_cap && (coin.market_cap > 0)
   end
 
+  def units_elsewhere_sum
+    if units_elsewhere
+      units_elsewhere.split(' ').map do |x|
+        begin
+        Float(x.gsub(',', ''))
+        rescue StandardError
+          nil
+      end
+      end.compact.sum
+    else
+      0
+    end
+  end
+
   def all_units
-    (units || 0) + (staked_units || 0)
+    (units || 0) + (units_elsewhere_sum || 0)
   end
 
   def holding
