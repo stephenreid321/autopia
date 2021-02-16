@@ -1,16 +1,10 @@
 <td style="opacity: 0.5"></td>
 <td>
-  <a href="/u/<%=@account.id%>/tags/<%=tag.name%>"><%= tag.name %></a>
+  <a class="font-weight-bold" href="/u/<%=@account.id%>/tags/<%=tag.name%>"><%= tag.name %></a>
 </td>
 <td class="holding" data-sort="<%= (tag.holding < 1e-6 ? 0 : tag.holding) * ENV['PRICE_FACTOR'].to_i  %>">
   <a class="text-dark" href="/u/<%=@account.id%>/tags/<%=tag.name%>">
-    <div class="p">
-      <% if tag.holding < 1e-6 %>
-        <i data-toggle="tooltip" class="far fa-question-circle"></i>
-      <% else %>
-        <i class="fas fa-spin fa-circle-notch"></i>
-      <% end %>
-    </div>
+    <div class="p"></div>
   </a>
 </td>
 <% %w{24h 7d 1h}.each { |p| %>
