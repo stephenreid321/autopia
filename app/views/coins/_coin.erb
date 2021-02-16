@@ -81,28 +81,14 @@
     <% if current_account && current_account.id == @account.id %>
       <a class="text-dark" href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">
         <div class="p">
-          <% if coinship.starred && coinship.all_units %>
-            <% if coinship.holding < 1e-6 %>
-              <i data-toggle="tooltip" class="far fa-question-circle"></i>
-            <% else %>
-              <i class="fas fa-spin fa-circle-notch"></i>
-            <% end %>
-          <% end %>
+          <i data-toggle="tooltip" class="fas fa-pencil-alt"></i>
         </div>
       </a>
       <% form_tag "/coins/#{coin.id}/units_elsewhere", :style => 'display: none' do %>
-        <%= text_field_tag :units_elsewhere, :value => coinship.try(:units_elsewhere), :class => 'form-control', :style => 'width: 100%;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
+        <%= text_field_tag :units_elsewhere, :placeholder => 'Units', :value => coinship.try(:units_elsewhere), :class => 'form-control', :style => 'width: 100%;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
       <% end %>
     <% else %>
-      <div class="p">
-        <% if coinship.starred && coinship.all_units %>
-          <% if coinship.holding < 1e-6 %>
-            <i data-toggle="tooltip" class="far fa-question-circle"></i>
-          <% else %>
-            <i class="fas fa-spin fa-circle-notch"></i>
-          <% end %>
-        <% end %>
-      </div>
+      <div class="p"></div>
     <% end %>
   <% end %>
 </td>
