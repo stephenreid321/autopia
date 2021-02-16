@@ -85,7 +85,10 @@
         </div>
       </a>
       <% form_tag "/coins/#{coin.id}/units_elsewhere", :style => 'display: none' do %>
-        <%= text_field_tag :units_elsewhere, :placeholder => 'Units', :value => coinship.try(:units_elsewhere), :class => 'form-control', :style => 'width: 100%;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
+        <% if coinship.units %>
+          <%=coinship.units%> +
+        <% end %>
+        <%= text_field_tag :units_elsewhere, :placeholder => 'Elsewhere', :value => coinship.try(:units_elsewhere), :class => 'form-control', :style => 'width: 100%;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
       <% end %>
     <% else %>
       <div class="p"></div>

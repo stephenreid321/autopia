@@ -12,12 +12,19 @@ class Account
   field :slack_id, type: String
   field :dao_shares, type: Integer
   field :dao_loot, type: Integer
+  field :binance_api_key, type: String
+  field :binance_api_secret, type: String
 
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
 
   has_many :coinships, dependent: :destroy
   has_many :tags, dependent: :destroy
+  has_many :eth_addresses, dependent: :destroy
+
+  def eth_address_hashes
+    eth_addresses.empty? ? [address_hash] : eth_addresses.pluck(:address_hash)
+  end
 
   def self.sync_with_dao
     Account.all.set(dao_shares: nil, dao_loot: nil)

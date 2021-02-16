@@ -72,24 +72,24 @@ class Coinship
     if starred
       u = 0
       if coin.platform == 'ethereum'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
+        account.eth_address_hashes.each do |a|
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
       elsif coin.platform == 'binance-smart-chain'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
+        account.eth_address_hashes.each do |a|
           u += JSON.parse(agent.get("https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
       elsif coin.symbol == 'ETH'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
+        account.eth_address_hashes.each do |a|
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
       elsif coin.symbol == 'BNB'
-        ENV['ETH_ADDRESSES'].split(',').each do |a|
+        account.eth_address_hashes.each do |a|
           u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
-      elsif ENV['BINANCE_API_KEY'] && ENV['BINANCE_API_SECRET']
+      elsif account.binance_api_key && account.binance_api_secret
 
-        client = Binance::Client::REST.new api_key: ENV['BINANCE_API_KEY'], secret_key: ENV['BINANCE_API_SECRET']
+        client = Binance::Client::REST.new api_key: account.binance_api_key, secret_key: account.binance_api_secret
         balances = client.account_info['balances']
         bc = balances.find do |b|
           b['asset'] == coin.symbol
