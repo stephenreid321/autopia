@@ -157,3 +157,17 @@
     </tr>
     <% } %>
   </table>
+
+  <% unless @virtual_tags.include?(params[:tag]) %>
+    <div>
+      <small>
+        <a data-confirm="Are you sure?" class="text-dark" href="/coins/delete_tag/<%=params[:tag]%>">Delete tag</a>
+        &middot;
+        <a class="text-dark" href="javascript:;" onclick="
+        var tagName = prompt('New tag name');
+        if (tagName)
+          window.location = '/coins/rename_tag/<%=params[:tag]%>/' + tagName
+        ">Rename tag</a>
+      </small>
+    </div>
+  <% end %>

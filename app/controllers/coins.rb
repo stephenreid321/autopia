@@ -74,6 +74,19 @@ Autopia::App.controller do
     redirect "/u/#{current_account.id}/tags/#{tag.name}"
   end
 
+  get '/coins/delete_tag/:tag' do
+    sign_in_required!
+    tag = current_account.tags.find_by(name: params[:tag]).destroy
+    redirect "/u/#{current_account.id}/tags"
+  end
+
+  get '/coins/rename_tag/:tag/:new' do
+    sign_in_required!
+    tag = current_account.tags.find_by(name: params[:tag])
+    tag.update_attribute(:name, params[:new].parameterize)
+    redirect "/u/#{current_account.id}/tags/#{tag.name}"
+  end
+
   post '/coins/tag/:tag' do
     sign_in_required!
     if coin = Coin.symbol(params[:symbol])
