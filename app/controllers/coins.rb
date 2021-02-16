@@ -68,11 +68,17 @@ Autopia::App.controller do
 
   # sign_in_required
 
+  get '/coins/add_tag/:tag' do
+    sign_in_required!
+    tag = current_account.tags.find_or_create_by(name: params[:tag].parameterize)
+    redirect "/u/#{current_account.id}/tags/#{tag.name}"
+  end
+
   post '/coins/tag/:tag' do
     sign_in_required!
     if coin = Coin.symbol(params[:symbol])
       coinship = current_account.coinships.find_or_create_by(coin: coin)
-      coinship.tag = current_account.tags.find_or_create_by(name: params[:tag])
+      coinship.tag = current_account.tags.find_by(name: params[:tag])
       coinship.save
     end
     current_account.tags.update_holdings

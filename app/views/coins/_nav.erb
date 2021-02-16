@@ -10,8 +10,8 @@
 
 <%= ul_nav (
       (@virtual_tags.map { |slug| [tag_badge(slug, account: @account, html_tag: 'span'), "/u/#{@account.id}/tags/#{slug}"] }) +
-      (tags = @account.tags.sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/u/#{@account.id}/tags/#{tag.name}"] } +
-      [[tag_badge('overview', account: @account, html_tag: 'span'), "/u/#{@account.id}/tags"]]
+      [[tag_badge('overview', account: @account, html_tag: 'span'), "/u/#{@account.id}/tags"]] +
+      (tags = @account.tags.sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/u/#{@account.id}/tags/#{tag.name}"] }
     ),
     ul_class: 'nav nav-tabs',
     li_class: 'nav-item',
@@ -21,6 +21,25 @@
     ul_id: 'coins-ul',
     generate_subnav_href_and_ul: false
 %>
+
+<% if current_account && current_account.id == @account.id %>
+  <script>
+    $(function() {
+
+    $('#coins-ul').append('\
+    <li class="nav-item ">\
+      <a id="add-tag" class="nav-link" href="javascript:;"><i class="fa fa-plus-circle"></i></a>\
+      </li>\
+      ')
+    $('#add-tag').click(function() {
+      var tagName = prompt('Tag name');
+      if(tagName)
+        window.location = '/coins/add_tag/' + tagName
+    })
+
+    })
+  </script>
+<% end %>
 
 <div class="mt-3">
   <% total_holding = @account.tags.holding %>
