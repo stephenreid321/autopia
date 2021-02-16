@@ -24,10 +24,7 @@
   <% end %>
 </td>
 <td style="white-space: nowrap" data-symbol="<%=coin.symbol.starts_with?('$') ? coin.symbol[1..-1] : coin.symbol%>">
-  <a class="text-dark font-weight-bold" target="_blank" href="<%=coin.website || %Q{https://coingecko.com/en/coins/#{coin.slug}}%>"><%=coin.name%> (<%=coin.symbol%>)</a>
-  <a target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
-    <i data-toggle="tooltip" title="Coingecko" class="fas fa-chevron-right"></i>
-  </a>
+  <a class="text-dark font-weight-bold" target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>"><%=coin.name%> (<%=coin.symbol%>)</a>
   <% if coin.erc20? %>
     <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
       <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>

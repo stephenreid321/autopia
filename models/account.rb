@@ -93,7 +93,7 @@ class Account
       all_members.concat(response.members)
     end
     all_members.each do |member|
-      name = member.name
+      name = member.real_name
       email = member.profile.email
       next if !email || member.is_invited_user || member.deleted
 
