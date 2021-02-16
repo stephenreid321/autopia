@@ -10,6 +10,14 @@
 
   <% if current_account && current_account.id == @account.id %>
 
+    <% if @account.coinships.where(:coin_id.in => coins.pluck(:id), starred: true).count > 0 %>
+      <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+    <% end %>
+
+    <% if coins.count > 0 %>
+      <div id="symbols" class="text-center mt-3"><i class="fas fa-spin fa-circle-notch"></i></div>
+    <% end %>
+
     <% unless @virtual_tags.include?(params[:tag]) %>
       <div class="row justify-content-center">
         <div class="col-auto">
@@ -23,14 +31,6 @@
           <% end %>
         </div>
       </div>
-    <% end %>
-
-    <% if @account.coinships.where(:coin_id.in => coins.pluck(:id), starred: true).count > 0 %>
-      <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
-    <% end %>
-
-    <% if coins.count > 0 %>
-      <div id="symbols" class="text-center mt-3"><i class="fas fa-spin fa-circle-notch"></i></div>
     <% end %>
 
   <% end %>
@@ -87,18 +87,20 @@
               else if (parseFloat($(this).attr('data-sort')) > max)
                 max = parseFloat($(this).attr('data-sort'))
             })
+
             $('#coins td.holding').each(function() {
                 var v = parseFloat($(this).attr('data-sort'))
                 if (v) {
                   var text = parseFloat(100*v/t).toFixed(1)+'%'
                   $(this).find('.p').html('\
-                  <div class="p back"> \
+                  <div class="p back" style="width: 150px"> \
                     <span>'+text+'</span> \
                     <div class="p boundbox"> \
                       <div class="p front">'+text+'</div> \
                     </div>')
-                    $(this).find('.boundbox').css('width', v/max * $(this).find('.back').width())
-                    $(this).find('.front').width($(this).find('.back').width())
+                    var w = $(this).find('.back').width()
+                    $(this).find('.boundbox').css('width', v/max * w)
+                    $(this).find('.front').css('width', w)
                   }
             })
           }

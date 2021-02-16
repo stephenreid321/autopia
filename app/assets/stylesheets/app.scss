@@ -1,5 +1,5 @@
 $primary: #8747E6;
-$font-family-sans-serif: 'Space Mono', sans-serif;
+$font-family-sans-serif: 'Lato', sans-serif;
 
 @import "bootstrap/bootstrap";
 
@@ -9,8 +9,11 @@ $font-family-sans-serif: 'Space Mono', sans-serif;
   -moz-osx-font-smoothing: grayscale;
 }
 
+.mono {
+  font-family: 'Space Mono';
+}
 
-h2:not(.regular) { border-bottom: 3px solid rgb(33, 37, 41); display: inline-block }
+
 .badge-warning { color: white }
 
 .bgo:hover { opacity: 0 !important }

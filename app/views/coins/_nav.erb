@@ -1,7 +1,10 @@
 <nav>
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Portfolios</a></li>
-    <li class="breadcrumb-item active"><%=@account.name%></li>
+    <li class="breadcrumb-item"><a href="#"><%=@account.name%></a></li>
+    <li class="breadcrumb-item active">
+      <%= params[:tag] || 'Overview' %>
+    </li>
   </ol>
 </nav>
 
