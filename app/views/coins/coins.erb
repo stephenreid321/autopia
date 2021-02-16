@@ -6,18 +6,10 @@
       :id.in => @account.coinships.where(:starred => true).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc')} %>
 
-<% when 'watching' %>
+<% when 'tagged' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
         :id.in => @account.coinships.where(:tag_id.ne => nil).pluck(:coin_id)
-      ).order('price_change_percentage_24h_in_currency desc')} %>
-
-<% when 'watching-less-core' %>
-
-<%= partial :'coins/coin_table', locals: {coins: Coin.where(
-        :id.in => @account.coinships.where(
-          :tag_id.in => @account.tags.pluck(:id) - @account.tags.where(:name.in => ['core', 'fiat-pegged']).pluck(:id)
-        ).pluck(:coin_id)
       ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'uniswap' %>
