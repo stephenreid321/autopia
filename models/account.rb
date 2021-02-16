@@ -192,9 +192,9 @@ class Account
     if save
       mail = Mail.new
       mail.to = email
-      mail.from = 'team@autopia.co'
-      mail.subject = "New password for #{ENV['BASE_URI']}"
-      mail.body = "Hi #{firstname},\n\nSomeone (hopefully you) requested a new password for #{ENV['BASE_URI']}.\n\nYour new password is: #{password}\n\nYou can sign in at #{ENV['BASE_URI']}/sign_in."
+      mail.from = 'Autopia <team@autopia.co>'
+      mail.subject = 'New password for Autopia'
+      mail.body = "Hi #{firstname},\n\nSomeone (hopefully you) requested a new password for Autopia.\n\nYour new password is: #{password}\n\nYou can sign in at #{ENV['BASE_URI']}/sign_in."
       mail.deliver
     else
       false
