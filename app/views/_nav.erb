@@ -23,6 +23,7 @@
               <%=current_account.name%> <b class="caret"></b>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/accounts/edit">Edit profile</a>
               <a class="dropdown-item" href="<%="/u/#{current_account.id}/coins"%>">Portfolio</a>
               <a class="dropdown-item" href="/sign_out">Sign out</a>
             </div>

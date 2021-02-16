@@ -39,6 +39,15 @@ class Account
     }
   end
 
+  def self.human_attribute_name(attr, options = {})
+    {
+      address_hash: 'Primary address',
+      dao_shares: 'DAO shares',
+      dao_loot: 'DAO loot',
+      slack_id: 'Slack user ID'
+    }[attr.to_sym] || super
+  end
+
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
 
