@@ -9,13 +9,8 @@ Autopia::App.controller do
 
   get '/u/:account_id/tags' do
     @account = Account.find(params[:account_id])
-    erb :'coins/tags'
-  end
-
-  get '/u/:account_id/tags/update_holdings' do
-    @account = Account.find(params[:account_id])
     @account.tags.update_holdings
-    redirect "/u/#{@account.id}/coins"
+    erb :'coins/tags'
   end
 
   get '/u/:account_id/tags/:tag' do

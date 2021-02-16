@@ -73,7 +73,7 @@
     </tr>
   </thead>
   <% @account.tags.each { |tag| %>
-  <tr data-pagelet-url="/tags/<%=tag.name%>">
+  <tr>
     <%= partial :'coins/tag', locals: { tag: tag } %>
   </tr>
   <% } %>
