@@ -1,7 +1,9 @@
 <%= partial :'coins/nav' %>
 
 <% if current_account && current_account.id == @account.id %>
-  <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+  <% if !@account.hide_total %>
+    <h1 id="total" class="mt-3 text-center"><i class="fas fa-spin fa-circle-notch"></i></h1>
+  <% end %>
 <% end %>
 
 <script>
