@@ -4,7 +4,7 @@ Autopia::App.controller do
   end
 
   get '/u/:account_id/coins' do
-    redirect "/u/#{params[:account_id]}/tags/holding"
+    redirect "/u/#{params[:account_id]}/tags/starred"
   end
 
   get '/u/:account_id/tags' do
