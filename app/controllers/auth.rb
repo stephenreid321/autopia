@@ -9,6 +9,24 @@ Autopia::App.controller do
     redirect '/sign_in'
   end
 
+  get '/reset_password' do
+    @hide_right_nav = true
+    erb :reset_password
+  end
+
+  post '/reset_password' do
+    if params[:email] && (@account = Account.find_by(email: params[:email].downcase))
+      if @account.reset_password!
+        flash[:notice] = "A new password was sent to #{@account.email}"
+      else
+        flash[:error] = 'There was a problem resetting your password.'
+      end
+    else
+      flash[:error] = "There's no account registered under that email address."
+    end
+    redirect '/sign_in'
+  end
+
   %w[get post].each do |method|
     send(method, '/auth/:provider/callback') do
       account = if env['omniauth.auth']['provider'] == 'account'

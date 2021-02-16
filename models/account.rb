@@ -178,6 +178,20 @@ class Account
     Array.new(len) { chars[rand(chars.size)] }.join
   end
 
+  def reset_password!
+    self.password = Account.generate_password(8)
+    if save
+      mail = Mail.new
+      mail.to = email
+      mail.from = ENV['MAIL_FROM']
+      mail.subject = "New password for #{ENV['BASE_URI']}"
+      mail.body = "Hi #{firstname},\n\nSomeone (hopefully you) requested a new password for #{ENV['BASE_URI']}.\n\nYour new password is: #{password}\n\nYou can sign in at #{ENV['BASE_URI']}/sign_in."
+      mail.deliver
+    else
+      false
+    end
+  end
+
   private
 
   def encrypt_password
