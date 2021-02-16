@@ -15,6 +15,28 @@ class Account
   field :binance_api_key, type: String
   field :binance_api_secret, type: String
   field :price_factor, type: Integer
+  field :hide_total, type: Boolean
+
+  def self.admin_fields
+    {
+      email: :email,
+      name: :text,
+      address_hash: :text,
+      admin: :check_box,
+      hide_total: :check_box,
+      time_zone: :select,
+      link: :url,
+      slack_id: :text,
+      dao_shares: :number,
+      dao_loot: :number,
+      price_factor: :number,
+      binance_api_key: :text,
+      binance_api_secret: :text,
+      eth_addresses: :collection,
+      coinships: :collection,
+      tags: :collection
+    }
+  end
 
   has_many :transactions_as_sender, class_name: 'Transaction', inverse_of: :sender, dependent: :destroy
   has_many :transactions_as_receiver, class_name: 'Transaction', inverse_of: :receiver, dependent: :destroy
@@ -115,26 +137,6 @@ class Account
   validates_format_of       :email, with: /\A[^@\s]+@[^@\s]+\.[^@\s]+\Z/i, allow_nil: true
   validates_presence_of     :password, if: :password_required
   validates_length_of       :password, within: 4..40, if: :password_required
-
-  def self.admin_fields
-    {
-      email: :email,
-      name: :text,
-      address_hash: :text,
-      admin: :check_box,
-      time_zone: :select,
-      link: :url,
-      slack_id: :text,
-      dao_shares: :number,
-      dao_loot: :number,
-      price_factor: :number,
-      binance_api_key: :text,
-      binance_api_secret: :text,
-      eth_addresses: :collection,
-      coinships: :collection,
-      tags: :collection
-    }
-  end
 
   def self.edit_hints
     {
