@@ -120,7 +120,7 @@
 </td>
 <td>
   <% if coin.twitter_followers %>
-    <a target="_blank" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
+    <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
   <% end %>
 </td>
 <td data-sort="<%= coin.uniswap_volume || 0 %>">
