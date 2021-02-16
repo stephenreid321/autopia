@@ -124,7 +124,12 @@ class Account
       link: :url,
       slack_id: :text,
       dao_shares: :number,
-      dao_loot: :number
+      dao_loot: :number,
+      binance_api_key: :text,
+      binance_api_secret: :text,
+      eth_addresses: :collection,
+      coinships: :collection,
+      tags: :collection
     }
   end
 
