@@ -81,7 +81,7 @@ class Coinship
         end
       elsif coin.symbol == 'ETH'
         account.eth_address_hashes.each do |a|
-          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+          u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
         end
       elsif coin.symbol == 'BNB'
         account.eth_address_hashes.each do |a|
