@@ -1,7 +1,7 @@
 Autopia::App.controller do
   get '/auth/failure' do
     flash.now[:error] = '<strong>Hmm.</strong> There was a problem signing you in.'
-    erb :'accounts/sign_in'
+    erb :sign_in
   end
 
   get '/sign_out' do
@@ -38,17 +38,17 @@ Autopia::App.controller do
                   nil
                 end
       if current_account # already signed in; attempt to connect
-        if account # someone's already connected
-          flash[:error] = "Someone's already connected to that account!"
-        else # connect; Account never reaches here
-          # current_account.provider_links.build(provider: @provider.display_name, provider_uid: env['omniauth.auth']['uid'], omniauth_hash: env['omniauth.auth'])
-          # current_account.picture_url = @provider.image.call(env['omniauth.auth']) unless current_account.picture
-          if current_account.save
-            flash[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> Connected!"
-          else
-            flash[:error] = 'There was an error connecting the account'
-          end
-        end
+        # if account # someone's already connected
+        # flash[:error] = "Someone's already connected to that account!"
+        # else # connect; Account never reaches here
+        # current_account.provider_links.build(provider: @provider.display_name, provider_uid: env['omniauth.auth']['uid'], omniauth_hash: env['omniauth.auth'])
+        # current_account.picture_url = @provider.image.call(env['omniauth.auth']) unless current_account.picture
+        # if current_account.save
+        #   flash[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> Connected!"
+        # else
+        #   flash[:error] = 'There was an error connecting the account'
+        # end
+        # end
         redirect '/accounts/edit'
       else # not signed in
         if account # sign in
@@ -60,14 +60,14 @@ Autopia::App.controller do
             redirect "/u/#{current_account.id}/coins"
           end
         else
-          flash.now[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> We need a few more details to finish creating your account&hellip;"
-          session['omniauth.auth'] = env['omniauth.auth']
-          @account = Account.new
-          @account.name = env['omniauth.auth']['info']['name']
-          @account.email = env['omniauth.auth']['info']['email']
+          # flash.now[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> We need a few more details to finish creating your account&hellip;"
+          # session['omniauth.auth'] = env['omniauth.auth']
+          # @account = Account.new
+          # @account.name = env['omniauth.auth']['info']['name']
+          # @account.email = env['omniauth.auth']['info']['email']
           # @account.picture_url = @provider.image.call(env['omniauth.auth'])
           # @account.provider_links.build(provider: @provider.display_name, provider_uid: env['omniauth.auth']['uid'], omniauth_hash: env['omniauth.auth'])
-          erb :'accounts/new'
+          # erb :'accounts/new'
         end
       end
     end
