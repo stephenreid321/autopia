@@ -82,12 +82,12 @@
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
             var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
             $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
-
-            $('#coins').on('order.dt', function () { 
-              $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
-            }).trigger('order.dt')
             <% end %>
           <% end %>
+
+          $('#coins').on('order.dt', function () { 
+            $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
+          }).trigger('order.dt')
 
             var max;
             $('#coins td.holding').each(function() {
