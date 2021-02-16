@@ -72,6 +72,12 @@
   :tag_id => nil
 ).order('market_cap_rank asc').limit(100)} %>
 
+<% when 'starred-less-tagged' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+  :id.in => @account.coinships.where(:tag_id => nil, :starred => true).pluck(:coin_id)
+).order('price_change_percentage_24h_in_currency asc')} %>
+
 <% else %>
 
   <div data-pagelet-url="/u/<%=@account.id%>/tags/<%=params[:tag]%>/table">
