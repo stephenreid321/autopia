@@ -89,7 +89,8 @@ class Account
       next if !email || member.is_invited_user || member.deleted
 
       puts "#{name} #{email}"
-      account = Account.find_by(email: email.downcase) || Account.create(name: name, email: email)
+      account = Account.find_by(email: email.downcase) || Account.create(email: email)
+      account.name = name
       account.slack_id = member.id
       account.save
     end
