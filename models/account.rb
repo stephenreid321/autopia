@@ -19,9 +19,10 @@ class Account
 
   def self.admin_fields
     {
-      email: :email,
-      name: :text,
       address_hash: :text,
+      email: :email,
+      password: :password,
+      name: :text,
       admin: :check_box,
       hide_total: :check_box,
       time_zone: :select,
