@@ -43,6 +43,7 @@
 
 <div class="mt-3">
   <% total_holding = @account.tags.holding %>
+  <% @account.tags.update_holdings if @account.coinships < 100 %>
   <%= tags.map { |tag|
     if tag.holding && tag.holding > 0
       relative_holding = tag.holding / total_holding
