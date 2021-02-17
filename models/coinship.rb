@@ -12,10 +12,6 @@ class Coinship
   belongs_to :coin
   belongs_to :tag, optional: true
 
-  before_validation do
-    self.units = 0 unless units
-  end
-
   validates_uniqueness_of :coin, scope: :account
 
   def self.admin_fields
