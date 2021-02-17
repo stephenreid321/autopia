@@ -15,13 +15,13 @@
 <% when 'wallets' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
-        :id.in => @account.coinships.where(:units.gt => 0).pluck(:coin_id)
+        :id.in => @account.coinships.where(:units.gt => 1e-6).pluck(:coin_id)
       ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'elsewhere' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
-        :id.in => @account.coinships.where(:units => 0).pluck(:coin_id)
+        :id.in => @account.coinships.where(:units.lt => 1e-6).pluck(:coin_id)
       ).order('price_change_percentage_24h_in_currency desc')} %>
 
 <% when 'uniswap' %>

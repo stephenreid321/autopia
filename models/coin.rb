@@ -97,7 +97,7 @@ class Coin
   end
 
   def self.symbol(symbol)
-    Coin.where(symbol: symbol.upcase).order('total_volume desc').first
+    Coin.where(symbol: symbol.upcase).order('total_volume desc').first if symbol
   end
 
   def self.remote_update
