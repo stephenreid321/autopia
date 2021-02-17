@@ -12,6 +12,18 @@
         :id.in => @account.coinships.where(:tag_id.ne => nil).pluck(:coin_id)
       ).order('price_change_percentage_24h_in_currency desc')} %>
 
+<% when 'wallets' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+        :id.in => @account.coinships.where(:units.ne => nil).pluck(:coin_id)
+      ).order('price_change_percentage_24h_in_currency desc')} %>
+
+<% when 'elsewhere' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+        :id.in => @account.coinships.where(:units => nil).pluck(:coin_id)
+      ).order('price_change_percentage_24h_in_currency desc')} %>
+
 <% when 'uniswap' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
