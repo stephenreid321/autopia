@@ -23,4 +23,4 @@
   </a>
 </div>
 
-<%= cp(:balances, key: "balances?signed_in=#{current_account ? 1 : 0}", expires: 1.hours.to_i) %>
+<%= cp(:balances, key: "balances?signed_in=#{current_account ? 1 : 0}") %>
