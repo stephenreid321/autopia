@@ -14,6 +14,7 @@ Autopia::App.controller do
   end
 
   get '/u/:account_id/tags/:tag' do
+    @title = params[:tag]
     @account = Account.find(params[:account_id])
     if params[:tag] == 'uniswap'
       agent = Mechanize.new
