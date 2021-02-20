@@ -23,4 +23,4 @@
   </a>
 </div>
 
-<%= Padrino.env == :development ? partial(:balances) : cache("balances?signed_in=#{current_account ? 1 : 0}", expires: 1.hours.to_i) { partial :balances } %>
+<%= cp(:balances, key: "balances?signed_in=#{current_account ? 1 : 0}", expires: 1.hours.to_i) %>

@@ -15,8 +15,8 @@ Autopia::App.helpers do
     FrontMatterParser::Parser.new(:md).call(text)
   end
 
-  def cp(slug)
-    cache(slug, expires: 6.hours.to_i) { ; partial :"#{slug}"; }
+  def cp(slug, key: slug, expires: 1.hours.to_i)
+    Padrino.env == :development ? partial(slug) : cache(key, expires: expires) { partial slug }
   end
 
   def current_account
