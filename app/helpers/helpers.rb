@@ -51,4 +51,33 @@ Autopia::App.helpers do
       %(<#{html_tag} href="/u/#{account.id}/tags/#{name}" class="badge badge-secondary #{c}" style="#{bg}; color: white; #{s}">#{name}</#{html_tag}>)
     end
   end
+
+  def pair_query
+    TheGraph.query '1hive/uniswap-v2', %{
+      {
+       pair(id: "0xccace6772a98d8a3da115b63e816e500a12aad9a"){
+           token0 {
+             id
+             symbol
+             name
+             derivedETH
+           }
+           token1 {
+             id
+             symbol
+             name
+             derivedETH
+           }
+           reserve0
+           reserve1
+           reserveUSD
+           trackedReserveETH
+           token0Price
+           token1Price
+           volumeUSD
+           txCount
+       }
+      }
+    }
+  end
 end

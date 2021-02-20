@@ -1,31 +1,4 @@
-<%
-@pair = TheGraph.query '1hive/uniswap-v2', %{
-  {
-   pair(id: "0xccace6772a98d8a3da115b63e816e500a12aad9a"){
-       token0 {
-         id
-         symbol
-         name
-         derivedETH
-       }
-       token1 {
-         id
-         symbol
-         name
-         derivedETH
-       }
-       reserve0
-       reserve1
-       reserveUSD
-       trackedReserveETH
-       token0Price
-       token1Price
-       volumeUSD
-       txCount
-   }
-  }
-}
-%>
+<% @pair ||= pair_query %>
 
 <style>
   .card.aut-price { font-size: 2.5em }
