@@ -24,6 +24,17 @@
         :id.in => @account.coinships.where(:units.lt => 1e-6).pluck(:coin_id)
       ).order('price_change_percentage_24h_in_currency desc')} %>
 
+<% when 'holding-less-starred' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+              :id.in => @account.coinships.where(
+                :id.in =>
+                (@account.coinships.where(:units.gte => 1e-6).pluck(:id) +
+                @account.coinships.where(:units_elsewhere.gt => 0).pluck(:id)),
+                :starred.ne => true                
+              ).pluck(:coin_id)
+            ).order('price_change_percentage_24h_in_currency desc')} %>
+
 <% when 'uniswap' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
