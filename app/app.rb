@@ -59,11 +59,7 @@ module Autopia
       erb :not_found, layout: :application
     end
 
-    get '/', cache: true do
-      unless Padrino.env == :development
-        cache_key { request.path + "?signed_in=#{current_account ? 1 : 0}" }
-        expires 1.hour.to_i
-      end
+    get '/' do
       erb :home
     end
 
