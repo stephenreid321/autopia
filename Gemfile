@@ -31,6 +31,7 @@ gem 'bcrypt'
 gem 'delayed_job_mongoid'
 gem 'mongoid'
 
+gem 'bazaar'
 gem 'binance'
 gem 'digest-sha3'
 gem 'eth'

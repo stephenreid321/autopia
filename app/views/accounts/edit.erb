@@ -3,6 +3,7 @@
     <% form_for @account, '/accounts/edit', :multipart => true do |f| %>
       <%= f.text_block :name, disabled: true %>
       <%= f.email_block :email, disabled: true %>
+      <%= f.text_block :username %>
       <%= f.text_block :address_hash, disabled: true %>
       <%= f.text_block :slack_id, disabled: true %>
       <%= f.text_block :dao_shares, disabled: true %>
