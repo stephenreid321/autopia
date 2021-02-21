@@ -132,7 +132,7 @@ class Account
   end
 
   def short_hash
-    "#{address_hash[0..4]}&hellip;#{address_hash[-2..-1]}" if address_hash
+    "#{address_hash[0..5]}&hellip;#{address_hash[-4..-1]}" if address_hash
   end
 
   attr_accessor :password
