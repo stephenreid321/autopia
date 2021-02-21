@@ -57,7 +57,7 @@ Autopia::App.controller do
           if session[:return_to]
             redirect session[:return_to]
           else
-            redirect "/u/#{current_account.id}/coins"
+            redirect "/u/#{current_account.username}/coins"
           end
         else
           # flash.now[:notice] = "<i class=\"fa fa-#{@provider.icon}\"></i> We need a few more details to finish creating your account&hellip;"

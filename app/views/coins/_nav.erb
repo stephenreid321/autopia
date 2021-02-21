@@ -1,7 +1,7 @@
 <nav>
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Portfolios</a></li>
-    <li class="breadcrumb-item"><a href="/u/<%=@account.id%>/coins"><%=@account.name%></a></li>
+    <li class="breadcrumb-item"><a href="/u/<%=@account.username%>/coins"><%=@account.name%></a></li>
     <li class="breadcrumb-item active">
       <%= params[:tag] || 'Overview' %>
     </li>
@@ -9,9 +9,9 @@
 </nav>
 
 <%= ul_nav (
-      (@virtual_tags.map { |slug| [tag_badge(slug, account: @account, html_tag: 'span'), "/u/#{@account.id}/tags/#{slug}"] }) +
-      [[tag_badge('overview', account: @account, html_tag: 'span'), "/u/#{@account.id}/tags"]] +
-      (tags = @account.tags.sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/u/#{@account.id}/tags/#{tag.name}"] }
+      (@virtual_tags.map { |slug| [tag_badge(slug, account: @account, html_tag: 'span'), "/u/#{@account.username}/tags/#{slug}"] }) +
+      [[tag_badge('overview', account: @account, html_tag: 'span'), "/u/#{@account.username}/tags"]] +
+      (tags = @account.tags.sort_by { |tag| -tag.holding }).map { |tag| [tag_badge(tag, html_tag: 'span'), "/u/#{@account.username}/tags/#{tag.name}"] }
     ),
     ul_class: 'nav nav-tabs',
     li_class: 'nav-item',
@@ -47,7 +47,7 @@
   <%= tags.map { |tag|
     if tag.holding && tag.holding > 0
       relative_holding = tag.holding / total_holding
-      %{<a href="/u/#{@account.id}/tags/#{tag.name}" data-toggle="tooltip" title="#{tag.name}" class="text-center d-inline-block" style="color: white; background-color: #{tag.background_color || '#6C757D'}; width: #{relative_holding*100}%"><span class="d-inline-block p-1">#{number_to_percentage relative_holding*100, precision: 1}</span></a>}
+      %{<a href="/u/#{@account.username}/tags/#{tag.name}" data-toggle="tooltip" title="#{tag.name}" class="text-center d-inline-block" style="color: white; background-color: #{tag.background_color || '#6C757D'}; width: #{relative_holding*100}%"><span class="d-inline-block p-1">#{number_to_percentage relative_holding*100, precision: 1}</span></a>}
     end
 }.compact.join %>
 </div>

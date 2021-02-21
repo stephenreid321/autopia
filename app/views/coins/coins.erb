@@ -31,7 +31,7 @@
                 :id.in =>
                 (@account.coinships.where(:units.gte => 1e-6).pluck(:id) +
                 @account.coinships.where(:units_elsewhere.gt => 0).pluck(:id)),
-                :starred.ne => true                
+                :starred.ne => true
               ).pluck(:coin_id)
             ).order('price_change_percentage_24h_in_currency desc')} %>
 
@@ -95,7 +95,7 @@
 
 <% else %>
 
-  <div data-pagelet-url="/u/<%=@account.id%>/tags/<%=params[:tag]%>/table">
+  <div data-pagelet-url="/u/<%=@account.username%>/tags/<%=params[:tag]%>/table">
     <%= partial :'coins/coin_table', locals: { coins: Coin.where(
       :id.in => @account.coinships.where(tag: @account.tags.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') } %>

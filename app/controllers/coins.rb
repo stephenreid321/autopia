@@ -3,19 +3,23 @@ Autopia::App.controller do
     @virtual_tags = %w[starred tagged wallets elsewhere uniswap sushiswap defi-pulse 24h 7d market-cap-24h top-100 top-100-less-tagged starred-less-tagged holding-less-starred]
   end
 
-  get '/u/:account_id/coins' do
-    redirect "/u/#{params[:account_id]}/tags/starred"
+  get '/u/:username' do
+    redirect "/u/#{params[:username]}/tags/starred"
   end
 
-  get '/u/:account_id/tags' do
-    @account = Account.find(params[:account_id])
+  get '/u/:username/coins' do
+    redirect "/u/#{params[:username]}/tags/starred"
+  end
+
+  get '/u/:username/tags' do
+    @account = Account.find_by(username: params[:username])
     @account.tags.update_holdings
     erb :'coins/tags'
   end
 
-  get '/u/:account_id/tags/:tag' do
+  get '/u/:username/tags/:tag' do
     @title = params[:tag]
-    @account = Account.find(params[:account_id])
+    @account = Account.find_by(username: params[:username])
     if params[:tag] == 'uniswap'
       agent = Mechanize.new
       @uniswap = []
@@ -53,15 +57,15 @@ Autopia::App.controller do
     erb :'coins/coins'
   end
 
-  get '/u/:account_id/tags/:tag/table' do
-    @account = Account.find(params[:account_id])
+  get '/u/:username/tags/:tag/table' do
+    @account = Account.find_by(username: params[:username])
     partial :'coins/coin_table', locals: { coins: Coin.where(
       :id.in => @account.coinships.where(tag: @account.tags.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') }
   end
 
-  get '/u/:account_id/coins/:slug' do
-    @account = Account.find(params[:account_id])
+  get '/u/:username/coins/:slug' do
+    @account = Account.find_by(username: params[:username])
     coin = Coin.find_by(slug: params[:slug])
     coin.remote_update
     partial :'coins/coin', locals: { coin: coin }
@@ -72,20 +76,20 @@ Autopia::App.controller do
   get '/coins/add_tag/:tag' do
     sign_in_required!
     tag = current_account.tags.find_or_create_by(name: params[:tag].parameterize)
-    redirect "/u/#{current_account.id}/tags/#{tag.name}"
+    redirect "/u/#{current_account.username}/tags/#{tag.name}"
   end
 
   get '/coins/delete_tag/:tag' do
     sign_in_required!
     tag = current_account.tags.find_by(name: params[:tag]).destroy
-    redirect "/u/#{current_account.id}/tags"
+    redirect "/u/#{current_account.username}/tags"
   end
 
   get '/coins/rename_tag/:tag/:new' do
     sign_in_required!
     tag = current_account.tags.find_by(name: params[:tag])
     tag.update_attribute(:name, params[:new].parameterize)
-    redirect "/u/#{current_account.id}/tags/#{tag.name}"
+    redirect "/u/#{current_account.username}/tags/#{tag.name}"
   end
 
   post '/coins/tag/:tag' do

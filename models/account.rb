@@ -16,11 +16,13 @@ class Account
   field :binance_api_secret, type: String
   field :price_factor, type: Integer
   field :hide_total, type: Boolean
+  field :username, type: String
 
   def self.admin_fields
     {
       address_hash: :text,
       email: :email,
+      username: :text,
       password: :password,
       name: :text,
       admin: :check_box,
@@ -141,7 +143,22 @@ class Account
     self.price_factor = rand(100) unless price_factor
     self.dao_shares = nil if dao_shares && dao_shares.zero?
     self.dao_loot = nil if dao_loot && dao_loot.zero?
+
+    unless username
+      u = Bazaar.super_object.parameterize.underscore
+      if !Account.find_by(username: u)
+        self.username = u
+      else
+        n = 1
+        n += 1 while Account.find_by(username: "#{u}_#{n}")
+        self.username = "#{u}_#{n}"
+      end
+    end
+    self.username = username.downcase if username
   end
+
+  validates_format_of :username, with: /\A[a-z0-9_\.]+\z/
+  validates_uniqueness_of :username
 
   validates_uniqueness_of   :address_hash, allow_nil: true
   validates_uniqueness_of   :email, case_sensitive: false, allow_nil: true
