@@ -35,6 +35,17 @@
               ).pluck(:coin_id)
             ).order('price_change_percentage_24h_in_currency desc')} %>
 
+<% when 'starred-less-holding' %>
+
+<%= partial :'coins/coin_table', locals: {coins: Coin.where(
+                          :id.in => @account.coinships.where(
+                            :id.nin =>
+                            (@account.coinships.where(:units.gte => 1e-6).pluck(:id) +
+                            @account.coinships.where(:units_elsewhere.gt => 0).pluck(:id)),
+                            :starred => true
+                          ).pluck(:coin_id)
+                        ).order('price_change_percentage_24h_in_currency desc')} %>
+
 <% when 'uniswap' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.where(
