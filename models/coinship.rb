@@ -43,13 +43,12 @@ class Coinship
     holding_before = (units_before || 0) + (units_elsewhere_sum_before || 0)
     holding_after = (units_after || 0) + (units_elsewhere_sum_after || 0)
     holding_percentage_change = (100 * (holding_after - holding_before) / holding_before).round(1)
+    message = "<@#{account.slack_id}>'s <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> holding changed by #{'+' if holding_percentage_change.positive?}#{holding_percentage_change}% https://autopia.co/u/#{account.username}"
 
     Slack.configure do |config|
       config.token = ENV['SLACK_API_KEY']
     end
     client = Slack::Web::Client.new
-    message = "<@#{account.slack_id}>'s <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> holding changed by #{'+' if holding_percentage_change.positive?}#{holding_percentage_change}% https://autopia.co/u/#{account.username}"
-    puts message
     client.chat_postMessage(
       channel: '#crypto-alerts',
       icon_url: 'https://autopia.co/images/autopia-200-200.png',
