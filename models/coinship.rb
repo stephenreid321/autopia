@@ -50,6 +50,7 @@ class Coinship
     end
     client = Slack::Web::Client.new
     client.chat_postMessage(
+      username: 'Autopia',
       channel: '#crypto-alerts',
       icon_url: 'https://autopia.co/images/autopia-200-200.png',
       text: message
