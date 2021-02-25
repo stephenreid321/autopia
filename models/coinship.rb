@@ -27,6 +27,36 @@ class Coinship
     }
   end
 
+  after_save do
+    units_before = units
+    units_after = units
+    if changes['units']
+      units_before = changes['units'][0]
+      units_after = hanges['units'][1]
+    end
+    units_elsewhere_sum_before = units_elsewhere_sum
+    units_elsewhere_sum_after = units_elsewhere_sum
+    if changes['units_elsewhere']
+      units_elsewhere_sum_before = Coinship.units_elsewhere_sum(changes['units_elsewhere'][0])
+      units_elsewhere_sum_after = Coinship.units_elsewhere_sum(changes['units_elsewhere'][1])
+    end
+    holding_before = (units_before || 0) + (units_elsewhere_sum_before || 0)
+    holding_after = (units_after || 0) + (units_elsewhere_sum_after || 0)
+    holding_percentage_change = (100 * (holding_after - holding_before) / holding_before).round(1)
+
+    Slack.configure do |config|
+      config.token = ENV['SLACK_API_KEY']
+    end
+    client = Slack::Web::Client.new
+    message = "<@#{account.slack_id}>'s <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> holding changed by #{'+' if holding_percentage_change.positive?}#{holding_percentage_change}% https://autopia.co/u/#{account.username}"
+    puts message
+    client.chat_postMessage(
+      channel: '#crypto-alerts',
+      icon_url: 'https://autopia.co/images/autopia-200-200.png',
+      text: message
+    )
+  end
+
   def market_cap_at_predicted_rank
     if (p = market_cap_rank_prediction)
       mc = nil
@@ -43,7 +73,7 @@ class Coinship
     (market_cap_at_predicted_rank / coin.market_cap) * (market_cap_rank_prediction_conviction || 1) if market_cap_at_predicted_rank && coin.market_cap && (coin.market_cap > 0)
   end
 
-  def units_elsewhere_sum
+  def self.units_elsewhere_sum(units_elsewhere)
     if units_elsewhere
       units_elsewhere.split(' ').map do |x|
         begin
@@ -55,6 +85,10 @@ class Coinship
     else
       0
     end
+  end
+
+  def units_elsewhere_sum
+    Coinship.units_elsewhere_sum(units_elsewhere)
   end
 
   def all_units
