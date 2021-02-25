@@ -12,14 +12,14 @@ Autopia::App.controller do
   end
 
   get '/u/:username/tags' do
-    @account = Account.find_by(username: params[:username])
+    @account = Account.find_by(username: params[:username]) || not_found
     @account.tags.update_holdings
     erb :'coins/tags'
   end
 
   get '/u/:username/tags/:tag' do
     @title = params[:tag]
-    @account = Account.find_by(username: params[:username])
+    @account = Account.find_by(username: params[:username]) || not_found
     if params[:tag] == 'uniswap'
       agent = Mechanize.new
       @uniswap = []
@@ -58,14 +58,14 @@ Autopia::App.controller do
   end
 
   get '/u/:username/tags/:tag/table' do
-    @account = Account.find_by(username: params[:username])
+    @account = Account.find_by(username: params[:username]) || not_found
     partial :'coins/coin_table', locals: { coins: Coin.where(
       :id.in => @account.coinships.where(tag: @account.tags.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') }
   end
 
   get '/u/:username/coins/:slug' do
-    @account = Account.find_by(username: params[:username])
+    @account = Account.find_by(username: params[:username]) || not_found
     coin = Coin.find_by(slug: params[:slug])
     coin.remote_update
     partial :'coins/coin', locals: { coin: coin }
