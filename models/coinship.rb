@@ -32,7 +32,7 @@ class Coinship
     units_after = units
     if changes['units']
       units_before = changes['units'][0]
-      units_after = hanges['units'][1]
+      units_after = changes['units'][1]
     end
     units_elsewhere_sum_before = units_elsewhere_sum
     units_elsewhere_sum_after = units_elsewhere_sum
