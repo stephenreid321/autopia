@@ -123,7 +123,6 @@ Autopia::App.controller do
     sign_in_required!
     coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
     coinship.update_attribute(:starred, nil)
-    coinship.remote_update
     200
   end
 
