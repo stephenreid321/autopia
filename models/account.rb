@@ -17,6 +17,7 @@ class Account
   field :price_factor, type: Integer
   field :hide_total, type: Boolean
   field :username, type: String
+  field :holding_change_notifications, type: Boolean
 
   def self.admin_fields
     {
@@ -35,6 +36,7 @@ class Account
       price_factor: :number,
       binance_api_key: :text,
       binance_api_secret: :text,
+      holding_change_notifications: :check_box,
       eth_addresses: :collection,
       coinships: :collection,
       tags: :collection
