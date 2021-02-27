@@ -112,19 +112,27 @@ class Coinship
       u = 0
       if coin.platform == 'ethereum'
         account.eth_address_hashes.each do |a|
+          begin
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+          rescue StandardError; end
         end
       elsif coin.platform == 'binance-smart-chain'
         account.eth_address_hashes.each do |a|
+          begin
           u += JSON.parse(agent.get("https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=#{coin.contract_address}&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+          rescue StandardError; end
         end
       elsif coin.symbol == 'ETH'
         account.eth_address_hashes.each do |a|
+          begin
           u += JSON.parse(agent.get("https://api.etherscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['ETHERSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+          rescue StandardError; end
         end
       elsif coin.symbol == 'BNB'
         account.eth_address_hashes.each do |a|
+          begin
           u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
+          rescue StandardError; end
         end
       elsif account.binance_api_key && account.binance_api_secret
 
