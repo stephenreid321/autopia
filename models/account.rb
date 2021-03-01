@@ -110,7 +110,7 @@ class Account
   end
 
   def self.balance
-    Account.where(:address_hash.ne => '0x0000000000000000000000000000000000000000').map(&:balance).sum
+    Account.all.map(&:balance).sum
   end
 
   def self.with_balance
