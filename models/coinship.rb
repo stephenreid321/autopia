@@ -46,8 +46,11 @@ class Coinship
       holding_change = holding_after - holding_before
       if holding_change.abs > 1e-6
         holding_percentage_change = (100 * (holding_after - holding_before) / holding_before).round(1)
-        message = "<@#{account.slack_id}>'s <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> holding changed by #{'+' if holding_percentage_change.positive?}#{holding_percentage_change}% https://autopia.co/u/#{account.username}"
-
+        message = if holding_percentage_change.infinite?
+                    "<@#{account.slack_id}> bought a fresh batch of <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> https://autopia.co/u/#{account.username}"
+                  else
+                    "<@#{account.slack_id}>'s <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> holding changed by #{'+' if holding_percentage_change.positive?}#{holding_percentage_change}% https://autopia.co/u/#{account.username}"
+                  end
         if Padrino.env == :production
           Slack.configure do |config|
             config.token = ENV['SLACK_API_KEY']
