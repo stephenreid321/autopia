@@ -59,7 +59,7 @@ class Coinship
           client = Slack::Web::Client.new
           client.chat_postMessage(
             username: 'Autopia',
-            channel: '#crypto-moves-test',
+            channel: '#crypto-moves',
             icon_url: 'https://autopia.co/images/autopia-200-200.png',
             text: message
           )
