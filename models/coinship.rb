@@ -142,7 +142,7 @@ class Coinship
           end
           u += (bc['free'].to_f + bc['locked'].to_f) if bc
         end
-      rescue StandardError
+      rescue StandardError => e
         Airbrake.notify(e)
         return
       end
