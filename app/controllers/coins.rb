@@ -23,7 +23,7 @@ Autopia::App.controller do
     if params[:tag] == 'uniswap'
       agent = Mechanize.new
       @uniswap = []
-      Coin.where(:uniswap_volume.ne => nil).set(uniswap_volume: nil)
+      Coin.and(:uniswap_volume.ne => nil).set(uniswap_volume: nil)
       JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/uniswap').body)['tickers'].each do |ticker|
         if coin = Coin.find_by(slug: ticker['coin_id'])
           coin.update_attribute(:uniswap_volume, ticker['converted_volume']['eth'])
@@ -33,7 +33,7 @@ Autopia::App.controller do
     elsif params[:tag] == 'sushiswap'
       agent = Mechanize.new
       @sushiswap = []
-      Coin.where(:sushiswap_volume.ne => nil).set(sushiswap_volume: nil)
+      Coin.and(:sushiswap_volume.ne => nil).set(sushiswap_volume: nil)
       JSON.parse(agent.get('https://api.coingecko.com/api/v3/exchanges/sushiswap').body)['tickers'].each do |ticker|
         if coin = Coin.find_by(slug: ticker['coin_id'])
           coin.update_attribute(:sushiswap_volume, ticker['converted_volume']['eth'])
@@ -43,7 +43,7 @@ Autopia::App.controller do
     elsif params[:tag] == 'defi-pulse'
       agent = Mechanize.new
       @defi_pulse = []
-      Coin.where(:tvl.ne => nil).set(tvl: nil)
+      Coin.and(:tvl.ne => nil).set(tvl: nil)
       JSON.parse(agent.get('https://defipulse.com/').search('#__NEXT_DATA__').inner_html)['props']['initialState']['coin']['projects'].each do |project|
         if coin = Coin.find_by(defi_pulse_name: project['name'])
           coin.update_attribute(:tvl, project['value']['tvl']['ETH']['value'])
@@ -51,16 +51,16 @@ Autopia::App.controller do
         end
       end
     end
-    @uniswap_slugs = Coin.where(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug)
-    @sushiswap_slugs = Coin.where(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug)
-    @tvl_slugs = Coin.where(:tvl.ne => nil).order('tvl desc').pluck(:slug)
+    @uniswap_slugs = Coin.and(:uniswap_volume.ne => nil).order('uniswap_volume desc').pluck(:slug)
+    @sushiswap_slugs = Coin.and(:sushiswap_volume.ne => nil).order('sushiswap_volume desc').pluck(:slug)
+    @tvl_slugs = Coin.and(:tvl.ne => nil).order('tvl desc').pluck(:slug)
     erb :'coins/coins'
   end
 
   get '/u/:username/tags/:tag/table' do
     @account = Account.find_by(username: params[:username]) || not_found
-    partial :'coins/coin_table', locals: { coins: Coin.where(
-      :id.in => @account.coinships.where(tag: @account.tags.find_by(name: params[:tag])).pluck(:coin_id)
+    partial :'coins/coin_table', locals: { coins: Coin.and(
+      :id.in => @account.coinships.and(tag: @account.tags.find_by(name: params[:tag])).pluck(:coin_id)
     ).order('price_change_percentage_24h_in_currency desc') }
   end
 

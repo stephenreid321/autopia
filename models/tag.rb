@@ -12,7 +12,7 @@ class Tag
   belongs_to :account
   has_many :coinships, dependent: :nullify
   def coins
-    Coin.where(:id.in => coinships.pluck(:coin_id))
+    Coin.and(:id.in => coinships.pluck(:coin_id))
   end
 
   def self.admin_fields
@@ -52,7 +52,7 @@ class Tag
   end
 
   def background_color
-    tags = account.tags.order('holding desc').where(:holding.gt => 0)
+    tags = account.tags.order('holding desc').and(:holding.gt => 0)
     i = tags.pluck(:id).index(id)
     i = (tags.count - 1) - i if i.odd?
     i && !tags.empty? ? '#8747E6'.paint.spin(0 - (i.to_f / (tags.count - 1)) * (360 - (360 / tags.count))).lighten(10) : '#666666'

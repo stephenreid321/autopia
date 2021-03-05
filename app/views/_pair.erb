@@ -114,7 +114,7 @@
     </a>
   </div>
 
-  <% slack_members = Account.where(:slack_id.ne => nil).count %>
+  <% slack_members = Account.and(:slack_id.ne => nil).count %>
   <div>
     <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
       <div class="card-body py-1 px-2">
@@ -123,7 +123,7 @@
     </span>
   </div>
 
-  <% dao_members = Account.where(:dao_shares.ne => nil).count %>
+  <% dao_members = Account.and(:dao_shares.ne => nil).count %>
   <div>
     <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(dao_members, 'DAO member')%>" href="https://app.daohaus.club/dao/0x80de9a508443c68e825f683f9ebd2659600a678e">
       <div class="card-body py-1 px-2">
