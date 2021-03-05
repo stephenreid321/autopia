@@ -51,7 +51,6 @@ class Coinship
                   else
                     "<@#{account.slack_id}>'s <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> holding changed by #{'+' if holding_percentage_change.positive?}#{holding_percentage_change}% https://autopia.co/u/#{account.username}"
                   end
-        message += " #{units_before} #{units_after} #{units_elsewhere_sum_before} #{units_elsewhere_sum_after}"
         if Padrino.env == :production
           Slack.configure do |config|
             config.token = ENV['SLACK_API_KEY']
