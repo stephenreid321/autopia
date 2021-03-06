@@ -94,7 +94,7 @@ Autopia::App.controller do
 
   post '/coins/tag/:tag' do
     sign_in_required!
-    if coin = Coin.symbol(params[:symbol])
+    if coin = (Coin.symbol(params[:symbol]) || Coin.find_by(slug: params[:symbol]))
       coinship = current_account.coinships.find_or_create_by(coin: coin)
       coinship.tag = current_account.tags.find_by(name: params[:tag])
       coinship.save
