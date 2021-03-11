@@ -82,7 +82,7 @@
   </div>
 
   <% total_supply = Account.balance + 10_000 %>
-  <% total_supply = number_with_delimiter(total_supply.round((total_supply.to_i - total_supply.to_f).abs < 1e-6 ? 0 : 2)) %>
+  <% total_supply = number_with_delimiter((total_supply.to_i - total_supply.to_f).abs < 1e-6 ? total_supply.to_i : total_supply.round(2)) %>
   <div>
     <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Total supply = <%= total_supply %> AUT" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938">
       <div class="card-body py-1 px-2">
