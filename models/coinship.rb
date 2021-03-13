@@ -45,7 +45,7 @@ class Coinship
       holding_after = (units_after || 0) + (units_elsewhere_sum_after || 0)
       holding_change = holding_after - holding_before
       holding_percentage_change = (100 * holding_change / holding_before).round(1)
-      if holding_percentage_change.abs > 1
+      if holding_percentage_change.abs >= 1
         message = if holding_percentage_change.infinite?
                     "<@#{account.slack_id}> bought a fresh batch of <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> https://autopia.co/u/#{account.username}"
                   else
