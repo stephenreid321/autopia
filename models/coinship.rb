@@ -49,7 +49,7 @@ class Coinship
                                   else
                                     (100 * holding_change / holding_before).round(1)
                                   end
-      if holding_percentage_change.abs >= 1
+      if false && holding_percentage_change.abs >= 1
         message = if holding_percentage_change.infinite?
                     "<@#{account.slack_id}> bought a fresh batch of <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> https://autopia.co/u/#{account.username}"
                   else
