@@ -44,7 +44,11 @@ class Coinship
       holding_before = (units_before || 0) + (units_elsewhere_sum_before || 0)
       holding_after = (units_after || 0) + (units_elsewhere_sum_after || 0)
       holding_change = holding_after - holding_before
-      holding_percentage_change = holding_after && holding_before.zero? ? Float::INFINITY : (100 * holding_change / holding_before).round(1)
+      holding_percentage_change = if holding_before.zero? && !holding_after.zero?
+                                    Float::INFINITY
+                                  else
+                                    (100 * holding_change / holding_before).round(1)
+                                  end
       if holding_percentage_change.abs >= 1
         message = if holding_percentage_change.infinite?
                     "<@#{account.slack_id}> bought a fresh batch of <https://www.coingecko.com/en/coins/#{coin.slug}|#{coin.symbol}> https://autopia.co/u/#{account.username}"
