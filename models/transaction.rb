@@ -42,7 +42,7 @@ class Transaction
 
     items.each do |item|
       h = Nokogiri::HTML(item)
-      block = h.search("a[href^='/poa/xdai/blocks']")[0].text.gsub('Block #', '')
+      block = h.search("a[href^='/xdai/mainnet/blocks']")[0].text.gsub('Block #', '')
       identifier = h.search('[data-identifier-hash]')[0].attr('data-identifier-hash')
       tx = h.search('[data-test=transaction_hash_link]')[0].text
       from = h.search('[data-address-hash]')[0].attr('data-address-hash').downcase
