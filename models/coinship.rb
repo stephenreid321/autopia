@@ -44,7 +44,7 @@ class Coinship
       holding_before = (units_before || 0) + (units_elsewhere_sum_before || 0)
       holding_after = (units_after || 0) + (units_elsewhere_sum_after || 0)
       holding_change = holding_after - holding_before
-      if holding_change.abs > 1e-6
+      unless holding_before.zero? && holding_after.zero?
         holding_percentage_change = (100 * holding_change / holding_before).round(1)
         if holding_percentage_change.abs >= 1
           message = if holding_percentage_change.infinite?
