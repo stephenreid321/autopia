@@ -2,7 +2,7 @@
 <td>
   <a class="font-weight-bold" href="/u/<%=@account.username%>/tags/<%=tag.name%>"><%= tag.name %></a>
 </td>
-<td class="holding" data-sort="<%= (tag.holding < 1e-6 ? 0 : tag.holding) * @account.price_factor  %>">
+<td class="holding" data-sort="<%= (tag.holding < 1e-3 ? 0 : tag.holding) * @account.price_factor  %>">
   <a class="text-dark" href="/u/<%=@account.username%>/tags/<%=tag.name%>">
     <div class="p"></div>
   </a>
