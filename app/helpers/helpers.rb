@@ -3,6 +3,10 @@ Autopia::App.helpers do
     %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x}</abbr>)
   end
 
+  def admin?
+    current_account && current_account.admin?
+  end
+
   def partial(*args)
     if admin?
       t1 = Time.now
