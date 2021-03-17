@@ -3,6 +3,18 @@ Autopia::App.helpers do
     %(<abbr data-toggle="tooltip" class="timeago" title="#{x.iso8601}">#{x}</abbr>)
   end
 
+  def partial(*args)
+    if admin?
+      t1 = Time.now
+      output = super(*args)
+      t2 = Time.now
+      ms = ((t2 - t1) * 1000).round
+      output + "<script>console.log('PARTIAL #{ms.times.map { '=' }.join} #{args.first} #{ms}ms')</script>"
+    else
+      super(*args)
+    end
+  end
+
   def md(slug)
     text = open("#{Padrino.root}/app/markdown/#{slug}.md").read.force_encoding('utf-8')
     text = text.gsub(/\A---(.|\n)*?---/, '')
