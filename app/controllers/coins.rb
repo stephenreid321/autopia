@@ -146,4 +146,14 @@ Autopia::App.controller do
     coinship.update_attribute(:market_cap_rank_prediction_conviction, params[:p])
     200
   end
+
+  get '/holding_change_notifications' do
+    partial :'coins/holding_change_notifications'
+  end
+
+  post '/holding_change_notifications' do
+    sign_in_required!
+    current_account.update_attribute(:holding_change_notifications, params[:holding_change_notifications])
+    200
+  end
 end

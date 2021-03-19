@@ -38,18 +38,19 @@
 
 
   <% [
+      '//cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css',
       '/stylesheets/share.css',
       "/stylesheets/app.css?#{@cachebuster}",
       ].each { |f| %>
   <link rel="stylesheet" href="<%=f%>" />
   <% } %>
 
-
   <% [
       '//use.fontawesome.com/releases/v5.14.0/js/all.js',
       '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
       '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
       '//rawcdn.githack.com/cytoscape/cytoscape.js-cola/8c78f9d5c11ff6162b7d902f0639e1f787277b9f/cytoscape-cola.js',
+      '//cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js',
       '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
       '/javascripts/toc.min.js',
       "/javascripts/pagelets.js?#{@cachebuster}",

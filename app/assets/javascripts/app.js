@@ -47,6 +47,8 @@ $(function() {
 
   function ajaxCompleted() {
 
+    $('[data-toggle="toggle"]').bootstrapToggle()
+
     $('[data-toggle="tooltip"]').tooltip({
       html: true
     })
