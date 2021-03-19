@@ -47,7 +47,10 @@ $(function() {
 
   function ajaxCompleted() {
 
-    $('[data-toggle="toggle"]').bootstrapToggle()
+    $('input[type=checkbox][data-toggle="toggle"]:not(.togglified)').each(function() {
+      $(this).addClass('togglified')
+      $(this).bootstrapToggle()
+    })
 
     $('[data-toggle="tooltip"]').tooltip({
       html: true
