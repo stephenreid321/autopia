@@ -18,6 +18,7 @@ class Account
   field :hide_total, type: Boolean
   field :username, type: String
   field :holding_change_notifications, type: Boolean
+  field :mainnet_token_balance, type: Float
 
   def self.admin_fields
     {
@@ -27,6 +28,7 @@ class Account
       password: :password,
       name: :text,
       admin: :check_box,
+      mainnet_token_balance: :number,
       hide_total: :check_box,
       time_zone: :select,
       link: :url,
@@ -58,6 +60,14 @@ class Account
   has_many :coinships, dependent: :destroy
   has_many :tags, dependent: :destroy
   has_many :eth_addresses, dependent: :destroy
+
+  def update_mainnet_token_balance
+    agent = Mechanize.new
+    p = agent.get("https://etherscan.io/address/#{address_hash}")
+    update_attribute(:mainnet_token_balance, p.search('#availableBalanceDropdown').first.text.split("\n")[1].gsub(',', '').gsub('$', '').to_f)
+  rescue StandardError
+    nil
+  end
 
   def eth_address_hashes
     eth_addresses.empty? ? [address_hash] : eth_addresses.pluck(:address_hash)
