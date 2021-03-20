@@ -39,6 +39,9 @@
       <th>
         <%= xdai(h: '1em') %>
       </th>
+      <% if admin? %>
+        <th>Mainnet token balance</th>
+      <% end %>
     </tr>
   </thead>
   <%
@@ -53,7 +56,7 @@ Account.interesting.each_with_index { |account,i|
         <% end %>
       </a></td>
     <td>
-      <% if current_account && current_account.admin? %>
+      <% if admin? %>
         <% if account.email || account.name %>
           <a <% if account.email %> class="text-dark" <% end %> target="_blank" data-toggle="tooltip" title="<%=account.email || account.name%>" href="/admin/edit/Account/<%=account.id%>">
             <% if account.email %>
@@ -75,12 +78,12 @@ Account.interesting.each_with_index { |account,i|
     </td>
     <td>
       <% if account.slack_id %>
-        <% if current_account && current_account.admin? %>
+        <% if admin? %>
           <i style="opacity: 0.2" class="fa fa-check-circle"></i>
         <% else %>
           <i class="fa fa-check-circle"></i>
         <% end %>
-      <% elsif current_account && current_account.admin? && !account.name && i < 150 %>
+      <% elsif admin? && !account.name && i < 150 %>
         <i data-toggle="tooltip" title="Not a Slack member" class="fa fa-exclamation-triangle"></i>
       <% end %>
     </td>
@@ -100,6 +103,11 @@ Account.interesting.each_with_index { |account,i|
     <td>
       <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
+    <% if admin? %>
+      <td>
+        <%= number_to_currency account.mainnet_token_balance %>
+      </td>
+    <% end %>
   </tr>
   <% } %>
 </table>
