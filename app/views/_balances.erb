@@ -40,6 +40,7 @@
         <%= xdai(h: '1em') %>
       </th>
       <% if admin? %>
+        <th>Mainnet ETH balance</th>
         <th>Mainnet token balance</th>
       <% end %>
     </tr>
@@ -104,6 +105,11 @@ Account.interesting.each_with_index { |account,i|
       <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
     <% if admin? %>
+      <td data-sort="<%=account.mainnet_eth_balance%>">
+        <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
+          <%= number_to_currency account.mainnet_eth_balance %>
+        </a>
+      </td>
       <td data-sort="<%=account.mainnet_token_balance%>">
         <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
           <%= number_to_currency account.mainnet_token_balance %>

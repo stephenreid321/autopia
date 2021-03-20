@@ -19,6 +19,7 @@ class Account
   field :username, type: String
   field :holding_change_notifications, type: Boolean
   field :mainnet_token_balance, type: Float
+  field :mainnet_eth_balance, type: Float
 
   def self.admin_fields
     {
@@ -29,6 +30,7 @@ class Account
       name: :text,
       admin: :check_box,
       mainnet_token_balance: :number,
+      mainnet_eth_balance: :number,
       hide_total: :check_box,
       time_zone: :select,
       link: :url,
@@ -61,13 +63,22 @@ class Account
   has_many :tags, dependent: :destroy
   has_many :eth_addresses, dependent: :destroy
 
-  def update_mainnet_token_balance
+  def update_mainnet_balances
     agent = Mechanize.new
     p = agent.get("https://etherscan.io/address/#{address_hash}")
-    update_attribute(:mainnet_token_balance, p.search('#availableBalanceDropdown').first.text.split("\n")[1].gsub(',', '').gsub('$', '').to_f)
-  rescue StandardError
-    nil
+    begin
+          mainnet_eth_balance = p.search('#ContentPlaceHolder1_divSummary > div > div > div.card > div.card-body > div:nth-child(3)').text.split('$')[1].split('(')[0].gsub(',', '').to_f
+          update_attribute(:mainnet_eth_balance, mainnet_eth_balance)
+    rescue StandardError; end
+    begin
+    mainnet_token_balance = p.search('#availableBalanceDropdown').first.text.split("\n")[1].gsub(',', '').gsub('$', '').to_f
+    update_attribute(:mainnet_token_balance, mainnet_token_balance)
+    rescue StandardError; end
   end
+
+  agent = Mechanize.new
+  p = agent.get("https://etherscan.io/address/#{account.address_hash}")
+  p.search
 
   def eth_address_hashes
     eth_addresses.empty? ? [address_hash] : eth_addresses.pluck(:address_hash)
