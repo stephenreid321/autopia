@@ -105,7 +105,9 @@ Account.interesting.each_with_index { |account,i|
     </td>
     <% if admin? %>
       <td>
-        <%= number_to_currency account.mainnet_token_balance %>
+        <a href="https://app.zerion.io/<%=account.address_hash%>/overview">
+          <%= number_to_currency account.mainnet_token_balance %>
+        </a>
       </td>
     <% end %>
   </tr>
