@@ -29,4 +29,4 @@
   </a>
 </div>
 
-<%= cp(:balances, key: "balances?signed_in=#{current_account ? 1 : 0}") %>
+<%= cp(:balances, key: "balances?admin=#{admin? ? 1 : 0}") %>
