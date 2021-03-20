@@ -10,13 +10,11 @@
 
   <% if current_account && current_account.id == @account.id %>
 
-    <% if @account.coinships.and(:coin_id.in => coins.pluck(:id), starred: true).count > 0 %>
-      <h1 id="total" class="mt-3 text-center">
-        Ξ~
-        <br />
-        <small style="opacity: 0.25">$~</small>
-      </h1>
-    <% end %>
+    <h1 id="total" class="mt-3 text-center">
+      Ξ~
+      <br />
+      <small style="opacity: 0.25">$~</small>
+    </h1>
 
     <% unless @virtual_tags.include?(params[:tag]) %>
       <div class="row justify-content-center mt-3">
