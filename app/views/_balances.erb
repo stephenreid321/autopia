@@ -116,10 +116,12 @@ Account.interesting.each_with_index { |account,i|
           <%= number_to_currency account.mainnet_token_balance %>
         </a>
       </td>
-      <td data-sort="<%=account.mainnet_eth_balance + account.mainnet_token_balance%>">
-        <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
-          <%= number_to_currency account.mainnet_eth_balance + account.mainnet_token_balance %>
-        </a>
+      <td data-sort="<%=(account.mainnet_eth_balance || 0) + (account.mainnet_token_balance || 0)%>">
+        <% if account.mainnet_eth_balance || account.mainnet_token_balance %>
+          <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
+            <%= number_to_currency (account.mainnet_eth_balance || 0) + (account.mainnet_token_balance || 0) %>
+          </a>
+        <% end %>
       </td>
     <% end %>
   </tr>
