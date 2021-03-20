@@ -105,7 +105,7 @@ Account.interesting.each_with_index { |account,i|
     </td>
     <% if admin? %>
       <td data-sort="<%=account.mainnet_token_balance%>">
-        <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>/overview">
+        <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
           <%= number_to_currency account.mainnet_token_balance %>
         </a>
       </td>
