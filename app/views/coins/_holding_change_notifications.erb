@@ -1,3 +1,6 @@
+<style>
+  .toggle-group label svg { position: relative; top: -3px; left: -1px }
+</style>
 <% form_tag '/holding_change_notifications' do %>
   <%= check_box_tag :holding_change_notifications, :checked => current_account.holding_change_notifications, :'data-toggle' => 'toggle', :'data-on' => '<i class="fa fab fa-slack"></i>', :'data-off' => '<i class="fa fab fa-slack"></i>', :onchange => '$(this.form).submit()' %>
 <% end %>
