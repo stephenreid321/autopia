@@ -76,10 +76,6 @@ class Account
     rescue StandardError; end
   end
 
-  agent = Mechanize.new
-  p = agent.get("https://etherscan.io/address/#{account.address_hash}")
-  p.search
-
   def eth_address_hashes
     eth_addresses.empty? ? [address_hash] : eth_addresses.pluck(:address_hash)
   end
