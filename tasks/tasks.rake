@@ -5,6 +5,10 @@ namespace :transactions do
 end
 
 namespace :accounts do
+  task update_mainnet_token_balances: :environment do
+    Account.all.each(&:update_mainnet_token_balance)
+  end
+
   task sync_with_slack: :environment do
     Account.sync_with_slack
   end

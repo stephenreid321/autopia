@@ -104,7 +104,7 @@ Account.interesting.each_with_index { |account,i|
       <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
     <% if admin? %>
-      <td>
+      <td data-sort="<%=account.mainnet_token_balance%>">
         <a href="https://app.zerion.io/<%=account.address_hash%>/overview">
           <%= number_to_currency account.mainnet_token_balance %>
         </a>
