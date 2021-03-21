@@ -1,0 +1,52 @@
+<td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
+  <% if coin.price_change_percentage_24h_in_currency %>
+    <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
+  <% end %>
+</td>
+<td class="rg" <% unless params[:tag] == '7d' %> style="opacity: 0.5" <% end %>>
+  <% if coin.price_change_percentage_7d_in_currency %>
+    <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
+  <% end %>
+</td>
+<td class="rg" style="opacity: 0.5">
+  <% if coin.price_change_percentage_1h_in_currency %>
+    <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
+  <% end %>
+</td>
+<td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
+  <% if coin.market_cap_change_percentage_24h %>
+    <%=number_with_precision coin.market_cap_change_percentage_24h, precision: 2%>%
+  <% end %>
+</td>
+<td>
+  <% if coin.twitter_followers %>
+    <a target="_blank" class="text-dark" href="https://twitter.com/<%=coin.twitter_username%>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
+  <% end %>
+</td>
+<td data-sort="<%= coin.uniswap_volume || 0 %>">
+  <% if coin.uniswap_volume && @uniswap_slugs %>
+    #<%= @uniswap_slugs.index(coin.slug)+1 %>
+  <% end %>
+</td>
+<td data-sort="<%= coin.sushiswap_volume || 0 %>">
+  <% if coin.sushiswap_volume && @sushiswap_slugs %>
+    #<%= @sushiswap_slugs.index(coin.slug)+1 %>
+  <% end %>
+</td>
+<td data-sort="<%= coin.tvl || 0 %>">
+  <% if coin.tvl && @tvl_slugs %>
+    #<%= @tvl_slugs.index(coin.slug)+1 %>
+  <% end %>
+</td>
+<td>
+  <% if coin.market_cap && coin.market_cap > 0 %>
+    <%= number_to_percentage 100*(coin.total_volume.to_f/coin.market_cap), precision: 0%>
+  <% end %>
+</td>
+<% if coinship && coinship.holding && coinship.holding > 1e-3 && coin.market_cap && coin.market_cap > 0 %>
+  <td data-sort="<%=sprintf('%.18f', coinship.holding.to_f/coin.market_cap)%>">
+    <%= BigDecimal.new((coinship.holding.to_f*100)/coin.market_cap, 2).to_f %>%
+  </td>
+<% else %>
+  <td></td>
+<% end %>
