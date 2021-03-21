@@ -2,7 +2,7 @@ class EthAddress
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  belongs_to :account
+  belongs_to :account, index: true
 
   field :address_hash, type: String
 

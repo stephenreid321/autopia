@@ -9,7 +9,7 @@ class Tag
     self.holding = coinships.sum { |coinship| coinship.holding }
   end
 
-  belongs_to :account
+  belongs_to :account, index: true
   has_many :coinships, dependent: :nullify
   def coins
     Coin.and(:id.in => coinships.pluck(:coin_id))

@@ -8,9 +8,9 @@ class Coinship
   field :units, type: Float
   field :units_elsewhere, type: String
 
-  belongs_to :account
-  belongs_to :coin
-  belongs_to :tag, optional: true
+  belongs_to :account, index: true
+  belongs_to :coin, index: true
+  belongs_to :tag, optional: true, index: true
 
   validates_uniqueness_of :coin, scope: :account
 
