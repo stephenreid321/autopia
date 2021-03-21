@@ -75,7 +75,7 @@ class Coinship
       until mc
         mc = Coin.find_by(market_cap_rank: p).try(:market_cap)
         p += 1
-        break if p > market_cap_rank_prediction + 5
+        break if p > market_cap_rank_prediction + 3
       end
       mc
     end
