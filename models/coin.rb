@@ -13,7 +13,7 @@ class Coin
   field :current_price, type: Float
   field :market_cap, type: Float
   field :market_cap_change_percentage_24h, type: Float
-  field :market_cap_rank, type: Integer
+  field :market_cap_rank, type: Integer; index({ market_cap_rank: 1 })
   field :total_volume, type: Float
   field :uniswap_volume, type: Float
   field :sushiswap_volume, type: Float
