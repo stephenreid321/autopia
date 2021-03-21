@@ -1,0 +1,22 @@
+<td style="white-space: nowrap" data-symbol="<%=coin.symbol.starts_with?('$') ? coin.symbol[1..-1] : coin.symbol%>">
+  <a data-toggle="tooltip" title="$<%=
+
+usd_price = coin.current_price*(@eth_usd ||= Coin.eth_usd)
+if usd_price < 1
+  Float("%.#{3}g" % usd_price)
+else
+  number_with_precision usd_price, precision: 2, delimiter: ','
+end
+
+   %><br />Updated <%=time_ago_in_words coin.updated_at%> ago" class="text-dark font-weight-bold" target="_blank" href="https://coingecko.com/en/coins/<%=coin.slug%>">
+    <%=coin.name%> (<%=coin.symbol%>)
+  </a>
+  <% if coin.erc20? %>
+    <a target="_blank" href="https://etherscan.io/token/<%=coin.contract_address%>">
+      <i data-toggle="tooltip" title="Etherscan" style="color: #A68DFB" class="fab fa-ethereum"></i>
+    </a>
+  <% end %>
+  <% if coinship && @virtual_tags.include?(params[:tag]) %>
+    <%= tag_badge coinship.tag %>
+  <% end %>
+</td>

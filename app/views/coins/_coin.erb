@@ -2,6 +2,7 @@
 
 <%= partial :'coins/coin_tr_intro', locals: {coin: coin, coinship: coinship} %>
 <%= partial :'coins/coin_tr_predictions', locals: {coin: coin, coinship: coinship} %>
+<%= partial :'coins/coin_tr_holding', locals: {coin: coin, coinship: coinship} %>
 <%= partial :'coins/coin_tr_stats', locals: {coin: coin, coinship: coinship} %>
 <% if current_account && current_account.id == @account.id %>
   <td>
