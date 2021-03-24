@@ -112,6 +112,11 @@ class Coin
     agent = Mechanize.new
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
+    rescue Net::ReadTimeout => e
+      puts e
+      puts 'sleeping...'
+      sleep 1
+      remote_update
     rescue Mechanize::ResponseCodeError => e
       puts e.response_code
       case e.response_code.to_i
