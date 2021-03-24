@@ -118,6 +118,7 @@ class Coin
       when 404
         destroy
       when 429
+        puts 'sleeping...'
         sleep 1
         remote_update
       else
