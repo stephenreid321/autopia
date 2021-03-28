@@ -81,7 +81,7 @@ Account.interesting.each_with_index { |account,i|
         <% end %>
       <% end %>
     </td>
-    <td>
+    <td data-sort="<%= account.slack_id ? true : false %>">
       <% if account.slack_id %>
         <% if admin? %>
           <i style="opacity: 0.2" class="fa fa-check-circle"></i>
