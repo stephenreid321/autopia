@@ -34,6 +34,8 @@
 </td>
 <td data-sort="<%=coinship.try(:market_cap_change_prediction)%>">
   <% if coinship.try(:market_cap_change_prediction); p = coinship.market_cap_change_prediction.round %>
-    <a href="javascript:;" style="text-decoration: none; font-family: sans-serif" data-toggle="tooltip" title="<%=p%>x"><% p.times do %><i class="fa fa-square"></i> <% end %></a>
+    <a href="javascript:;" style="text-decoration: none; font-family: sans-serif" data-toggle="tooltip" title="<%=p%>x">
+      <%=p%>x
+    </a>
   <% end %>
 </td>
