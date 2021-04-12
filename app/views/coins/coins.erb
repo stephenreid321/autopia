@@ -1,5 +1,7 @@
 <%= partial :'coins/nav' %>
 
+<%= @account.bio unless current_account && current_account && current_account.id == @account.id %>
+
 <% case params[:tag]; when nil, 'starred' %>
 
 <%= partial :'coins/coin_table', locals: {coins: Coin.and(

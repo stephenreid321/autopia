@@ -20,6 +20,7 @@ class Account
   field :holding_change_notifications, type: Boolean
   field :mainnet_token_balance, type: Float
   field :mainnet_eth_balance, type: Float
+  field :bio, type: String
 
   def self.admin_fields
     {
@@ -28,6 +29,7 @@ class Account
       username: :text,
       password: :password,
       name: :text,
+      bio: :text_area,
       admin: :check_box,
       mainnet_token_balance: :number,
       mainnet_eth_balance: :number,
