@@ -63,7 +63,7 @@ class Coin
   end
 
   def price
-    fixed_price || current_price
+    fixed_price ? fixed_price / Coin.eth_usd : current_price
   end
 
   def erc20?
