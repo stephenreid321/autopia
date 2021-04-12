@@ -108,7 +108,7 @@ class Coinship
   end
 
   def holding
-    (all_units || 0) * (coin.current_price || 0)
+    (all_units || 0) * (coin.price || 0)
   end
 
   def remote_update(skip_coin_update: nil)

@@ -11,6 +11,7 @@ class Coin
   field :defi_pulse_name, type: String
   field :platform, type: String
   field :current_price, type: Float
+  field :fixed_price, type: Float
   field :market_cap, type: Float
   field :market_cap_change_percentage_24h, type: Float
   field :market_cap_rank, type: Integer; index({ market_cap_rank: 1 })
@@ -39,6 +40,7 @@ class Coin
       decimals: :number,
       platform: :text,
       current_price: :number,
+      fixed_price: :number,
       market_cap: :number,
       market_cap_rank: :number,
       total_volume: :number,
@@ -58,6 +60,10 @@ class Coin
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
+  end
+
+  def price
+    fixed_price || current_price
   end
 
   def erc20?

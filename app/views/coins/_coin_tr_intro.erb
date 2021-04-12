@@ -24,7 +24,7 @@
 <td style="white-space: nowrap" data-symbol="<%=coin.symbol.starts_with?('$') ? coin.symbol[1..-1] : coin.symbol%>">
   <a data-toggle="tooltip" title="$<%=
 
-usd_price = coin.current_price*(@eth_usd ||= Coin.eth_usd)
+usd_price = coin.price*(@eth_usd ||= Coin.eth_usd)
 if usd_price < 1
   Float("%.#{3}g" % usd_price)
 else
