@@ -1,20 +1,20 @@
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %> >
-  <% if coin.price_change_percentage_24h_in_currency %>
+  <% if !coin.fixed_price && coin.price_change_percentage_24h_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2%>
   <% end %>
 </td>
 <td class="rg" <% unless params[:tag] == '7d' %> style="opacity: 0.5" <% end %>>
-  <% if coin.price_change_percentage_7d_in_currency %>
+  <% if !coin.fixed_price && coin.price_change_percentage_7d_in_currency %>
     <%=number_to_percentage coin.price_change_percentage_7d_in_currency, precision: 2%>
   <% end %>
 </td>
 <td class="rg" style="opacity: 0.5">
-  <% if coin.price_change_percentage_1h_in_currency %>
+  <% if !coin.fixed_price && coin.price_change_percentage_1h_in_currency %>
     <%=number_with_precision coin.price_change_percentage_1h_in_currency, precision: 2%>%
   <% end %>
 </td>
 <td class="rg" data-sort="<%= coin.market_cap_change_percentage_24h || 0 %>">
-  <% if coin.market_cap_change_percentage_24h %>
+  <% if !coin.fixed_price && coin.market_cap_change_percentage_24h %>
     <%=number_with_precision coin.market_cap_change_percentage_24h, precision: 2%>%
   <% end %>
 </td>
