@@ -136,12 +136,12 @@ class Coinship
           #   u += JSON.parse(agent.get("https://api.bscscan.io/api?module=account&action=balance&address=#{a}&tag=latest&apikey=#{ENV['BSCSCAN_API_KEY']}").body)['result'].to_i / 10**(coin.decimals || 18).to_f
           # end
         elsif account.binance_api_key && account.binance_api_secret
-          client = Binance::Client::REST.new api_key: account.binance_api_key, secret_key: account.binance_api_secret
-          balances = client.account_info['balances']
-          bc = balances.find do |b|
-            b['asset'] == coin.symbol
-          end
-          u += (bc['free'].to_f + bc['locked'].to_f) if bc
+          # client = Binance::Client::REST.new api_key: account.binance_api_key, secret_key: account.binance_api_secret
+          # balances = client.account_info['balances']
+          # bc = balances.find do |b|
+          #   b['asset'] == coin.symbol
+          # end
+          # u += (bc['free'].to_f + bc['locked'].to_f) if bc
         end
       rescue StandardError => e
         Airbrake.notify(e)

@@ -8,10 +8,10 @@ gem 'sass'
 gem 'sinatra'
 
 # Admin
+gem 'activate-admin', github: 'stephenreid321/activate-admin'
 gem 'activate-tools', github: 'stephenreid321/activate-tools'
 gem 'will_paginate', github: 'mislav/will_paginate'
 
-gem 'activate-admin', github: 'stephenreid321/activate-admin'
 gem 'airbrake'
 gem 'airrecord'
 gem 'bazaar'
