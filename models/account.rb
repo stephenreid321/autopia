@@ -178,7 +178,7 @@ class Account
     self.username = username.downcase if username
   end
 
-  validates_format_of :username, with: /\A[a-z0-9_\.]+\z/
+  validates_format_of :username, with: /\A[a-z0-9_.]+\z/
   validates_uniqueness_of :username
 
   validates_uniqueness_of   :address_hash, allow_nil: true

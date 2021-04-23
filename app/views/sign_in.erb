@@ -8,11 +8,11 @@
         <% form_tag '/auth/account/callback' do %>
           <div class="form-group mb-1">
             <label class="sr-only">Email</label>
-            <%= email_field_tag :email, :id => 'email', :class => 'form-control', :placeholder => 'Email'%>
+            <%= email_field_tag :email, id: 'email', class: 'form-control', placeholder: 'Email' %>
           </div>
           <div class="form-group mb-1">
             <label class="sr-only">Password</label>
-            <%= password_field_tag :password, :id => 'password', :class => 'form-control', :placeholder => 'Password' %>
+            <%= password_field_tag :password, id: 'password', class: 'form-control', placeholder: 'Password' %>
           </div>
           <button class="btn btn-primary" type="submit">Sign in</button>
         <% end %>

@@ -1,39 +1,39 @@
-<td data-sort="<%=coinship.try(:market_cap_rank_prediction)%>">
+<td data-sort="<%= coinship.try(:market_cap_rank_prediction) %>">
   <% if current_account && current_account.id == @account.id %>
-    <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">#<%=coinship.try(:market_cap_rank_prediction)%></a>
-    <% form_tag "/coins/#{coin.id}/market_cap_rank_prediction", :style => 'display: none' do %>
+    <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()">#<%= coinship.try(:market_cap_rank_prediction) %></a>
+    <% form_tag "/coins/#{coin.id}/market_cap_rank_prediction", style: 'display: none' do %>
 
       <div class="input-group flex-nowrap">
         <div class="input-group-prepend">
           <span class="input-group-text">#</span>
         </div>
-        <%= number_field_tag :p, :value => coinship.try(:market_cap_rank_prediction), :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
+        <%= number_field_tag :p, value: coinship.try(:market_cap_rank_prediction), class: 'form-control', style: 'width: 5em;', onblur: '$(this.form).submit()', onfocus: "var val = this.value; this.value = ''; this.value = val;" %>
       </div>
     <% end %>
   <% else %>
     <% if coinship.try(:market_cap_rank_prediction) %>
-      <span data-toggle="tooltip" title="Market cap rank prediction: #<%=coinship.try(:market_cap_rank_prediction)%>">
-        #<%=coinship.try(:market_cap_rank_prediction)%>
+      <span data-toggle="tooltip" title="Market cap rank prediction: #<%= coinship.try(:market_cap_rank_prediction) %>">
+        #<%= coinship.try(:market_cap_rank_prediction) %>
       </span>
     <% end %>
   <% end %>
 </td>
-<td data-sort="<%=coinship.try(:market_cap_rank_prediction_conviction)%>">
+<td data-sort="<%= coinship.try(:market_cap_rank_prediction_conviction) %>">
   <% if current_account && current_account.id == @account.id %>
-    <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()"><%=coinship.try(:market_cap_rank_prediction_conviction) || '&hellip;'%></a>
-    <% form_tag "/coins/#{coin.id}/market_cap_rank_prediction_conviction", :style => 'display: none' do %>
-      <%= number_field_tag :p, :value => coinship.try(:market_cap_rank_prediction_conviction), :class => 'form-control', :style => 'width: 5em;', :onblur => '$(this.form).submit()', :onfocus => "var val = this.value; this.value = ''; this.value = val;" %>
+    <a href="javascript:;" onclick="$(this).hide().next().show().find('input').focus()"><%= coinship.try(:market_cap_rank_prediction_conviction) || '&hellip;' %></a>
+    <% form_tag "/coins/#{coin.id}/market_cap_rank_prediction_conviction", style: 'display: none' do %>
+      <%= number_field_tag :p, value: coinship.try(:market_cap_rank_prediction_conviction), class: 'form-control', style: 'width: 5em;', onblur: '$(this.form).submit()', onfocus: "var val = this.value; this.value = ''; this.value = val;" %>
     <% end %>
   <% else %>
     <% if coinship.try(:market_cap_rank_prediction_conviction) %>
-      <span data-toggle="tooltip" title="Market cap rank prediction conviction: <%=coinship.try(:market_cap_rank_prediction_conviction)%>">
-        <%=coinship.try(:market_cap_rank_prediction_conviction)%>
+      <span data-toggle="tooltip" title="Market cap rank prediction conviction: <%= coinship.try(:market_cap_rank_prediction_conviction) %>">
+        <%= coinship.try(:market_cap_rank_prediction_conviction) %>
       </span>
     <% end %>
   <% end %>
 </td>
-<td data-sort="<%=coinship.try(:market_cap_change_prediction)%>">
+<td data-sort="<%= coinship.try(:market_cap_change_prediction) %>">
   <% if coinship.try(:market_cap_change_prediction); p = coinship.market_cap_change_prediction.round %>
-    <%=p%>x
+    <%= p %>x
   <% end %>
 </td>

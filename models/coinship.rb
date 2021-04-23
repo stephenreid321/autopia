@@ -89,10 +89,10 @@ class Coinship
     if units_elsewhere
       units_elsewhere.split(' ').map do |x|
         begin
-        Float(x.gsub(',', ''))
+          Float(x.gsub(',', ''))
         rescue StandardError
           nil
-      end
+        end
       end.compact.sum
     else
       0

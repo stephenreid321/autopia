@@ -7,9 +7,9 @@
   </style>
   <div id="alert-wrap" class="mt-3">
     <div class="container">
-      <% {:error => 'alert-danger', :warning => 'alert-warning', :notice => 'alert-success'}.each { |k,v| %>
+      <% { error: 'alert-danger', warning: 'alert-warning', notice: 'alert-success' }.each { |k,v| %>
       <% if flash[k] %>
-        <div class="alert fade show <%=v%> alert-dismissable">
+        <div class="alert fade show <%= v %> alert-dismissable">
           <%= flash[k] %>
           <% unless @hide_alert %>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">

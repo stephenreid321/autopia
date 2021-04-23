@@ -1,6 +1,6 @@
 <% if ['24h', '7d', 'market-cap-24h'].include?(params[:tag]) %>
   <p class="text-center mt-3">
-    Showing coins with a market cap rank <= #<%=ENV['MAX_MARKET_CAP_RANK'] %> and volume >= Ξ<%=ENV['MIN_VOLUME']%>
+    Showing coins with a market cap rank <= <%= ENV['MAX_MARKET_CAP_RANK'] %> and volume>= Ξ<%= ENV['MIN_VOLUME'] %>
     </p>
   <% end %>
 
@@ -12,16 +12,16 @@
 
     <h1 id="total" class="mt-3 text-center">
       Ξ~
-      <br />
+      <br>
       <small style="opacity: 0.25">$~</small>
     </h1>
 
     <% unless @virtual_tags.include?(params[:tag]) %>
       <div class="row justify-content-center mt-3">
         <div class="col-auto">
-          <% form_tag "/coins/tag/#{params[:tag]}", :class => 'form-inline' do %>
+          <% form_tag "/coins/tag/#{params[:tag]}", class: 'form-inline' do %>
             <div class="input-group">
-              <%= text_field_tag :symbol, :class => 'form-control' %>
+              <%= text_field_tag :symbol, class: 'form-control' %>
               <div class="input-group-append">
                 <button class="btn btn-primary" type="submit">Add</button>
               </div>
@@ -44,14 +44,14 @@
       function coinTable() {
         if (!$('#coins').hasClass('datatabled')) {
 
-        <% if %w[starred wallets elsewhere].include? params[:tag]  %>
+        <% if %w[starred wallets elsewhere].include? params[:tag] %>
           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='holding']")[0])
           var direction = 'desc'
         <% elsif params[:tag] && params[:tag].starts_with?('top-100') %>
           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='market-cap-rank']")[0])
           var direction = 'asc'
         <% elsif params[:tag] %>
-           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%=params[:tag]%>']")[0])
+           var colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='<%= params[:tag] %>']")[0])
            var direction = 'desc'
            if (colIndex == -1)
             colIndex = $("#coins th").toArray().indexOf($("th[data-col-name='24h']")[0])
@@ -79,13 +79,13 @@
           <% if current_account && current_account.id == @account.id %>
 
             <% if !@account.hide_total %>
-              var priceFactor = <%=@account.price_factor%>
+              var priceFactor = <%= @account.price_factor %>
               var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
-              var usd = parseFloat(eth * <%=@eth_usd ||= Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+              var usd = parseFloat(eth * <%= @eth_usd ||= Coin.eth_usd %>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
               $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
             <% end %>
 
-            $('#coins').on('order.dt', function () { 
+            $('#coins').on('order.dt', function () {
               $('#symbols').text($('#coins td[data-symbol]').slice(0,5).map(function(i,x) { return ('$' + $(x).attr('data-symbol')) }).toArray().join(' '))
             }).trigger('order.dt')
 
@@ -154,13 +154,12 @@
       </tr>
     </thead>
     <% coins.each { |coin| %>
-    <tr data-pagelet-url="/u/<%=@account.username%>/coins/<%=coin.slug%>?tag=<%=params[:tag]%>"
+    <tr data-pagelet-url="/u/<%= @account.username %>/coins/<%= coin.slug %>?tag=<%= params[:tag] %>"
      <% if coin.symbol == 'ETH' %>
      style="background-color: rgba(135, 71, 230, 0.3)"
      <% elsif coin.erc20? %>
      style="background-color: rgba(135, 71, 230, 0.125)"
-     <% end %>
-     >
+     <% end %>>
       <%= partial :'coins/coin', locals: { coin: coin } %>
     </tr>
     <% } %>
@@ -169,12 +168,12 @@
   <% unless @virtual_tags.include?(params[:tag]) %>
     <div>
       <small>
-        <a data-confirm="Are you sure?" class="text-dark" href="/coins/delete_tag/<%=params[:tag]%>">Delete tag</a>
+        <a data-confirm="Are you sure?" class="text-dark" href="/coins/delete_tag/<%= params[:tag] %>">Delete tag</a>
         &middot;
         <a class="text-dark" href="javascript:;" onclick="
         var tagName = prompt('New tag name');
         if (tagName)
-          window.location = '/coins/rename_tag/<%=params[:tag]%>/' + tagName
+          window.location = '/coins/rename_tag/<%= params[:tag] %>/' + tagName
         ">Rename tag</a>
       </small>
     </div>

@@ -3,7 +3,7 @@
 
 <div class="text-center my-3">
   <a href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders">Token balances from Blockscout</a>.
-  <br />
+  <br>
   Have you entered the top 150? <a href="mailto:team@autopia.co">Get in touch</a> to be added to the Slack workspace on the next full moon 🌝
 </div>
 
@@ -46,38 +46,32 @@
       <% end %>
     </tr>
   </thead>
-  <%
-
-Account.interesting.each_with_index { |account,i|
-%>
+  <% Account.interesting.each_with_index { |account,i| %>
   <tr>
-    <th data-sort="<%=i%>">#<%=i+1%></th>
-    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%=account.address_hash%>/tokens">
-        <% if account.address_hash%>
-          <span data-toggle="tooltip" title="<%=account.address_hash%>"><%=account.short_hash%></span>
+    <th data-sort="<%= i %>">#<%= i + 1 %></th>
+    <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%= account.address_hash %>/tokens">
+        <% if account.address_hash %>
+          <span data-toggle="tooltip" title="<%= account.address_hash %>"><%= account.short_hash %></span>
         <% end %>
       </a></td>
     <td>
       <% if admin? %>
         <% if account.email || account.name %>
-          <a <% if account.email %> class="text-dark" <% end %> target="_blank" data-toggle="tooltip" title="<%=account.email || account.name%>" href="/admin/edit/Account/<%=account.id%>">
+          <a <% if account.email %> class="text-dark" <% end %> target="_blank" data-toggle="tooltip" title="<%= account.email || account.name %>" href="/admin/edit/Account/<%= account.id %>">
             <% if account.email %>
-              <%
-              # account.email.length > 25 ? account.email.split('@').first+'@&hellip;' : account.email
-              %>
               <%= account.email %>
             <% else %>
-              <%=account.name%>
+              <%= account.name %>
             <% end %>
           </a>
         <% else %>
-          <a target="_blank" href="/admin/edit/Account/<%=account.id%>"><i class="fa fa-question-circle"></i></a>
+          <a target="_blank" href="/admin/edit/Account/<%= account.id %>"><i class="fa fa-question-circle"></i></a>
         <% end %>
       <% else %>
         <% if account.email || (account.name && !account.link) %>
           <i class="fa fa-check-circle"></i>
         <% elsif account.name && account.link %>
-          <a href="<%=account.link%>"><%= account.name %></a>
+          <a href="<%= account.link %>"><%= account.name %></a>
         <% end %>
       <% end %>
     </td>
@@ -103,25 +97,25 @@ Account.interesting.each_with_index { |account,i|
       <% end %>
     </td>
     <td>
-      <%= ((b = account.balance) < 0.001) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
+      <%= (b = account.balance) < 0.001 ? BigDecimal(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
     <td>
-      <%= ((b = account.balance_xdai(@aut_in_xdai)) < 0.01) ? BigDecimal.new(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
+      <%= (b = account.balance_xdai(@aut_in_xdai)) < 0.01 ? BigDecimal(b.to_f, 3).to_f : number_with_delimiter(number_with_precision(b, precision: 2)) %>
     </td>
     <% if admin? %>
-      <td data-sort="<%=account.mainnet_eth_balance%>">
-        <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
+      <td data-sort="<%= account.mainnet_eth_balance %>">
+        <a href="https://etherscan.io/tokenholdings?a=<%= account.address_hash %>">
           <%= number_to_currency account.mainnet_eth_balance %>
         </a>
       </td>
-      <td data-sort="<%=account.mainnet_token_balance%>">
-        <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
+      <td data-sort="<%= account.mainnet_token_balance %>">
+        <a href="https://etherscan.io/tokenholdings?a=<%= account.address_hash %>">
           <%= number_to_currency account.mainnet_token_balance %>
         </a>
       </td>
-      <td data-sort="<%=(account.mainnet_eth_balance || 0) + (account.mainnet_token_balance || 0)%>">
+      <td data-sort="<%= (account.mainnet_eth_balance || 0) + (account.mainnet_token_balance || 0) %>">
         <% if account.mainnet_eth_balance || account.mainnet_token_balance %>
-          <a href="https://etherscan.io/tokenholdings?a=<%=account.address_hash%>">
+          <a href="https://etherscan.io/tokenholdings?a=<%= account.address_hash %>">
             <%= number_to_currency (account.mainnet_eth_balance || 0) + (account.mainnet_token_balance || 0) %>
           </a>
         <% end %>

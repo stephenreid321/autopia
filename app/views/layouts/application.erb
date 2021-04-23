@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="preload" href="/fonts/zilap_tribu/stylesheet.css" as="style">
     <link href="/fonts/zilap_tribu/stylesheet.css" rel="stylesheet">
@@ -11,64 +11,68 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
-
     <% {
-      'jquery/3.2.0' => 'jquery.min.js',
-      'jqueryui/1.12.1' => 'jquery-ui.min.js',
-      'popper.js/1.11.0' => 'umd/popper.min.js',
-      'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
-      'select2/3.5.2' => 'select2.min.js select2.min.css',
-      'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',
-      'Chart.js/2.7.0' => 'Chart.bundle.min.js',
-      'js-cookie/2.2.1' => 'js.cookie.min.js',
-      'cytoscape/3.9.4' => 'cytoscape.min.js',
-      'chroma-js/2.0.6' => 'chroma.min.js',
-      'lightgallery/1.7.2' => 'js/lightgallery.min.js css/lightgallery.min.css',
-      'lg-thumbnail/1.2.1' => 'lg-thumbnail.min.js',
-      'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css'
-      }.each { |k,v| %>
+         'jquery/3.2.0' => 'jquery.min.js',
+         'jqueryui/1.12.1' => 'jquery-ui.min.js',
+         'popper.js/1.11.0' => 'umd/popper.min.js',
+         'twitter-bootstrap/4.0.0-beta' => 'js/bootstrap.min.js',
+         'select2/3.5.2' => 'select2.min.js select2.min.css',
+         'jquery-timeago/1.4.3' => 'jquery.timeago.min.js',
+         'Chart.js/2.7.0' => 'Chart.bundle.min.js',
+         'js-cookie/2.2.1' => 'js.cookie.min.js',
+         'cytoscape/3.9.4' => 'cytoscape.min.js',
+         'chroma-js/2.0.6' => 'chroma.min.js',
+         'lightgallery/1.7.2' => 'js/lightgallery.min.js css/lightgallery.min.css',
+         'lg-thumbnail/1.2.1' => 'lg-thumbnail.min.js',
+         'datatables/1.10.16' => 'js/jquery.dataTables.min.js js/dataTables.bootstrap4.min.js css/dataTables.bootstrap4.min.css'
+       }.each { |k,v| %>
     <% v.split(' ').each { |f| u = "https://cdnjs.cloudflare.com/ajax/libs/#{k}/#{f}" %>
     <% case f.split('.').last.to_sym; when :js %>
-    <script src="<%=u%>"></script>
+    <script src="<%= u %>"></script>
     <% when :css %>
-    <link rel="stylesheet" href="<%=u%>" />
+    <link rel="stylesheet" href="<%= u %>">
   <% end %>
   <% } %>
   <% } %>
 
-
   <% [
-      '//cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css',
-      '/stylesheets/share.css',
-      "/stylesheets/app.css?#{@cachebuster}",
-      ].each { |f| %>
-  <link rel="stylesheet" href="<%=f%>" />
+       '//cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css',
+       '/stylesheets/share.css',
+       "/stylesheets/app.css?#{@cachebuster}"
+     ].each { |f| %>
+  <link rel="stylesheet" href="<%= f %>">
   <% } %>
 
   <% [
-      '//use.fontawesome.com/releases/v5.14.0/js/all.js',
-      '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
-      '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
-      '//rawcdn.githack.com/cytoscape/cytoscape.js-cola/8c78f9d5c11ff6162b7d902f0639e1f787277b9f/cytoscape-cola.js',
-      '//cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js',
-      '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
-      '/javascripts/toc.min.js',
-      "/javascripts/pagelets.js?#{@cachebuster}",
-      "/javascripts/app.js?#{@cachebuster}"
-      ].each { |f| %>
-  <script src="<%=f%>"></script>
+       '//use.fontawesome.com/releases/v5.14.0/js/all.js',
+       '//rawcdn.githack.com/davidshimjs/qrcodejs/06c7a5e134f116402699f03cda5819e10a0e5787/qrcode.min.js',
+       '//rawcdn.githack.com/tgdwyer/WebCola/aab7e61cd9580c4c89180cc0a30594e12743a242/WebCola/cola.min.js',
+       '//rawcdn.githack.com/cytoscape/cytoscape.js-cola/8c78f9d5c11ff6162b7d902f0639e1f787277b9f/cytoscape-cola.js',
+       '//cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js',
+       '//unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js',
+       '/javascripts/toc.min.js',
+       "/javascripts/pagelets.js?#{@cachebuster}",
+       "/javascripts/app.js?#{@cachebuster}"
+     ].each { |f| %>
+  <script src="<%= f %>"></script>
   <% } %>
 
-  <title><%=if @full_title; t = @full_title; elsif @title; t = "#{@title} · Autopia"; else; t = "Autopia"; end %></title>
+  <title><%= t = if @full_title
+                   @full_title
+                 elsif @title
+                   "#{@title} · Autopia"
+                 else
+                   'Autopia'
+                 end %></title>
     <%= favicon_tag @favicon || 'autopia-200-200.png' %>
-    <meta property="og:title" content="<%=t%>" />
-    <meta name="description" content="<%=@og_desc%>">
-    <meta property="og:image" content="<%= @og_image%>" />
+    <meta property="og:title" content="<%= t %>">
+    <meta name="description" content="<%= @og_desc %>">
+    <meta property="og:image" content="<%= @og_image %>">
 
     <% if @og_image && @og_desc %>
-      <meta name="twitter:title" content="<%=t%>">
-      <meta name="twitter:description" content="<%=@og_desc%>">
-      <meta name="twitter:image" content="<%=@og_image%>">
+      <meta name="twitter:title" content="<%= t %>">
+      <meta name="twitter:description" content="<%= @og_desc %>">
+      <meta name="twitter:image" content="<%= @og_image %>">
       <meta name="twitter:card" content="summary_large_image">
     <% end %>
   </head>

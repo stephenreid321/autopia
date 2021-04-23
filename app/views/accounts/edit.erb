@@ -1,6 +1,6 @@
 <div class="row justify-content-center">
   <div class="col-sm-6">
-    <% form_for @account, '/accounts/edit', :multipart => true do |f| %>
+    <% form_for @account, '/accounts/edit', multipart: true do |f| %>
       <%= f.text_block :name, disabled: true %>
       <%= f.email_block :email, disabled: true %>
       <%= f.text_block :username %>
@@ -15,7 +15,7 @@
 
     <h2 class="mt-3">Wallet addresses</h2>
 
-    <% form_tag '/eth_addresses/add', :class => 'form-inline' do %>
+    <% form_tag '/eth_addresses/add', class: 'form-inline' do %>
       <div class="input-group">
         <%= text_field_tag :eth_address, class: 'form-control' %>
         <div class="input-group-append">
@@ -27,8 +27,8 @@
     <table class="table mt-3" id="wallet_addresses">
       <% @account.eth_addresses.each { |eth_address| %>
       <tr>
-        <td><%=eth_address.address_hash%></td>
-        <td><a data-confirm="Are you sure?" class="btn btn-danger btn-sm" href="/eth_addresses/delete/<%=eth_address.address_hash%>"><i class="fa fa-times"></i></a></td>
+        <td><%= eth_address.address_hash %></td>
+        <td><a data-confirm="Are you sure?" class="btn btn-danger btn-sm" href="/eth_addresses/delete/<%= eth_address.address_hash %>"><i class="fa fa-times"></i></a></td>
       </tr>
       <% } %>
     </table>

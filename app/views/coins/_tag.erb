@@ -1,21 +1,21 @@
 <td style="opacity: 0.5"></td>
 <td>
-  <a class="font-weight-bold" href="/u/<%=@account.username%>/tags/<%=tag.name%>"><%= tag.name %></a>
+  <a class="font-weight-bold" href="/u/<%= @account.username %>/tags/<%= tag.name %>"><%= tag.name %></a>
 </td>
-<td class="holding" data-sort="<%= (tag.holding < 1e-3 ? 0 : tag.holding) * @account.price_factor  %>">
-  <a class="text-dark" href="/u/<%=@account.username%>/tags/<%=tag.name%>">
+<td class="holding" data-sort="<%= (tag.holding < 1e-3 ? 0 : tag.holding) * @account.price_factor %>">
+  <a class="text-dark" href="/u/<%= @account.username %>/tags/<%= tag.name %>">
     <div class="p"></div>
   </a>
 </td>
-<% %w{24h 7d 1h}.each { |p| %>
+<% %w[24h 7d 1h].each { |p| %>
 <td class="rg" <% unless p == '24h' %> style="opacity: 0.5" <% end %>>
   <% if tag.send(:"price_change_percentage_#{p}_in_currency") %>
-    <%=number_to_percentage tag.send(:"price_change_percentage_#{p}_in_currency"), precision: 2%>
+    <%= number_to_percentage tag.send(:"price_change_percentage_#{p}_in_currency"), precision: 2 %>
   <% end %>
 </td>
 <% } %>
 <td class="rg">
   <% if tag.send(:market_cap_change_percentage_24h) %>
-    <%=number_to_percentage tag.send(:market_cap_change_percentage_24h), precision: 2%>
+    <%= number_to_percentage tag.send(:market_cap_change_percentage_24h), precision: 2 %>
   <% end %>
 </td>

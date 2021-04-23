@@ -3,7 +3,7 @@
 <% if current_account && current_account.id == @account.id %>
   <h1 id="total" class="mt-3 text-center">
     Ξ~
-    <br />
+    <br>
     <small style="opacity: 0.25">$~</small>
   </h1>
 <% end %>
@@ -30,9 +30,9 @@
 
           <% if current_account && current_account.id == @account.id %>
             <% if !@account.hide_total %>
-            var priceFactor = <%=@account.price_factor%>
+            var priceFactor = <%= @account.price_factor %>
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
-            var usd = parseFloat(eth * <%=Coin.eth_usd%>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+            var usd = parseFloat(eth * <%= Coin.eth_usd %>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
             $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
             <% end %>
           <% end %>

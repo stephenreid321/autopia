@@ -23,7 +23,7 @@
 <% @aut_in_xdai = @pair['data']['pair']['token0']['derivedETH'].to_f %>
 <% @aut_in_xdai_2 = number_with_precision @aut_in_xdai, precision: 2 %>
 <div class="text-center mb-2">
-  <a target="_blank" class="text-dark card d-sm-inline-block aut-price" data-toggle="tooltip" title="1 AUT = <%= @aut_in_xdai_2 %> XDAI "  href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
+  <a target="_blank" class="text-dark card d-sm-inline-block aut-price" data-toggle="tooltip" title="1 AUT = <%= @aut_in_xdai_2 %> XDAI " href="https://app.honeyswap.org/#/swap?inputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1">
     <div class="card-body py-1 px-4">
       1 <%= aut %> = <%= @aut_in_xdai_2 %> <%= xdai %>
     </div>
@@ -32,28 +32,25 @@
 
 <div class="stats text-center mb-1">
 
-  <% xdai_in_aut = (1/@aut_in_xdai).round(3) %>
+  <% xdai_in_aut = (1 / @aut_in_xdai).round(3) %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 XDAI = <%= xdai_in_aut %> AUT "  href="https://app.honeyswap.org/#/swap?outputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1" >
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="1 XDAI = <%= xdai_in_aut %> AUT " href="https://app.honeyswap.org/#/swap?outputCurrency=0xcae40062a887581a3d1661d0ac2b481c32e3e938&exactAmount=1">
       <div class="card-body py-1 px-2">
         1 <%= xdai %> = <%= xdai_in_aut %> <%= aut %>
       </div>
     </a>
   </div>
 
-
-  <%
-  @vol_daily = TheGraph.query '1hive/uniswap-v2', %{
+  <% @vol_daily = TheGraph.query '1hive/uniswap-v2', %{
     {
       pairDayDatas(first: 1, orderBy: date, orderDirection: desc, where: {pairAddress: "0xccace6772a98d8a3da115b63e816e500a12aad9a"}) {
         dailyVolumeUSD
       }
     }
-  }
-%>
+  } %>
   <% vol_daily = number_with_delimiter @vol_daily['data']['pairDayDatas'].first['dailyVolumeUSD'].to_f.round %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Daily volume = <%=vol_daily%> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="Daily volume = <%= vol_daily %> XDAI" href="https://info.honeyswap.org/pair/0xccace6772a98d8a3da115b63e816e500a12aad9a">
       <div class="card-body py-1 px-2">
         🌅
         <%= vol_daily %> <%= xdai %>
@@ -108,7 +105,7 @@
 
   <% token_holders = Account.with_balance.count %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(token_holders, 'token holders')%>" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%= pluralize(token_holders, 'token holders') %>" href="https://blockscout.com/poa/xdai/tokens/0xcaE40062a887581A3d1661d0AC2b481c32e3E938/token-holders">
       <div class="card-body py-1 px-2">
         <i class="fa fa-user"></i> <%= token_holders %>
       </div>
@@ -117,7 +114,7 @@
 
   <% slack_members = Account.and(:slack_id.ne => nil).count %>
   <div>
-    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(slack_members, 'Slack member')%>">
+    <span target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%= pluralize(slack_members, 'Slack member') %>">
       <div class="card-body py-1 px-2">
         <i class="fa fab fa-slack"></i> <%= slack_members %>
       </div>
@@ -126,7 +123,7 @@
 
   <% dao_members = Account.and(:dao_shares.ne => nil).count %>
   <div>
-    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%=pluralize(dao_members, 'DAO member')%>" href="https://app.daohaus.club/dao/0x80de9a508443c68e825f683f9ebd2659600a678e">
+    <a target="_blank" class="text-dark card d-sm-inline-block" data-toggle="tooltip" title="<%= pluralize(dao_members, 'DAO member') %>" href="https://app.daohaus.club/dao/0x80de9a508443c68e825f683f9ebd2659600a678e">
       <div class="card-body py-1 px-2">
         <i class="fa fa-user-cog"></i> <%= dao_members %>
       </div>
