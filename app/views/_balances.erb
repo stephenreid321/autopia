@@ -46,7 +46,7 @@
       <% end %>
     </tr>
   </thead>
-  <% Account.interesting.each_with_index { |account,i| %>
+  <% Account.interesting.limit(150).each_with_index { |account,i| %>
   <tr>
     <th data-sort="<%= i %>">#<%= i + 1 %></th>
     <td><a target="_blank" href="https://blockscout.com/poa/xdai/address/<%= account.address_hash %>/tokens">
