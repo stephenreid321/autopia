@@ -1,6 +1,6 @@
 Autopia::App.controller do
   before do
-    halt 200
+    halt 200 unless admin?
     @virtual_tags = %w[starred tagged wallets elsewhere uniswap sushiswap defi-pulse 24h 7d market-cap-24h top-100 top-100-less-tagged starred-less-tagged holding-less-starred starred-less-holding]
   end
 
