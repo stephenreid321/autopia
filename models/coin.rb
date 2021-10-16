@@ -119,7 +119,7 @@ class Coin
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
       if c.nil?
-        destroy
+        remote_update
         return
       end
     rescue Net::ReadTimeout => e
