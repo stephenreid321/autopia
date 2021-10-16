@@ -119,6 +119,9 @@ class Coin
     begin
       c = JSON.parse(agent.get("https://api.coingecko.com/api/v3/coins/#{slug}").body)
       if c.nil?
+        puts 'nil response'
+        puts 'sleeping...'
+        sleep 1
         remote_update
         return
       end
