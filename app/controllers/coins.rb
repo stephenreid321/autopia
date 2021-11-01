@@ -106,8 +106,8 @@ Autopia::App.controller do
 
   get '/coins/:coin_id/hide' do
     sign_in_required!
-    coinship = current_account.coinships.find_or_create_by(coin: params[:coin_id])
-    coinship.update_attribute(:tag_id, nil)
+    coinship = current_account.coinships.find_by(coin: params[:coin_id])
+    coinship.try(:destroy)
     current_account.tags.update_holdings
     200
   end
