@@ -47,7 +47,9 @@
     </tr>
   </thead>
   <% b_end = nil; Account.interesting.each_with_index { |account,i|
-    if i == 149; b_end = account.balance; elsif i > 149 && account.balance < b_end; break; end
+    if !admin?
+      if i == 149; b_end = account.balance; elsif i > 149 && account.balance < b_end; break; end
+    end
   %>
   <tr>
     <th data-sort="<%= i %>">#<%= i + 1 %></th>
