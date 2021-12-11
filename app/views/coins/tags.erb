@@ -32,7 +32,7 @@
             <% if !@account.hide_total %>
             var priceFactor = <%= @account.price_factor %>
             var eth = parseFloat(t/priceFactor).toLocaleString(window.document.documentElement.lang, {minimumFractionDigits:2, maximumFractionDigits:2})
-            var usd = parseFloat(eth / <%= Coin.find_by(slug: 'usd-coin').price %>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
+            var usd = parseFloat(eth * <%= Coin.find_by(slug: 'usd-coin').price %>).toLocaleString(window.document.documentElement.lang, {maximumFractionDigits:0})
             $('#total').html('Ξ' + eth + '<br />' + '<small style="opacity: 0.25">$' + usd + '</small>')
             <% end %>
           <% end %>

@@ -4,7 +4,7 @@
       <a
 <% if coinship.holding > 1e-3 %>
   data-toggle="tooltip" title="
-  $<%= number_with_precision coinship.holding / Coin.find_by(slug: 'usd-coin').price, precision: 0, delimiter: ',' %>
+  $<%= number_with_precision coinship.holding * Coin.find_by(slug: 'usd-coin').price, precision: 0, delimiter: ',' %>
   <br />
   Updated <%= time_ago_in_words coin.updated_at %> ago"
 <% end %>
