@@ -26,6 +26,12 @@
   <% end %>
 </td>
 <td>
+  <% usd_price = coin.price*(@eth_usd ||= Coin.eth_usd) %>
+  <% if usd_price < 1 %>
+   $<%= Float("%.#{3}g" % usd_price) %>
+ <% end %>   
+</td>
+<td>
   <% if coin.twitter_followers %>
     <a target="_blank" class="text-dark" href="https://twitter.com/<%= coin.twitter_username %>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
   <% end %>
