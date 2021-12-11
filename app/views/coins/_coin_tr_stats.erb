@@ -1,3 +1,10 @@
+<td>
+  <% if coin.exchanges %>
+    <% {binance: '#F0B909', coinbase: '#3052FF', ftx: '#32A2C7', kraken: '#5842D8', 'crypto.com': '#399DFF', kucoin: '#2EAE8F', coinlist: '#F33596'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
+      <span class="badge badge-primary" style="background-color: <%=color%>"><%= exchange %></span>
+    <% end } %>
+  <% end %>
+</td>
 <td class="rg" <% if params[:tag] == '7d' %> style="opacity: 0.5" <% end %>>
   <% if !coin.fixed_price && coin.price_change_percentage_24h_in_currency %>
     <%= number_to_percentage coin.price_change_percentage_24h_in_currency, precision: 2 %>
@@ -21,13 +28,6 @@
 <td>
   <% if coin.twitter_followers %>
     <a target="_blank" class="text-dark" href="https://twitter.com/<%= coin.twitter_username %>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
-  <% end %>
-</td>
-<td>
-  <% if coin.exchanges %>
-    <% {binance: '#F0B909', coinbase: '#3052FF', ftx: '#32A2C7', kraken: '#5842D8', 'crypto.com': '#399DFF', kucoin: '#2EAE8F'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
-      <span class="badge badge-primary" style="background-color: <%=color%>"><%= exchange %></span>
-    <% end } %>
   <% end %>
 </td>
 <td>
