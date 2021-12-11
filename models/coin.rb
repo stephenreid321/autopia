@@ -27,6 +27,7 @@ class Coin
   field :twitter_followers, type: Integer
   field :skip_remote_update, type: Boolean
   field :exchanges, type: Array
+  field :usd_price, type: Float
 
   has_many :coinships, dependent: :destroy
 
@@ -62,10 +63,11 @@ class Coin
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
+    self.usd_price = price / Coin.find_by(slug: 'usd-coin').price
   end
 
   def price
-    fixed_price ? fixed_price / Coin.eth_usd : current_price
+    fixed_price ? fixed_price / Coin.find_by(slug: 'usd-coin').price : current_price
   end
 
   def erc20?
@@ -78,11 +80,6 @@ class Coin
     max = coins.pluck(x).compact.max
     score = 100 * ((send(x) - min) / (max - min))
     [score, index]
-  end
-
-  def self.eth_usd
-    agent = Mechanize.new
-    JSON.parse(agent.get('https://api.coingecko.com/api/v3/coins/ethereum').body)['market_data']['current_price']['usd']
   end
 
   def self.import

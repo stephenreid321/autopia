@@ -26,10 +26,9 @@
   <% end %>
 </td>
 <td>
-  <% usd_price = coin.price*(@eth_usd ||= Coin.eth_usd) %>
-  <% if usd_price < 1 %>
-   $<%= Float("%.#{3}g" % usd_price) %>
- <% end %>   
+  <% if coin.usd_price && coin.usd_price < 1 %>
+   $<%= Float("%.#{3}g" % coin.usd_price) %>
+ <% end %>
 </td>
 <td>
   <% if coin.twitter_followers %>
