@@ -25,7 +25,7 @@
 </td>
 <td>
   <% if coin.exchanges %>
-    <% {coinbase: '#3052FF', binance: '#F0B909', ftx: '#32A2C7'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
+    <% {binance: '#F0B909', coinbase: '#3052FF', ftx: '#32A2C7', kraken: '#5842D8', 'crypto.com': '#399DFF', kucoin: '#2EAE8F'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
       <span class="badge badge-primary" style="background-color: <%=color%>"><%= exchange %></span>
     <% end } %>
   <% end %>
