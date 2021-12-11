@@ -26,6 +26,7 @@ class Coin
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
   field :skip_remote_update, type: Boolean
+  field :exchanges, type: Array
 
   has_many :coinships, dependent: :destroy
 
@@ -52,6 +53,7 @@ class Coin
       sushiswap_volume: :number,
       tvl: :number,
       website: :url,
+      exchanges: { type: :text_area, disabled: true },
       twitter_username: :text,
       twitter_followers: :number
     }
@@ -155,6 +157,7 @@ class Coin
     self.website = c['links']['homepage'].first
     self.twitter_username = c['links']['twitter_screen_name']
     self.twitter_followers = c['community_data']['twitter_followers']
+    self.exchanges = c['tickers'].map { |t| t['market']['name'] }.uniq
     save!
   end
 end

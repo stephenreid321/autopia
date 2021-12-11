@@ -23,19 +23,11 @@
     <a target="_blank" class="text-dark" href="https://twitter.com/<%= coin.twitter_username %>"><%= number_with_precision coin.twitter_followers, precision: 0, delimiter: ',' %></a>
   <% end %>
 </td>
-<td data-sort="<%= coin.uniswap_volume || 0 %>">
-  <% if coin.uniswap_volume && @uniswap_slugs %>
-    #<%= @uniswap_slugs.index(coin.slug) + 1 %>
-  <% end %>
-</td>
-<td data-sort="<%= coin.sushiswap_volume || 0 %>">
-  <% if coin.sushiswap_volume && @sushiswap_slugs %>
-    #<%= @sushiswap_slugs.index(coin.slug) + 1 %>
-  <% end %>
-</td>
-<td data-sort="<%= coin.tvl || 0 %>">
-  <% if coin.tvl && @tvl_slugs %>
-    #<%= @tvl_slugs.index(coin.slug) + 1 %>
+<td>
+  <% if coin.exchanges %>
+    <% {coinbase: '#3052FF', binance: '#F0B909', ftx: '#32A2C7'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
+      <span class="badge badge-primary" style="background-color: <%=color%>"><%= exchange %></span>
+    <% end } %>
   <% end %>
 </td>
 <td>
