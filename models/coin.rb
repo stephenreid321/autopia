@@ -67,7 +67,7 @@ class Coin
   end
 
   def price
-    fixed_price ? fixed_price / Coin.find_by(slug: 'usd-coin').price : current_price
+    fixed_price ? (fixed_price * Coin.find_by(slug: 'usd-coin').price) : current_price
   end
 
   def erc20?
