@@ -23,7 +23,7 @@
     <%= number_with_precision coin.ath_change_percentage, precision: 2 %>%
   <% end %>
 </td>
-<td>
+<td nowrap>
   <% if coin.exchanges %>
     <% {binance: '#F0B909', coinbase: '#3052FF', ftx: '#32A2C7', kraken: '#5842D8', 'crypto.com': '#399DFF', kucoin: '#2EAE8F', coinlist: '#F33596'}.each { |exchange,color| if coin.exchanges.any? { |x| x =~ /#{exchange}/i } %>
       <span class="badge badge-primary" style="background-color: <%=color%>"><%= exchange %></span>
