@@ -18,7 +18,7 @@
     <%= number_with_precision coin.market_cap_change_percentage_24h, precision: 2 %>%
   <% end %>
 </td>
-<td class="rg" data-sort="<%= coin.ath_change_percentage || 0 %>">
+<td data-sort="<%= coin.ath_change_percentage || 0 %>">
   <% if !coin.fixed_price && coin.ath_change_percentage %>
     <%= number_with_precision coin.ath_change_percentage, precision: 2 %>%
   <% end %>
