@@ -97,7 +97,7 @@
 
 <%= partial :'coins/coin_table', locals: { coins: Coin.and(
       :market_cap_rank.lte => 100,
-      :id.in => @account.coinships.where(:tag_id => nil).pluck(:coin_id)
+      :id.in => @account.coinships.where(tag_id: nil).pluck(:coin_id)
     ).order('market_cap_rank asc').limit(100) } %>
 
 <% when 'starred-less-tagged' %>
