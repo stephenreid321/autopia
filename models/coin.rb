@@ -145,7 +145,7 @@ class Coin
       end
       return
     end
-    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
+    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency ath_change_percentage].each do |r|
       send("#{r}=", c['market_data'][r]['eth'])
     end
     %w[market_cap_rank].each do |r|
