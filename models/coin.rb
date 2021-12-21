@@ -95,7 +95,7 @@ class Coin
         coin = Coin.find_or_create_by!(slug: c['id'])
         next if coin.skip_remote_update
 
-        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency ath_change_percentage].each do |r|
+        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
           coin.send("#{r}=", c[r])
         end
         coin.save
@@ -145,9 +145,10 @@ class Coin
       end
       return
     end
-    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency ath_change_percentage].each do |r|
+    %w[current_price market_cap total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
       send("#{r}=", c['market_data'][r]['eth'])
     end
+    self.ath_change_percentage = c['market_data'][r]['usd']
     %w[market_cap_rank].each do |r|
       send("#{r}=", c['market_data'][r])
     end
