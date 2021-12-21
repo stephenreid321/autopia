@@ -22,6 +22,7 @@ class Coin
   field :price_change_percentage_1h_in_currency, type: Float
   field :price_change_percentage_24h_in_currency, type: Float
   field :price_change_percentage_7d_in_currency, type: Float
+  field :ath_change_percentage, type: Float
   field :website, type: String
   field :twitter_username, type: String
   field :twitter_followers, type: Integer
@@ -49,6 +50,7 @@ class Coin
       price_change_percentage_1h_in_currency: :number,
       price_change_percentage_24h_in_currency: :number,
       price_change_percentage_7d_in_currency: :number,
+      ath_change_percentage: :number,
       market_cap_change_percentage_24h: :number,
       uniswap_volume: :number,
       sushiswap_volume: :number,
@@ -93,7 +95,7 @@ class Coin
         coin = Coin.find_or_create_by!(slug: c['id'])
         next if coin.skip_remote_update
 
-        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency].each do |r|
+        %w[symbol name current_price market_cap market_cap_rank market_cap_change_percentage_24h total_volume price_change_percentage_1h_in_currency price_change_percentage_24h_in_currency price_change_percentage_7d_in_currency ath_change_percentage].each do |r|
           coin.send("#{r}=", c[r])
         end
         coin.save
