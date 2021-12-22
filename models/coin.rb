@@ -65,7 +65,7 @@ class Coin
   before_validation do
     self.symbol = symbol.try(:upcase)
     self.twitter_followers = nil if twitter_followers && twitter_followers.zero?
-    self.usd_price = price / Coin.find_by(slug: 'usd-coin').price
+    self.usd_price = price / Coin.find_by(slug: 'usd-coin').price if price
   end
 
   def price
