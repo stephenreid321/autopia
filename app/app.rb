@@ -60,7 +60,8 @@ module Autopia
     end
 
     get '/' do
-      erb :home
+      redirect 'https://discord.gg/4KRE425cGZ'
+      # erb :home
     end
 
     get '/sign_in' do
